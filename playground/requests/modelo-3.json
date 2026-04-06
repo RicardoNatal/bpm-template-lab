@@ -1,0 +1,9 @@
+{
+  "templateId": "va-vr-base",
+  "presetId": "modelo-3",
+  "project": {
+    "name": "VA/VR Modelo 3 - Completo",
+    "slug": "va-vr-modelo-3"
+  },
+  "customizations": []
+}

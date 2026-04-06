@@ -1,0 +1,57 @@
+{
+  "routes": [
+    {
+      "stepId": "solicitacao",
+      "path": "solicitacao",
+      "modulePath": "./modules/solicitacao/solicitacao.module",
+      "moduleName": "SolicitacaoModule",
+      "routeData": {
+        "stepId": "solicitacao",
+        "mode": "edit"
+      }
+    },
+    {
+      "stepId": "revisao",
+      "path": "revisao",
+      "modulePath": "./modules/solicitacao/solicitacao.module",
+      "moduleName": "SolicitacaoModule",
+      "hasNote": "Variante de solicitacao em modo review. Mesmo módulo, comportamento distinto via route data.",
+      "routeData": {
+        "stepId": "revisao",
+        "mode": "review"
+      }
+    },
+    {
+      "stepId": "analise-rh",
+      "path": "analise-rh",
+      "modulePath": "./modules/analise-rh/analise-rh.module",
+      "moduleName": "AnaliseRhModule",
+      "routeData": {
+        "stepId": "analise-rh",
+        "mode": "edit"
+      }
+    },
+    {
+      "stepId": "detalhes",
+      "path": "detalhes",
+      "modulePath": "./modules/detalhes/detalhes.module",
+      "moduleName": "DetalhesModule",
+      "routeData": {
+        "stepId": "detalhes",
+        "mode": "readonly"
+      }
+    }
+  ],
+  "stepRouteMap": {
+    "solicitacao": "solicitacao",
+    "revisao": "revisao",
+    "analise-rh": "analise-rh",
+    "detalhes": "detalhes"
+  },
+  "routeStepMap": {
+    "solicitacao": "solicitacao",
+    "revisao": "revisao",
+    "analise-rh": "analise-rh",
+    "detalhes": "detalhes"
+  }
+}

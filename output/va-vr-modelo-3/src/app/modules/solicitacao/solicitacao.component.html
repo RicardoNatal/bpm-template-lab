@@ -1,0 +1,15 @@
+<app-dados-solicitante data-template-block-instance="dados-solicitante-solicitacao"></app-dados-solicitante>
+
+<app-beneficio-atual data-template-block-instance="beneficio-atual-solicitacao"></app-beneficio-atual>
+
+<app-dados-solicitacao data-template-block-instance="dados-solicitacao-solicitacao"></app-dados-solicitacao>
+
+<!-- TEMPLATE:OPTIONAL block="observacao-rh" instance="observacao-rh-solicitacao" -->
+<app-observacao
+  data-template-block-instance="observacao-rh-solicitacao"
+  [mostrarCard]="true"
+  [label]="'Observação do RH'"
+  [title]="'Análise do RH'"
+  [hidden]="!isRevisao"
+></app-observacao>
+<!-- /TEMPLATE:OPTIONAL -->

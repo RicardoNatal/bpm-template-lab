@@ -1,0 +1,156 @@
+# Para ativar o deploy da imagem no registry, retire o '#' do stage '- deploy'
+# e também da  configuração do job 'image_update'. Atente-se que as configurações de base-href utilizada nos stages de build,
+# pois essas configurações irão sobrescrever a configuração definida no arquivo index.html. e  no script do package.json.
+
+# Para ativar o deploy de frontend no S3, retire o '#' do stage '- deploy'
+# e também das configurações de jobs 'deploy-s3''
+
+image: arquiteturasenior/node-sonar-runner:node20-sonar4
+
+stages:
+  - build
+  - qa
+  # - deploy
+
+before_script:
+  - PROJECT_VERSION=${CI_COMMIT_SHA:0:7}
+
+# Configuração de variáveis de ambiente
+variables:
+  AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID_HCM_ARQ_SERVICES
+  AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_HCM_ARQ_SERVICES
+  AWS_DEFAULT_REGION: $AWS_REGION_HCM_ARQ_SERVICES
+  AWS_PROJECT_PATH_DEV: "/${AWS_PROJECT_NAME}/dev/"
+  AWS_PROJECT_PATH_HOMOL: "/${AWS_PROJECT_NAME}/homol/"
+  AWS_PROJECT_PATH_PROD: "/${AWS_PROJECT_NAME}/prod/"
+  AWS_CLIENT_BUCKET: $AWS_CLIENT_BUCKET
+  AWS_CLOUDFRONT_DISTRIBUTION_ID: $AWS_CLOUDFRONT_DISTRIBUTION_ID
+  SONAR_URL: $SONAR_URL
+
+# Template para jobs de build
+.build_template:
+  stage: build
+  cache:
+    key: $CI_PROJECT_NAME
+    paths:
+      - node_modules/
+  before_script:
+    - rm -rf dist
+    - rm -rf ./package-lock.json
+    - npm install
+  artifacts:
+    paths:
+      - dist
+      - .version.env
+    reports:
+      dotenv: .version.env
+
+# Template para jobs de deploy
+.deploy_s3_template:
+  stage: deploy
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  before_script:
+    - if [ -z "$AWS_CLIENT_BUCKET" ]; then echo "A variável AWS_CLIENT_BUCKET não foi configurada. Favor verificar as variáveis de CI/CD no gitlab"; exit 1; fi
+    - if [ -z "$AWS_PROJECT_NAME" ]; then echo "A variável AWS_PROJECT_NAME não foi configurada. Favor verificar as variáveis de CI/CD no gitlab"; exit 1; fi
+    - if [ -z "$AWS_CLOUDFRONT_DISTRIBUTION_ID" ]; then echo "A variável AWS_CLOUDFRONT_DISTRIBUTION_ID não foi configurada. Favor verificar as variáveis de CI/CD no gitlab"; exit 1; fi
+  artifacts:
+    paths:
+      - dist
+      - .version.env
+
+# Jobs de build
+build:develop:
+  extends: .build_template
+  script:
+    - node process-version.js dev
+    - VERSION=$(grep -oP 'VERSION=\K.*' .version.env)
+    - echo "VERSION=$VERSION"
+    - npm run build:dev -- --base-href "${AWS_PROJECT_PATH_DEV}${VERSION}/"
+  except:
+    - staging
+    - tags
+
+build:homol:
+  extends: .build_template
+  script:
+    - node process-version.js homol
+    - VERSION=$(grep -oP 'VERSION=\K.*' .version.env)
+    - echo "VERSION=$VERSION"
+    - npm run build:homol -- --base-href "${AWS_PROJECT_PATH_HOMOL}${VERSION}/"
+  only:
+    - staging
+
+build:prod:
+  extends: .build_template
+  script:
+    - node process-version.js prod
+    - VERSION=$(grep -oP 'VERSION=\K.*' .version.env)
+    - echo "VERSION=$VERSION"
+    - npm run build:prod -- --base-href "${AWS_PROJECT_PATH_PROD}${VERSION}/"
+  only:
+    - tags
+
+# Jobs de deploy S3
+# deploy-s3:develop:
+#   extends: .deploy_s3_template
+#   script:
+#     - source .version.env
+#     - aws s3 sync dist "s3://${AWS_CLIENT_BUCKET}${AWS_PROJECT_PATH_DEV}${VERSION}/" --delete
+#     - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "${AWS_PROJECT_PATH_DEV}${VERSION}/*"
+#   dependencies:
+#     - build:develop
+#   only:
+#     - develop
+
+# deploy-s3:homol:
+#   extends: .deploy_s3_template
+#   dependencies:
+#     - build:homol
+#   script:
+#     - source .version.env
+#     - aws s3 sync dist "s3://${AWS_CLIENT_BUCKET}${AWS_PROJECT_PATH_HOMOL}${VERSION}/" --delete
+#     - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "${AWS_PROJECT_PATH_HOMOL}${VERSION}/*"
+#   dependencies:
+#     - build:homol
+#   only:
+#     - staging
+
+# deploy-s3:prod:
+#   extends: .deploy_s3_template
+#   dependencies:
+#     - build:prod
+#   script:
+#     - source .version.env
+#     - aws s3 sync dist "s3://${AWS_CLIENT_BUCKET}${AWS_PROJECT_PATH_PROD}${VERSION}/" --delete
+#     - aws cloudfront create-invalidation --distribution-id $AWS_CLOUDFRONT_DISTRIBUTION_ID --paths "${AWS_PROJECT_PATH_PROD}${VERSION}/*"
+#   dependencies:
+#     - build:prod
+#   only:
+#     - tags
+
+# Job de QA
+sonarqube:develop:
+  stage: qa
+  script:
+    - sonar-scanner -Dsonar.host.url=$SONAR_URL -Drevision=$PROJECT_VERSION -Dsonar.projectName=unstable_$CI_PROJECT_NAME -Dsonar.projectVersion=$PROJECT_VERSION -Dsonar.projectKey=unstable_$CI_PROJECT_NAME -Dsonar.exclusions=**/src/assets/* -Dsonar.sources=.
+  only:
+    - develop
+
+# Job de criação de imagem no registry
+# image_update:
+#   image:
+#     name: gcr.io/kaniko-project/executor:debug
+#     entrypoint: ['']
+#   variables:
+#     DOCKER_TLS_CERTDIR: ''
+#   stage: deploy
+#   script:
+#     - cp -R nginx dist/
+#     - cp entrypoint.sh dist/
+#     - echo "{\"auths\":{\"registry.gitlab.com\":{\"username\":\"$GITLAB_USER\",\"password\":\"$GITLAB_TOKEN\"}}}" > /kaniko/.docker/config.json
+#     - IMAGE_TAG=registry.gitlab.com/$GITLAB_USER/docker-registry/$CI_PROJECT_NAME:$CI_COMMIT_REF_NAME
+#     - /kaniko/executor --context $CI_PROJECT_DIR/dist --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $IMAGE_TAG
+#     - echo "$IMAGE_TAG"
+#   only:
+#     - tags
+#     - staging

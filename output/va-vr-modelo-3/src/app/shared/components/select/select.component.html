@@ -1,0 +1,26 @@
+<label>
+  <strong *ngIf="isRequired()" style="display: inline;"
+        class="form-error" >
+    *
+  </strong>
+  {{ config.label }}
+</label>
+
+<p-dropdown
+  [hidden]="isDisabled"
+  [options]="config.options?.length ? config.options : [{ label: 'N/A', value: null, disabled: true }]"
+  optionLabel="label"
+  optionValue="value"
+  [placeholder]="config.placeholder"
+  [disabled]="isDisabled"
+  [ngModel]="value"
+  (onChange)="handleChange($event.value)"
+  (onBlur)="onTouched()"
+  [ngClass]="showError() ? 'form-error' : ''">
+</p-dropdown>
+
+<p [hidden]="!isDisabled"> {{selectedLabel}} </p>
+
+<div *ngIf="showError()" class="required-error">
+  * Campo obrigatório!
+</div>

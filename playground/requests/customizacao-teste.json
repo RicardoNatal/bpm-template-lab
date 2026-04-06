@@ -1,0 +1,17 @@
+{
+  "templateId": "va-vr-base",
+  "presetId": "modelo-2",
+  "project": {
+    "name": "VA/VR Customizado - Teste",
+    "slug": "va-vr-customizado-teste"
+  },
+  "customizations": [
+    {
+      "operation": "rename_label",
+      "params": {
+        "target": "observacaoRh",
+        "newLabel": "Parecer do RH"
+      }
+    }
+  ]
+}

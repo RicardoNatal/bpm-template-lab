@@ -1,0 +1,73 @@
+[
+  {
+    "id": "solicitacao",
+    "label": "Solicitação",
+    "route": "solicitacao",
+    "componentClass": "SolicitacaoComponent",
+    "mode": "edit",
+    "blocks": [
+      "dados-solicitante",
+      "beneficio-atual",
+      "dados-solicitacao"
+    ],
+    "features": [
+      "buscar-dados-solicitante",
+      "buscar-beneficio-atual",
+      "buscar-vales-empresa"
+    ],
+    "optional": false
+  },
+  {
+    "id": "revisao",
+    "label": "Revisão pelo Solicitante",
+    "route": "revisao",
+    "componentClass": "SolicitacaoComponent",
+    "mode": "review",
+    "blocks": [
+      "dados-solicitante",
+      "beneficio-atual",
+      "dados-solicitacao",
+      "observacao-rh"
+    ],
+    "features": [
+      "revisao-pelo-solicitante",
+      "observacao-rh"
+    ],
+    "optional": true,
+    "variantOf": "solicitacao"
+  },
+  {
+    "id": "analise-rh",
+    "label": "Análise RH",
+    "route": "analise-rh",
+    "componentClass": "AnaliseRhComponent",
+    "mode": "edit",
+    "blocks": [
+      "dados-solicitante",
+      "beneficio-atual",
+      "dados-solicitacao",
+      "observacao-rh"
+    ],
+    "features": [
+      "gravar-beneficio",
+      "analise-rh-com-aprovacao",
+      "observacao-rh"
+    ],
+    "optional": true
+  },
+  {
+    "id": "detalhes",
+    "label": "Detalhes",
+    "route": "detalhes",
+    "componentClass": "DetalhesComponent",
+    "mode": "readonly",
+    "blocks": [
+      "dados-solicitante",
+      "beneficio-atual",
+      "dados-solicitacao",
+      "observacao-rh"
+    ],
+    "features": [],
+    "optional": true
+  }
+]

@@ -1,0 +1,80 @@
+{
+  "templateId": "banco-mercantil-va-vr",
+  "name": "Troca de Benefício VA/VR",
+  "description": "Fluxo BPM para solicitação de troca de vale alimentação/refeição (VA/VR) pelo colaborador, com análise do RH e gravação do benefício no sistema Senior.",
+  "version": "1.0.0",
+  "baseModel": "modelo-3",
+  "features": [
+    {
+      "id": "buscar-dados-solicitante",
+      "label": "Busca de dados do solicitante",
+      "description": "Consulta os dados do colaborador logado via Senior XT (retornaSolicitante). Preenche automaticamente o bloco dados-solicitante na etapa de solicitação.",
+      "optional": false
+    },
+    {
+      "id": "buscar-beneficio-atual",
+      "label": "Busca de benefício atual",
+      "description": "Consulta o benefício VA/VR atual do colaborador (retornaBeneficioAtual). Exibido como informação no bloco beneficio-atual.",
+      "optional": false
+    },
+    {
+      "id": "buscar-vales-empresa",
+      "label": "Busca de vales disponíveis por empresa",
+      "description": "Consulta os vales configurados para a empresa do colaborador (retornaValesPorEmpresa). Popula as opções de troca no bloco dados-solicitacao. Exige exatamente 2 vales configurados para a empresa.",
+      "optional": false,
+      "enabledBy": [
+        "buscar-beneficio-atual"
+      ]
+    },
+    {
+      "id": "gravar-beneficio",
+      "label": "Gravação do novo benefício no Senior",
+      "description": "Persiste a troca de benefício no sistema Senior (gravaBeneficioNovo) quando o RH aciona a ação \"Aprovar\" na etapa analise-rh.",
+      "optional": true,
+      "enabledBy": [
+        "analise-rh-com-aprovacao"
+      ]
+    },
+    {
+      "id": "revisao-pelo-solicitante",
+      "label": "Revisão pelo solicitante",
+      "description": "Etapa em que o solicitante revisa os dados preenchidos antes de seguir. Reutiliza SolicitacaoComponent em modo review (variantOf: solicitacao). O componente detecta o modo via route data, não por URL. Remove esta feature para ir direto da solicitação para a análise.",
+      "optional": true
+    },
+    {
+      "id": "analise-rh-com-aprovacao",
+      "label": "Análise de RH com Aprovar/Revisar",
+      "description": "Etapa de análise do RH com duas ações disponíveis: Aprovar (grava benefício) ou Revisar (devolve ao solicitante). Controlado pelo nextAction.name no submit.",
+      "optional": true
+    },
+    {
+      "id": "observacao-rh",
+      "label": "Observação do RH",
+      "description": "Campo de observação preenchido pelo RH na etapa analise-rh. Exibido como somente-leitura na revisão e nos detalhes. Obrigatório apenas quando a ação é \"Revisar\".",
+      "optional": true
+    }
+  ],
+  "allowedOperations": [
+    "disable_step",
+    "disable_route",
+    "disable_feature",
+    "remove_block",
+    "remove_block_instance",
+    "add_field",
+    "remove_field",
+    "change_validation",
+    "rename_label",
+    "filter_process_variables_by_feature",
+    "derive_variant_from_preset"
+  ],
+  "files": {
+    "steps": "steps.json",
+    "routes": "routes.json",
+    "presets": "presets.json",
+    "blocks": "blocks.json",
+    "blockInstances": "block-instances.json",
+    "fieldSchemas": "field-schemas.json",
+    "processVariables": "process-variables.json",
+    "dependencies": "dependencies.json"
+  }
+}

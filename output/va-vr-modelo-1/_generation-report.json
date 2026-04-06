@@ -1,0 +1,96 @@
+{
+  "success": true,
+  "templateId": "va-vr-base",
+  "presetId": "modelo-1",
+  "projectName": "VA/VR Modelo 1 - Básico",
+  "outputDir": "C:\\Users\\Ricardo.Schvambach\\Desktop\\Desenvolvimentos\\Hackaton\\bpm-template-lab\\output\\va-vr-modelo-1",
+  "operationsExecuted": [
+    {
+      "type": "disable_feature",
+      "target": "gravar-beneficio",
+      "success": true
+    },
+    {
+      "type": "disable_feature",
+      "target": "revisao-pelo-solicitante",
+      "success": true
+    },
+    {
+      "type": "disable_feature",
+      "target": "analise-rh-com-aprovacao",
+      "success": true
+    },
+    {
+      "type": "disable_feature",
+      "target": "observacao-rh",
+      "success": true
+    },
+    {
+      "type": "disable_step",
+      "target": "revisao",
+      "success": true
+    },
+    {
+      "type": "disable_step",
+      "target": "analise-rh",
+      "success": true
+    },
+    {
+      "type": "disable_route",
+      "target": "revisao",
+      "success": true
+    },
+    {
+      "type": "disable_route",
+      "target": "analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "observacao-rh-solicitacao",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "observacao-rh-analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "observacao-rh-detalhes",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-solicitante-analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "beneficio-atual-analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-solicitacao-analise-rh",
+      "success": true
+    },
+    {
+      "type": "filter_process_variables_by_feature",
+      "target": "_all",
+      "success": true
+    }
+  ],
+  "warnings": [],
+  "filesModified": [
+    "src/app/app-routing.module.ts",
+    "src/app/modules/solicitacao/solicitacao.component.html",
+    "src/app/modules/analise-rh/analise-rh.component.html",
+    "src/app/modules/detalhes/detalhes.component.html",
+    "_meta/process-variables.json",
+    "_meta/steps.json",
+    "_meta/routes.json",
+    "_meta/manifest.json"
+  ],
+  "duration": 1422
+}

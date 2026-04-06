@@ -1,0 +1,145 @@
+[
+  {
+    "source": {
+      "type": "feature",
+      "id": "revisao-pelo-solicitante"
+    },
+    "target": {
+      "type": "step",
+      "id": "revisao"
+    },
+    "description": "Sem esta feature, o step de revisão não existe no fluxo."
+  },
+  {
+    "source": {
+      "type": "feature",
+      "id": "analise-rh-com-aprovacao"
+    },
+    "target": {
+      "type": "step",
+      "id": "analise-rh"
+    },
+    "description": "Sem esta feature, o step de análise RH não existe no fluxo."
+  },
+  {
+    "source": {
+      "type": "feature",
+      "id": "analise-rh-com-aprovacao"
+    },
+    "target": {
+      "type": "feature",
+      "id": "gravar-beneficio"
+    },
+    "description": "Gravação do benefício só ocorre na aprovação do RH."
+  },
+  {
+    "source": {
+      "type": "feature",
+      "id": "analise-rh-com-aprovacao"
+    },
+    "target": {
+      "type": "feature",
+      "id": "observacao-rh"
+    },
+    "description": "Observação do RH só tem sentido com etapa de análise RH."
+  },
+  {
+    "source": {
+      "type": "feature",
+      "id": "observacao-rh"
+    },
+    "target": {
+      "type": "block",
+      "id": "observacao-rh"
+    },
+    "description": "Sem a feature, o bloco de observação do RH deve ser removido."
+  },
+  {
+    "source": {
+      "type": "step",
+      "id": "revisao"
+    },
+    "target": {
+      "type": "route",
+      "id": "revisao"
+    },
+    "description": "Remoção do step revisao implica remoção da rota /revisao."
+  },
+  {
+    "source": {
+      "type": "step",
+      "id": "analise-rh"
+    },
+    "target": {
+      "type": "route",
+      "id": "analise-rh"
+    },
+    "description": "Remoção do step analise-rh implica remoção da rota /analise-rh."
+  },
+  {
+    "source": {
+      "type": "step",
+      "id": "detalhes"
+    },
+    "target": {
+      "type": "route",
+      "id": "detalhes"
+    },
+    "description": "Remoção do step detalhes implica remoção da rota /detalhes."
+  },
+  {
+    "source": {
+      "type": "step",
+      "id": "solicitacao"
+    },
+    "target": {
+      "type": "route",
+      "id": "solicitacao"
+    },
+    "description": "Remoção do step solicitacao implica remoção da rota /solicitacao."
+  },
+  {
+    "source": {
+      "type": "block",
+      "id": "observacao-rh"
+    },
+    "target": {
+      "type": "blockInstance",
+      "id": "observacao-rh-solicitacao"
+    },
+    "description": "Instância de observação RH na solicitação/revisão."
+  },
+  {
+    "source": {
+      "type": "block",
+      "id": "observacao-rh"
+    },
+    "target": {
+      "type": "blockInstance",
+      "id": "observacao-rh-analise-rh"
+    },
+    "description": "Instância de observação RH na análise RH."
+  },
+  {
+    "source": {
+      "type": "block",
+      "id": "observacao-rh"
+    },
+    "target": {
+      "type": "blockInstance",
+      "id": "observacao-rh-detalhes"
+    },
+    "description": "Instância de observação RH nos detalhes."
+  },
+  {
+    "source": {
+      "type": "block",
+      "id": "observacao-rh"
+    },
+    "target": {
+      "type": "processVariable",
+      "id": "observacaoRh"
+    },
+    "description": "Variável de processo vinculada ao bloco observação RH."
+  }
+]

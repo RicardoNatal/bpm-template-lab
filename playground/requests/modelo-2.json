@@ -1,0 +1,9 @@
+{
+  "templateId": "va-vr-base",
+  "presetId": "modelo-2",
+  "project": {
+    "name": "VA/VR Modelo 2 - Intermediário",
+    "slug": "va-vr-modelo-2"
+  },
+  "customizations": []
+}

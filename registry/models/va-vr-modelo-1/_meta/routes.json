@@ -1,0 +1,32 @@
+{
+  "routes": [
+    {
+      "stepId": "solicitacao",
+      "path": "solicitacao",
+      "modulePath": "./modules/solicitacao/solicitacao.module",
+      "moduleName": "SolicitacaoModule",
+      "routeData": {
+        "stepId": "solicitacao",
+        "mode": "edit"
+      }
+    },
+    {
+      "stepId": "detalhes",
+      "path": "detalhes",
+      "modulePath": "./modules/detalhes/detalhes.module",
+      "moduleName": "DetalhesModule",
+      "routeData": {
+        "stepId": "detalhes",
+        "mode": "readonly"
+      }
+    }
+  ],
+  "stepRouteMap": {
+    "solicitacao": "solicitacao",
+    "detalhes": "detalhes"
+  },
+  "routeStepMap": {
+    "solicitacao": "solicitacao",
+    "detalhes": "detalhes"
+  }
+}

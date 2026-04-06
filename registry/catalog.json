@@ -1,0 +1,728 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-04-06T18:07:55.445Z",
+  "bpmCategories": [
+    {
+      "id": "va-vr-base",
+      "name": "Troca de Benefício VA/VR",
+      "description": "Fluxo BPM para solicitação de troca de vale alimentação/refeição (VA/VR) pelo colaborador, com análise do RH e gravação do benefício no sistema Senior.",
+      "models": [
+        {
+          "slug": "va-vr-modelo-1",
+          "name": "VA/VR Modelo 1 - Básico",
+          "presetId": "modelo-1",
+          "presetLabel": "Modelo Básico",
+          "presetDescription": "Fluxo mínimo: Solicitação → Detalhes. Sem análise de RH intermediária. Adequado para processos de baixa complexidade onde a aprovação é automática ou feita por outro mecanismo externo ao fluxo.",
+          "templateId": "va-vr-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-06T18:07:55.349Z",
+          "aiGenerated": true,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão pelo Solicitante",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": false
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "buscar-dados-solicitante",
+              "label": "Busca de dados do solicitante",
+              "enabled": true
+            },
+            {
+              "id": "buscar-beneficio-atual",
+              "label": "Busca de benefício atual",
+              "enabled": true
+            },
+            {
+              "id": "buscar-vales-empresa",
+              "label": "Busca de vales disponíveis por empresa",
+              "enabled": true
+            },
+            {
+              "id": "gravar-beneficio",
+              "label": "Gravação do novo benefício no Senior",
+              "enabled": false
+            },
+            {
+              "id": "revisao-pelo-solicitante",
+              "label": "Revisão pelo solicitante",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh-com-aprovacao",
+              "label": "Análise de RH com Aprovar/Revisar",
+              "enabled": false
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": false
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "beneficio-atual",
+              "label": "Benefício Atual",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            },
+            {
+              "id": "observacao-solicitante",
+              "label": "Observação do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "termo-adesao",
+              "label": "Termo de Adesão",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 15,
+          "operations": [
+            {
+              "type": "disable_feature",
+              "target": "gravar-beneficio"
+            },
+            {
+              "type": "disable_feature",
+              "target": "revisao-pelo-solicitante"
+            },
+            {
+              "type": "disable_feature",
+              "target": "analise-rh-com-aprovacao"
+            },
+            {
+              "type": "disable_feature",
+              "target": "observacao-rh"
+            },
+            {
+              "type": "disable_step",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_step",
+              "target": "analise-rh"
+            },
+            {
+              "type": "disable_route",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_route",
+              "target": "analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-rh-solicitacao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-rh-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-rh-detalhes"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitante-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "beneficio-atual-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitacao-analise-rh"
+            },
+            {
+              "type": "filter_process_variables_by_feature",
+              "target": "_all"
+            }
+          ],
+          "workflow": {
+            "viewBox": "0 0 420 100",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 28,
+                "cy": 50
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 75,
+                "y": 25,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 320,
+                "cy": 50
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    40,
+                    50
+                  ],
+                  [
+                    75,
+                    50
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    210,
+                    50
+                  ],
+                  [
+                    308,
+                    50
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  259,
+                  40
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/va-vr-modelo-1/_meta",
+          "outputPath": "../../output/va-vr-modelo-1"
+        },
+        {
+          "slug": "va-vr-modelo-2",
+          "name": "VA/VR Modelo 2 - Intermediário",
+          "presetId": "modelo-2",
+          "presetLabel": "Modelo Intermediário",
+          "presetDescription": "Fluxo sem etapa de revisão: Solicitação → Análise RH → Detalhes. Adequado para fluxos onde a revisão pelo solicitante não é necessária.",
+          "templateId": "va-vr-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-06T18:07:55.393Z",
+          "aiGenerated": true,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão pelo Solicitante",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": true
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "buscar-dados-solicitante",
+              "label": "Busca de dados do solicitante",
+              "enabled": true
+            },
+            {
+              "id": "buscar-beneficio-atual",
+              "label": "Busca de benefício atual",
+              "enabled": true
+            },
+            {
+              "id": "buscar-vales-empresa",
+              "label": "Busca de vales disponíveis por empresa",
+              "enabled": true
+            },
+            {
+              "id": "gravar-beneficio",
+              "label": "Gravação do novo benefício no Senior",
+              "enabled": true
+            },
+            {
+              "id": "revisao-pelo-solicitante",
+              "label": "Revisão pelo solicitante",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh-com-aprovacao",
+              "label": "Análise de RH com Aprovar/Revisar",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "beneficio-atual",
+              "label": "Benefício Atual",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            },
+            {
+              "id": "observacao-solicitante",
+              "label": "Observação do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "termo-adesao",
+              "label": "Termo de Adesão",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 5,
+          "operations": [
+            {
+              "type": "disable_feature",
+              "target": "revisao-pelo-solicitante"
+            },
+            {
+              "type": "disable_step",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_route",
+              "target": "revisao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-rh-solicitacao"
+            },
+            {
+              "type": "filter_process_variables_by_feature",
+              "target": "_all"
+            }
+          ],
+          "workflow": {
+            "viewBox": "0 0 620 100",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 28,
+                "cy": 50
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 75,
+                "y": 25,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "analise-rh",
+                "type": "task",
+                "label": "Análise - RH",
+                "x": 320,
+                "y": 25,
+                "w": 145,
+                "h": 50,
+                "stepId": "analise-rh"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 565,
+                "cy": 50
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    40,
+                    50
+                  ],
+                  [
+                    75,
+                    50
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    210,
+                    50
+                  ],
+                  [
+                    320,
+                    50
+                  ]
+                ],
+                "label": "Envio para Análise",
+                "labelPos": [
+                  265,
+                  40
+                ]
+              },
+              {
+                "points": [
+                  [
+                    465,
+                    50
+                  ],
+                  [
+                    553,
+                    50
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  509,
+                  40
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/va-vr-modelo-2/_meta",
+          "outputPath": "../../output/va-vr-modelo-2"
+        },
+        {
+          "slug": "va-vr-modelo-3",
+          "name": "VA/VR Modelo 3 - Completo",
+          "presetId": "modelo-3",
+          "presetLabel": "Modelo Completo",
+          "presetDescription": "Fluxo completo: Solicitação → Revisão → Análise RH → Detalhes. Inclui revisão pelo solicitante antes da análise e gravação do benefício na aprovação.",
+          "templateId": "va-vr-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-06T18:07:55.419Z",
+          "aiGenerated": false,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão pelo Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": true
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "buscar-dados-solicitante",
+              "label": "Busca de dados do solicitante",
+              "enabled": true
+            },
+            {
+              "id": "buscar-beneficio-atual",
+              "label": "Busca de benefício atual",
+              "enabled": true
+            },
+            {
+              "id": "buscar-vales-empresa",
+              "label": "Busca de vales disponíveis por empresa",
+              "enabled": true
+            },
+            {
+              "id": "gravar-beneficio",
+              "label": "Gravação do novo benefício no Senior",
+              "enabled": true
+            },
+            {
+              "id": "revisao-pelo-solicitante",
+              "label": "Revisão pelo solicitante",
+              "enabled": true
+            },
+            {
+              "id": "analise-rh-com-aprovacao",
+              "label": "Análise de RH com Aprovar/Revisar",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "beneficio-atual",
+              "label": "Benefício Atual",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            },
+            {
+              "id": "observacao-solicitante",
+              "label": "Observação do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "termo-adesao",
+              "label": "Termo de Adesão",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 0,
+          "operations": [],
+          "workflow": {
+            "viewBox": "0 0 740 300",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 28,
+                "cy": 185
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 75,
+                "y": 160,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "analise-rh",
+                "type": "task",
+                "label": "Análise - RH",
+                "x": 340,
+                "y": 160,
+                "w": 145,
+                "h": 50,
+                "stepId": "analise-rh"
+              },
+              {
+                "id": "gateway1",
+                "type": "gateway",
+                "cx": 570,
+                "cy": 185
+              },
+              {
+                "id": "revisar",
+                "type": "task",
+                "label": "Revisar",
+                "x": 350,
+                "y": 28,
+                "w": 125,
+                "h": 45,
+                "stepId": "revisao"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 665,
+                "cy": 270
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    40,
+                    185
+                  ],
+                  [
+                    75,
+                    185
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    210,
+                    185
+                  ],
+                  [
+                    340,
+                    185
+                  ]
+                ],
+                "label": "Envio para Análise",
+                "labelPos": [
+                  275,
+                  175
+                ]
+              },
+              {
+                "points": [
+                  [
+                    485,
+                    185
+                  ],
+                  [
+                    545,
+                    185
+                  ]
+                ],
+                "label": "Prosseguir",
+                "labelPos": [
+                  515,
+                  175
+                ]
+              },
+              {
+                "points": [
+                  [
+                    595,
+                    185
+                  ],
+                  [
+                    680,
+                    185
+                  ],
+                  [
+                    680,
+                    50
+                  ],
+                  [
+                    475,
+                    50
+                  ]
+                ],
+                "label": "Revisar",
+                "labelPos": [
+                  695,
+                  120
+                ]
+              },
+              {
+                "points": [
+                  [
+                    350,
+                    50
+                  ],
+                  [
+                    300,
+                    50
+                  ],
+                  [
+                    300,
+                    185
+                  ],
+                  [
+                    340,
+                    185
+                  ]
+                ],
+                "label": "Retornar para Análise",
+                "labelPos": [
+                  195,
+                  120
+                ]
+              },
+              {
+                "points": [
+                  [
+                    570,
+                    210
+                  ],
+                  [
+                    570,
+                    270
+                  ],
+                  [
+                    653,
+                    270
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  585,
+                  255
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/va-vr-modelo-3/_meta",
+          "outputPath": "../../output/va-vr-modelo-3"
+        }
+      ]
+    }
+  ]
+}

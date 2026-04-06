@@ -1,0 +1,44 @@
+{
+    "name": "@seniorsistemas/workflow-cockpit",
+    "version": "2.0.7",
+    "description": "Biblioteca Senior Business Planning Model (BPM) para integração com WorkFlow G7.",
+    "main": "dist/workflow-cockpit.min.js",
+    "types": "dist/workflow-cockpit.d.ts",
+    "typings": "dist/workflow-cockpit.d.ts",
+    "license": "SEE LICENSE IN LICENCE.md",
+    "files": [
+        "dist/"
+    ],
+    "keywords": [
+        "Senior",
+        "BPM",
+        "Workflow",
+        "g7"
+    ],
+    "scripts": {
+        "prepack": "npm run build",
+        "lint": "./node_modules/.bin/eslint .",
+        "lint:fix": "npm run lint -- --fix",
+        "pretest": "npm run lint",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "node scripts/build.js && npm run build:lib && npm run build:standalone",
+        "build:wp": "./node_modules/.bin/webpack",
+        "build:lib": "npm run build:wp -- --config-name lib",
+        "build:standalone": "npm run build:wp -- --config-name standalone"
+    },
+    "dependencies": {
+        "iframe-resizer": "^3.5.14"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.3.4",
+        "@babel/preset-env": "^7.3.4",
+        "babel-loader": "^8.0.5",
+        "eslint": "^5.15.3",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.16.0",
+        "rimraf": "^2.6.3",
+        "uglifyjs-webpack-plugin": "^2.1.2",
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.3.0"
+    }
+}

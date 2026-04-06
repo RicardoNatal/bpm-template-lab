@@ -1,0 +1,35 @@
+[
+  {
+    "id": "solicitacao",
+    "label": "Solicitação",
+    "route": "solicitacao",
+    "componentClass": "SolicitacaoComponent",
+    "mode": "edit",
+    "blocks": [
+      "dados-solicitante",
+      "beneficio-atual",
+      "dados-solicitacao"
+    ],
+    "features": [
+      "buscar-dados-solicitante",
+      "buscar-beneficio-atual",
+      "buscar-vales-empresa"
+    ],
+    "optional": false
+  },
+  {
+    "id": "detalhes",
+    "label": "Detalhes",
+    "route": "detalhes",
+    "componentClass": "DetalhesComponent",
+    "mode": "readonly",
+    "blocks": [
+      "dados-solicitante",
+      "beneficio-atual",
+      "dados-solicitacao",
+      "observacao-rh"
+    ],
+    "features": [],
+    "optional": true
+  }
+]

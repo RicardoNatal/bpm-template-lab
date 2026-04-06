@@ -1,0 +1,47 @@
+{
+  "modelo-3": {
+    "viewBox": "0 0 740 300",
+    "nodes": [
+      { "id": "start", "type": "start", "cx": 28, "cy": 185 },
+      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 75, "y": 160, "w": 135, "h": 50, "stepId": "solicitacao" },
+      { "id": "analise-rh", "type": "task", "label": "Análise - RH", "x": 340, "y": 160, "w": 145, "h": 50, "stepId": "analise-rh" },
+      { "id": "gateway1", "type": "gateway", "cx": 570, "cy": 185 },
+      { "id": "revisar", "type": "task", "label": "Revisar", "x": 350, "y": 28, "w": 125, "h": 45, "stepId": "revisao" },
+      { "id": "end", "type": "end", "cx": 665, "cy": 270 }
+    ],
+    "edges": [
+      { "points": [[40,185],[75,185]] },
+      { "points": [[210,185],[340,185]], "label": "Envio para Análise", "labelPos": [275,175] },
+      { "points": [[485,185],[545,185]], "label": "Prosseguir", "labelPos": [515,175] },
+      { "points": [[595,185],[680,185],[680,50],[475,50]], "label": "Revisar", "labelPos": [695,120] },
+      { "points": [[350,50],[300,50],[300,185],[340,185]], "label": "Retornar para Análise", "labelPos": [195,120] },
+      { "points": [[570,210],[570,270],[653,270]], "label": "Finalizar", "labelPos": [585,255] }
+    ]
+  },
+  "modelo-2": {
+    "viewBox": "0 0 620 100",
+    "nodes": [
+      { "id": "start", "type": "start", "cx": 28, "cy": 50 },
+      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 75, "y": 25, "w": 135, "h": 50, "stepId": "solicitacao" },
+      { "id": "analise-rh", "type": "task", "label": "Análise - RH", "x": 320, "y": 25, "w": 145, "h": 50, "stepId": "analise-rh" },
+      { "id": "end", "type": "end", "cx": 565, "cy": 50 }
+    ],
+    "edges": [
+      { "points": [[40,50],[75,50]] },
+      { "points": [[210,50],[320,50]], "label": "Envio para Análise", "labelPos": [265,40] },
+      { "points": [[465,50],[553,50]], "label": "Finalizar", "labelPos": [509,40] }
+    ]
+  },
+  "modelo-1": {
+    "viewBox": "0 0 420 100",
+    "nodes": [
+      { "id": "start", "type": "start", "cx": 28, "cy": 50 },
+      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 75, "y": 25, "w": 135, "h": 50, "stepId": "solicitacao" },
+      { "id": "end", "type": "end", "cx": 320, "cy": 50 }
+    ],
+    "edges": [
+      { "points": [[40,50],[75,50]] },
+      { "points": [[210,50],[308,50]], "label": "Finalizar", "labelPos": [259,40] }
+    ]
+  }
+}

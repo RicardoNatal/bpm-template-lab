@@ -1,0 +1,50 @@
+<p-toast />
+
+<div *ngIf="estaExibindoLoading && complete" class="navigation-loading-overlay">
+  <div class="navigation-loading-container">
+    <p-progressSpinner
+      styleClass="large-spinner"
+      strokeWidth="3"
+      animationDuration="1.5s"
+    >
+    </p-progressSpinner>
+    <p>{{ mensagemRotaAtual }}</p>
+  </div>
+</div>
+
+@if (validaVersao) {
+  <div class="col-12 text-right text-xs text-400">
+    <p>Versão {{ ambiente }}.{{ versao }}</p>
+  </div>
+}
+
+@if (complete) {
+  @if (versaoInvalida) {
+    <p-messages severity="error">
+      <ng-template pTemplate>
+        <i class="pi pi-history"></i>
+        <div class="ml-2">
+          Fluxo desatualizado! Atualize a página e caso o erro persista, entre
+          em contato com o administrador do sistema.
+        </div>
+      </ng-template>
+    </p-messages>
+  } @else {
+    <div [class.blur-content]="estaExibindoLoading">
+      <router-outlet></router-outlet>
+    </div>
+  }
+} @else {
+  <div class="initial-loading-overlay">
+    <div class="initial-loading-container">
+      <p-progressSpinner
+        styleClass="large-spinner"
+        strokeWidth="3"
+        animationDuration="1.5s"
+        ariaLabel="loading"
+      >
+      </p-progressSpinner>
+      <p>Carregando aplicação...</p>
+    </div>
+  </div>
+}

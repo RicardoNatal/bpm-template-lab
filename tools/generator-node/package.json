@@ -1,0 +1,25 @@
+{
+  "name": "bpm-template-generator",
+  "version": "1.2.0",
+  "description": "Gerador BPM V1.2 — Bootstrap, sincronização, validação, geração de variantes e bootstrap IA",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "generate": "tsx src/cli.ts generate",
+    "generate:dev": "tsx src/cli.ts generate",
+    "init-template": "tsx src/cli.ts init-template",
+    "sync-meta": "tsx src/cli.ts sync-meta",
+    "validate-template": "tsx src/cli.ts validate-template",
+    "ai-bootstrap-meta": "tsx src/cli.ts ai-bootstrap-meta",
+    "publish": "tsx src/cli.ts publish"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "openai": "^6.33.0"
+  }
+}

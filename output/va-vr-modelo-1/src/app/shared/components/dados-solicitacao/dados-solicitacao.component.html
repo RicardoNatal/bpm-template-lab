@@ -1,0 +1,11 @@
+<hst-card [titulo]="'Solicitação'">
+  <app-select data-template-block-instance="dados-solicitacao-select-beneficio" [config]="selectConfig"></app-select>
+
+  <!-- TEMPLATE:OPTIONAL block="termo-adesao" instance="termo-adesao-dados-solicitacao" -->
+  <app-termo-adesao data-template-block-instance="termo-adesao-dados-solicitacao"></app-termo-adesao>
+  <!-- /TEMPLATE:OPTIONAL -->
+
+  <!-- TEMPLATE:OPTIONAL block="observacao-solicitante" instance="observacao-solicitante-dados-solicitacao" -->
+  <app-observacao data-template-block-instance="observacao-solicitante-dados-solicitacao" [mostrarCard]="false" [label]="'Observação do Solicitante'"></app-observacao>
+  <!-- /TEMPLATE:OPTIONAL -->
+</hst-card>

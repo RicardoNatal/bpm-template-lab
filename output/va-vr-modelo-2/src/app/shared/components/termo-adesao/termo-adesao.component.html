@@ -1,0 +1,66 @@
+<hst-message noIcon>
+  <div class="text-center mb-2">
+    <strong>PROGRAMA DE ALIMENTAÇÃO DO TRABALHADOR</strong><br />
+    <strong>ESCLARECIMENTOS LEGAIS</strong>
+  </div>
+  <p>1 - Este programa será executado por meio de documento de legitimação.</p>
+
+  <p>
+    2 - Fica entendido como sendo documento de legitimação os cupons, os vales
+    refeições, tíquetes alimentação, ou outros documentos, da mesma espécie, que
+    o empregador venha a adquirir com a finalidade de execução do PAT.
+  </p>
+
+  <p>
+    3 - Tendo motivos de força maior, alheios a vontade do empregador, o
+    documento de legitimação poderá ser substituído por igual valor em espécie.
+  </p>
+
+  <p>
+    4 - Fica, desde já, proibido ao funcionário recebedor do documento de
+    legitimação utilizar o mesmo de qualquer outra forma que não seja com o
+    objetivo de aquisição de refeições ou gêneros alimentícios.
+  </p>
+
+  <p>
+    5 - Por liberalidade do empregador ou por força de acordo/convenção
+    coletiva, não haverá desconto no salário do empregado.
+  </p>
+
+  <p>
+    6 - Sempre que for permitido em Lei, será resguardado ao empregador o
+    direito de suspender os benefícios do PAT ao empregado, seja de forma
+    temporária ou definitiva, podendo citada suspensão ser efetuada sem prévio
+    aviso.
+  </p>
+
+  <p>
+    7 - O empregado que interessar-se em não receber este benefício deverá
+    manifestar por escrito ao empregador.
+  </p>
+  <p>
+    8 - De acordo com o art. 6º do Decreto nº 5/91, os benefícios do PAT não têm
+    natureza salarial, assim como não se incorpora à remuneração paga para
+    quaisquer efeitos.
+  </p>
+  <p>
+    9 - Sempre que for do interesse da empregadora, os documentos de legitimação
+    poderão sofrer alterações em seu valor unitário, tanto para aumentar quanto
+    para reduzir os seus valores, independente da permissão do empregado.
+  </p>
+  <p>
+    10 - Haver lido, compreendido e aceito integralmente a Norma do Benefício.
+  </p>
+  <br />
+  <div>
+    <p-checkbox [binary]="true" inputId="ck" [formControl]="aceite">
+    </p-checkbox>
+    <!-- &nbsp; é um espaço para separar o texto do checkbox -->
+    <label for="ck"
+      >&nbsp;Declaro que li e estou de acordo com o TERMO DE ADESÃO.</label
+    >
+  </div>
+  <small *ngIf="aceite.dirty && aceite.invalid" class="p-error">
+    * Você deve aceitar o termo para continuar.
+  </small>
+</hst-message>
