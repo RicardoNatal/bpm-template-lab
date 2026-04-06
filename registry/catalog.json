@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-04-06T18:07:55.445Z",
+  "updatedAt": "2026-04-06T18:19:41.008Z",
   "bpmCategories": [
     {
       "id": "va-vr-base",
@@ -12,10 +12,10 @@
           "name": "VA/VR Modelo 1 - Básico",
           "presetId": "modelo-1",
           "presetLabel": "Modelo Básico",
-          "presetDescription": "Fluxo mínimo: Solicitação → Detalhes. Sem análise de RH intermediária. Adequado para processos de baixa complexidade onde a aprovação é automática ou feita por outro mecanismo externo ao fluxo.",
+          "presetDescription": "Fluxo mínimo: Incluíndo etapa de solicitação e gravação no módulo HCM, sem aprovação ou análise.",
           "templateId": "va-vr-base",
           "version": "1.0.0",
-          "publishedAt": "2026-04-06T18:07:55.349Z",
+          "publishedAt": "2026-04-06T18:19:40.894Z",
           "aiGenerated": true,
           "steps": [
             {
@@ -57,8 +57,8 @@
             },
             {
               "id": "gravar-beneficio",
-              "label": "Gravação do novo benefício no Senior",
-              "enabled": false
+              "label": "Gravação do novo benefício no Senior HCM",
+              "enabled": true
             },
             {
               "id": "revisao-pelo-solicitante",
@@ -110,10 +110,6 @@
           ],
           "operationsCount": 15,
           "operations": [
-            {
-              "type": "disable_feature",
-              "target": "gravar-beneficio"
-            },
             {
               "type": "disable_feature",
               "target": "revisao-pelo-solicitante"
@@ -172,59 +168,59 @@
             }
           ],
           "workflow": {
-            "viewBox": "0 0 420 100",
+            "viewBox": "0 0 400 200",
             "nodes": [
               {
                 "id": "start",
                 "type": "start",
-                "cx": 28,
-                "cy": 50
+                "cx": 40,
+                "cy": 100
               },
               {
                 "id": "solicitacao",
                 "type": "task",
                 "label": "Solicitação",
-                "x": 75,
-                "y": 25,
-                "w": 135,
+                "x": 85,
+                "y": 75,
+                "w": 145,
                 "h": 50,
                 "stepId": "solicitacao"
               },
               {
                 "id": "end",
                 "type": "end",
-                "cx": 320,
-                "cy": 50
+                "cx": 330,
+                "cy": 100
               }
             ],
             "edges": [
               {
                 "points": [
                   [
-                    40,
-                    50
+                    54,
+                    100
                   ],
                   [
-                    75,
-                    50
+                    85,
+                    100
                   ]
                 ]
               },
               {
                 "points": [
                   [
-                    210,
-                    50
+                    230,
+                    100
                   ],
                   [
-                    308,
-                    50
+                    318,
+                    100
                   ]
                 ],
                 "label": "Finalizar",
                 "labelPos": [
-                  259,
-                  40
+                  274,
+                  67
                 ]
               }
             ]
@@ -237,10 +233,10 @@
           "name": "VA/VR Modelo 2 - Intermediário",
           "presetId": "modelo-2",
           "presetLabel": "Modelo Intermediário",
-          "presetDescription": "Fluxo sem etapa de revisão: Solicitação → Análise RH → Detalhes. Adequado para fluxos onde a revisão pelo solicitante não é necessária.",
+          "presetDescription": "Fluxo Intermediário: Inclui etapa de solicitação, análise de RH, etapa de detalhes e gravação no módulo HCM, mas sem revisão pelo solicitante.",
           "templateId": "va-vr-base",
           "version": "1.0.0",
-          "publishedAt": "2026-04-06T18:07:55.393Z",
+          "publishedAt": "2026-04-06T18:19:40.948Z",
           "aiGenerated": true,
           "steps": [
             {
@@ -357,20 +353,20 @@
             }
           ],
           "workflow": {
-            "viewBox": "0 0 620 100",
+            "viewBox": "0 0 560 200",
             "nodes": [
               {
                 "id": "start",
                 "type": "start",
-                "cx": 28,
-                "cy": 50
+                "cx": 30,
+                "cy": 100
               },
               {
                 "id": "solicitacao",
                 "type": "task",
                 "label": "Solicitação",
                 "x": 75,
-                "y": 25,
+                "y": 75,
                 "w": 135,
                 "h": 50,
                 "stepId": "solicitacao"
@@ -379,8 +375,8 @@
                 "id": "analise-rh",
                 "type": "task",
                 "label": "Análise - RH",
-                "x": 320,
-                "y": 25,
+                "x": 290,
+                "y": 75,
                 "w": 145,
                 "h": 50,
                 "stepId": "analise-rh"
@@ -388,20 +384,20 @@
               {
                 "id": "end",
                 "type": "end",
-                "cx": 565,
-                "cy": 50
+                "cx": 505,
+                "cy": 100
               }
             ],
             "edges": [
               {
                 "points": [
                   [
-                    40,
-                    50
+                    44,
+                    100
                   ],
                   [
                     75,
-                    50
+                    100
                   ]
                 ]
               },
@@ -409,34 +405,34 @@
                 "points": [
                   [
                     210,
-                    50
+                    100
                   ],
                   [
-                    320,
-                    50
+                    290,
+                    100
                   ]
                 ],
                 "label": "Envio para Análise",
                 "labelPos": [
-                  265,
-                  40
+                  250,
+                  67
                 ]
               },
               {
                 "points": [
                   [
-                    465,
-                    50
+                    435,
+                    100
                   ],
                   [
-                    553,
-                    50
+                    493,
+                    100
                   ]
                 ],
                 "label": "Finalizar",
                 "labelPos": [
-                  509,
-                  40
+                  464,
+                  67
                 ]
               }
             ]
@@ -449,10 +445,10 @@
           "name": "VA/VR Modelo 3 - Completo",
           "presetId": "modelo-3",
           "presetLabel": "Modelo Completo",
-          "presetDescription": "Fluxo completo: Solicitação → Revisão → Análise RH → Detalhes. Inclui revisão pelo solicitante antes da análise e gravação do benefício na aprovação.",
+          "presetDescription": "Fluxo completo: Contendo solicitação, análise, revisão pelo solicitante, etapa de detalhes, gravação no módulo HCM.",
           "templateId": "va-vr-base",
           "version": "1.0.0",
-          "publishedAt": "2026-04-06T18:07:55.419Z",
+          "publishedAt": "2026-04-06T18:19:40.984Z",
           "aiGenerated": false,
           "steps": [
             {

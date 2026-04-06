@@ -19,29 +19,29 @@
     ]
   },
   "modelo-2": {
-    "viewBox": "0 0 620 100",
+    "viewBox": "0 0 560 200",
     "nodes": [
-      { "id": "start", "type": "start", "cx": 28, "cy": 50 },
-      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 75, "y": 25, "w": 135, "h": 50, "stepId": "solicitacao" },
-      { "id": "analise-rh", "type": "task", "label": "Análise - RH", "x": 320, "y": 25, "w": 145, "h": 50, "stepId": "analise-rh" },
-      { "id": "end", "type": "end", "cx": 565, "cy": 50 }
+      { "id": "start", "type": "start", "cx": 30, "cy": 100 },
+      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 75, "y": 75, "w": 135, "h": 50, "stepId": "solicitacao" },
+      { "id": "analise-rh", "type": "task", "label": "Análise - RH", "x": 290, "y": 75, "w": 145, "h": 50, "stepId": "analise-rh" },
+      { "id": "end", "type": "end", "cx": 505, "cy": 100 }
     ],
     "edges": [
-      { "points": [[40,50],[75,50]] },
-      { "points": [[210,50],[320,50]], "label": "Envio para Análise", "labelPos": [265,40] },
-      { "points": [[465,50],[553,50]], "label": "Finalizar", "labelPos": [509,40] }
+      { "points": [[44,100],[75,100]] },
+      { "points": [[210,100],[290,100]], "label": "Envio para Análise", "labelPos": [250,67] },
+      { "points": [[435,100],[493,100]], "label": "Finalizar", "labelPos": [464,67] }
     ]
   },
   "modelo-1": {
-    "viewBox": "0 0 420 100",
+    "viewBox": "0 0 400 200",
     "nodes": [
-      { "id": "start", "type": "start", "cx": 28, "cy": 50 },
-      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 75, "y": 25, "w": 135, "h": 50, "stepId": "solicitacao" },
-      { "id": "end", "type": "end", "cx": 320, "cy": 50 }
+      { "id": "start", "type": "start", "cx": 40, "cy": 100 },
+      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 85, "y": 75, "w": 145, "h": 50, "stepId": "solicitacao" },
+      { "id": "end", "type": "end", "cx": 330, "cy": 100 }
     ],
     "edges": [
-      { "points": [[40,50],[75,50]] },
-      { "points": [[210,50],[308,50]], "label": "Finalizar", "labelPos": [259,40] }
+      { "points": [[54,100],[85,100]] },
+      { "points": [[230,100],[318,100]], "label": "Finalizar", "labelPos": [274,67] }
     ]
   }
 }
