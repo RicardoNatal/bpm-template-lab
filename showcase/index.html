@@ -74,14 +74,14 @@
     .models-grid { max-width: 1200px; margin: 0 auto 60px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; }
     @media (max-width: 900px) { .models-grid { grid-template-columns: 1fr; } }
 
-    .model-card { background: var(--senior-white); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-card); transition: var(--transition); display: flex; flex-direction: column; position: relative; }
+    .model-card { background: var(--senior-white); border-radius: var(--radius-lg); box-shadow: var(--shadow-card); transition: var(--transition); display: flex; flex-direction: column; position: relative; }
     .model-card:hover { box-shadow: var(--shadow-card-hover); transform: translateY(-4px); }
-    .model-badge { position: absolute; top: 16px; right: 16px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; z-index: 2; }
-    .badge-ai { background: linear-gradient(135deg, #7C3AED, #2563EB); color: #fff; }
+    .model-badge { position: absolute; top: 16px; right: 16px; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; z-index: 3; display: inline-flex; align-items: center; gap: 4px; width: auto; }
+    .badge-ai { background: #6D28D9; color: #fff; }
     .badge-base { background: var(--senior-green); color: #fff; }
 
-    .model-workflow { background: var(--senior-gray-100); padding: 16px 12px; min-height: 120px; display: flex; align-items: center; justify-content: center; overflow-x: auto; }
-    .model-workflow svg { width: 100%; height: auto; }
+    .model-workflow { background: var(--senior-gray-100); border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding: 24px; height: 200px; display: flex; align-items: center; justify-content: center; }
+    .model-workflow svg { max-width: 100%; max-height: 100%; width: auto; height: auto; }
 
     .model-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
     .model-body h3 { font-size: 20px; font-weight: 800; margin-bottom: 4px; color: var(--senior-gray-900); }
@@ -99,7 +99,7 @@
     .change-icon.kept { background: rgba(0,179,134,.1); color: var(--senior-green); }
     .change-icon.info { background: rgba(0,117,190,.1); color: var(--senior-blue); }
 
-    .model-footer { padding: 16px 24px; border-top: 1px solid var(--senior-gray-100); display: flex; gap: 12px; }
+    .model-footer { padding: 16px 24px; border-top: 1px solid var(--senior-gray-100); border-radius: 0 0 var(--radius-lg) var(--radius-lg); display: flex; gap: 12px; }
     .btn { flex: 1; padding: 10px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 700; border: none; cursor: pointer; transition: var(--transition); text-align: center; display: inline-block; }
     .btn-primary { background: var(--senior-blue); color: var(--senior-white); }
     .btn-primary:hover { background: var(--senior-blue-dark); }
@@ -134,8 +134,9 @@
 
     /* ── AI Tooltip ── */
     .ai-tooltip { position: relative; cursor: help; }
-    .ai-tooltip::after { content: attr(data-tip); position: absolute; bottom: calc(100% + 8px); right: 0; background: var(--senior-gray-900); color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap; opacity: 0; pointer-events: none; transition: var(--transition); }
-    .ai-tooltip:hover::after { opacity: 1; }
+    .ai-tooltip::after { content: attr(data-tip); position: absolute; top: calc(100% + 8px); right: 0; background: var(--senior-gray-900); color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; white-space: nowrap; opacity: 0; pointer-events: none; transition: var(--transition); z-index: 20; box-shadow: 0 4px 12px rgba(0,0,0,.25); line-height: 1.4; }
+    .ai-tooltip::before { content: ''; position: absolute; top: 100%; right: 16px; border: 5px solid transparent; border-bottom-color: var(--senior-gray-900); opacity: 0; pointer-events: none; transition: var(--transition); z-index: 20; }
+    .ai-tooltip:hover::after, .ai-tooltip:hover::before { opacity: 1; }
 
     .hidden { display: none; }
     .catalog-meta { max-width: 1200px; margin: 0 auto; padding: 8px 24px; font-size: 12px; color: var(--senior-gray-300); text-align: right; }
@@ -227,12 +228,12 @@
         '</div>';
       });
       // Placeholder categories
-      html += '<div class="category-card category-disabled">' +
-        '<div class="cat-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>' +
-        '<div class="cat-text"><h3>Admissão de Colaborador</h3><p>Em breve</p></div></div>';
-      html += '<div class="category-card category-disabled">' +
-        '<div class="cat-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>' +
-        '<div class="cat-text"><h3>Solicitação de Férias</h3><p>Em breve</p></div></div>';
+    //   html += '<div class="category-card category-disabled">' +
+    //     '<div class="cat-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>' +
+    //     '<div class="cat-text"><h3>Admissão de Colaborador</h3><p>Em breve</p></div></div>';
+    //   html += '<div class="category-card category-disabled">' +
+    //     '<div class="cat-icon"><svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>' +
+    //     '<div class="cat-text"><h3>Solicitação de Férias</h3><p>Em breve</p></div></div>';
       html += '</div>';
 
       container.innerHTML = html;
@@ -276,7 +277,7 @@
 
     function renderModelCard(model, idx) {
       var badge = model.aiGenerated
-        ? '<div class="model-badge badge-ai ai-tooltip" data-tip="Meta gerada por IA (AI Bootstrap)">✦ IA</div>'
+        ? '<div class="model-badge badge-ai" data-tip="Meta gerada por IA (AI Bootstrap)">✦ IA</div>'
         : '<div class="model-badge badge-base">Completo</div>';
 
       // Workflow preview — render SVG BPMN diagram
