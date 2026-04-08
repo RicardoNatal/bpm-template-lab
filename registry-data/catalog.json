@@ -4,7 +4,7 @@
   "bpmCategories": [
     {
       "id": "va-vr-base",
-      "name": "Adesão e Troca de VA/VR",
+      "name": "BPM - VA/VR",
       "description": "Fluxo BPM para solicitação de adesão e troca de vale alimentação/refeição (VA/VR) pelo colaborador. Inclui análise do RH e integração com o módulo de Benefícios do Senior.",
       "models": [
         {
@@ -726,7 +726,7 @@
     },
     {
       "id": "plano-saude-base",
-      "name": "Plano de Saúde Base",
+      "name": "BPM - Plano de Saúde",
       "description": "Fluxo BPM para solicitação e gestão de planos de saúde pelo colaborador. Inclui validação de gestores, gerenciamento de dependentes e integração com o módulo de Benefícios do Senior.",
       "models": [
         {
