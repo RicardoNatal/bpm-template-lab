@@ -4,15 +4,15 @@
   "bpmCategories": [
     {
       "id": "va-vr-base",
-      "name": "Troca de BenefÃ­cio VA/VR",
-      "description": "Fluxo BPM para solicitaÃ§Ã£o de troca de vale alimentaÃ§Ã£o/refeiÃ§Ã£o (VA/VR) pelo colaborador, com anÃ¡lise do RH e gravaÃ§Ã£o do benefÃ­cio no sistema Senior.",
+      "name": "Troca de Benefício VA/VR",
+      "description": "Fluxo BPM para solicitação de troca de vale alimentação/refeição (VA/VR) pelo colaborador, com análise do RH e gravação do benefício no sistema Senior.",
       "models": [
         {
           "slug": "va-vr-modelo-1",
-          "name": "VA/VR Modelo 1 - BÃ¡sico",
+          "name": "VA/VR Modelo 1 - Básico",
           "presetId": "modelo-1",
-          "presetLabel": "Modelo BÃ¡sico",
-          "presetDescription": "Fluxo mÃ­nimo: SolicitaÃ§Ã£o â†’ Detalhes. Sem anÃ¡lise de RH intermediÃ¡ria. Adequado para processos de baixa complexidade onde a aprovaÃ§Ã£o Ã© automÃ¡tica ou feita por outro mecanismo externo ao fluxo.",
+          "presetLabel": "Modelo Básico",
+          "presetDescription": "Fluxo mínimo: Solicitação → Detalhes. Sem análise de RH intermediária. Adequado para processos de baixa complexidade onde a aprovação é automática ou feita por outro mecanismo externo ao fluxo.",
           "templateId": "va-vr-base",
           "version": "1.0.0",
           "publishedAt": "2026-04-07T11:22:43.874Z",
@@ -20,17 +20,17 @@
           "steps": [
             {
               "id": "solicitacao",
-              "label": "SolicitaÃ§Ã£o",
+              "label": "Solicitação",
               "enabled": true
             },
             {
               "id": "revisao",
-              "label": "RevisÃ£o pelo Solicitante",
+              "label": "Revisão pelo Solicitante",
               "enabled": false
             },
             {
               "id": "analise-rh",
-              "label": "AnÃ¡lise RH",
+              "label": "Análise RH",
               "enabled": false
             },
             {
@@ -47,32 +47,32 @@
             },
             {
               "id": "buscar-beneficio-atual",
-              "label": "Busca de benefÃ­cio atual",
+              "label": "Busca de benefício atual",
               "enabled": true
             },
             {
               "id": "buscar-vales-empresa",
-              "label": "Busca de vales disponÃ­veis por empresa",
+              "label": "Busca de vales disponíveis por empresa",
               "enabled": true
             },
             {
               "id": "gravar-beneficio",
-              "label": "GravaÃ§Ã£o do novo benefÃ­cio no Senior",
+              "label": "Gravação do novo benefício no Senior",
               "enabled": false
             },
             {
               "id": "revisao-pelo-solicitante",
-              "label": "RevisÃ£o pelo solicitante",
+              "label": "Revisão pelo solicitante",
               "enabled": false
             },
             {
               "id": "analise-rh-com-aprovacao",
-              "label": "AnÃ¡lise de RH com Aprovar/Revisar",
+              "label": "Análise de RH com Aprovar/Revisar",
               "enabled": false
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": false
             }
           ],
@@ -84,27 +84,27 @@
             },
             {
               "id": "beneficio-atual",
-              "label": "BenefÃ­cio Atual",
+              "label": "Benefício Atual",
               "enabled": true
             },
             {
               "id": "dados-solicitacao",
-              "label": "Dados da SolicitaÃ§Ã£o",
+              "label": "Dados da Solicitação",
               "enabled": true
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": true
             },
             {
               "id": "observacao-solicitante",
-              "label": "ObservaÃ§Ã£o do Solicitante",
+              "label": "Observação do Solicitante",
               "enabled": true
             },
             {
               "id": "termo-adesao",
-              "label": "Termo de AdesÃ£o",
+              "label": "Termo de Adesão",
               "enabled": true
             }
           ],
@@ -183,7 +183,7 @@
               {
                 "id": "solicitacao",
                 "type": "task",
-                "label": "SolicitaÃ§Ã£o",
+                "label": "Solicitação",
                 "x": 85,
                 "y": 75,
                 "w": 145,
@@ -234,10 +234,10 @@
         },
         {
           "slug": "va-vr-modelo-2",
-          "name": "VA/VR Modelo 2 - IntermediÃ¡rio",
+          "name": "VA/VR Modelo 2 - Intermediário",
           "presetId": "modelo-2",
-          "presetLabel": "Modelo IntermediÃ¡rio",
-          "presetDescription": "Fluxo IntermediÃ¡rio: Inclui etapa de solicitaÃ§Ã£o, anÃ¡lise de RH, etapa de detalhes e gravaÃ§Ã£o no mÃ³dulo HCM, mas sem revisÃ£o pelo solicitante.",
+          "presetLabel": "Modelo Intermediário",
+          "presetDescription": "Fluxo Intermediário: Inclui etapa de solicitação, análise de RH, etapa de detalhes e gravação no módulo HCM, mas sem revisão pelo solicitante.",
           "templateId": "va-vr-base",
           "version": "1.0.0",
           "publishedAt": "2026-04-06T18:19:40.948Z",
@@ -245,17 +245,17 @@
           "steps": [
             {
               "id": "solicitacao",
-              "label": "SolicitaÃ§Ã£o",
+              "label": "Solicitação",
               "enabled": true
             },
             {
               "id": "revisao",
-              "label": "RevisÃ£o pelo Solicitante",
+              "label": "Revisão pelo Solicitante",
               "enabled": false
             },
             {
               "id": "analise-rh",
-              "label": "AnÃ¡lise RH",
+              "label": "Análise RH",
               "enabled": true
             },
             {
@@ -272,32 +272,32 @@
             },
             {
               "id": "buscar-beneficio-atual",
-              "label": "Busca de benefÃ­cio atual",
+              "label": "Busca de benefício atual",
               "enabled": true
             },
             {
               "id": "buscar-vales-empresa",
-              "label": "Busca de vales disponÃ­veis por empresa",
+              "label": "Busca de vales disponíveis por empresa",
               "enabled": true
             },
             {
               "id": "gravar-beneficio",
-              "label": "GravaÃ§Ã£o do novo benefÃ­cio no Senior",
+              "label": "Gravação do novo benefício no Senior",
               "enabled": true
             },
             {
               "id": "revisao-pelo-solicitante",
-              "label": "RevisÃ£o pelo solicitante",
+              "label": "Revisão pelo solicitante",
               "enabled": false
             },
             {
               "id": "analise-rh-com-aprovacao",
-              "label": "AnÃ¡lise de RH com Aprovar/Revisar",
+              "label": "Análise de RH com Aprovar/Revisar",
               "enabled": true
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": true
             }
           ],
@@ -309,27 +309,27 @@
             },
             {
               "id": "beneficio-atual",
-              "label": "BenefÃ­cio Atual",
+              "label": "Benefício Atual",
               "enabled": true
             },
             {
               "id": "dados-solicitacao",
-              "label": "Dados da SolicitaÃ§Ã£o",
+              "label": "Dados da Solicitação",
               "enabled": true
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": true
             },
             {
               "id": "observacao-solicitante",
-              "label": "ObservaÃ§Ã£o do Solicitante",
+              "label": "Observação do Solicitante",
               "enabled": true
             },
             {
               "id": "termo-adesao",
-              "label": "Termo de AdesÃ£o",
+              "label": "Termo de Adesão",
               "enabled": true
             }
           ],
@@ -368,7 +368,7 @@
               {
                 "id": "solicitacao",
                 "type": "task",
-                "label": "SolicitaÃ§Ã£o",
+                "label": "Solicitação",
                 "x": 75,
                 "y": 75,
                 "w": 135,
@@ -378,7 +378,7 @@
               {
                 "id": "analise-rh",
                 "type": "task",
-                "label": "AnÃ¡lise - RH",
+                "label": "Análise - RH",
                 "x": 290,
                 "y": 75,
                 "w": 145,
@@ -416,7 +416,7 @@
                     100
                   ]
                 ],
-                "label": "Envio para AnÃ¡lise",
+                "label": "Envio para Análise",
                 "labelPos": [
                   250,
                   67
@@ -449,7 +449,7 @@
           "name": "VA/VR Modelo 3 - Completo",
           "presetId": "modelo-3",
           "presetLabel": "Modelo Completo",
-          "presetDescription": "Fluxo completo: Contendo solicitaÃ§Ã£o, anÃ¡lise, revisÃ£o pelo solicitante, etapa de detalhes, gravaÃ§Ã£o no mÃ³dulo HCM.",
+          "presetDescription": "Fluxo completo: Contendo solicitação, análise, revisão pelo solicitante, etapa de detalhes, gravação no módulo HCM.",
           "templateId": "va-vr-base",
           "version": "1.0.0",
           "publishedAt": "2026-04-06T18:19:40.984Z",
@@ -457,17 +457,17 @@
           "steps": [
             {
               "id": "solicitacao",
-              "label": "SolicitaÃ§Ã£o",
+              "label": "Solicitação",
               "enabled": true
             },
             {
               "id": "revisao",
-              "label": "RevisÃ£o pelo Solicitante",
+              "label": "Revisão pelo Solicitante",
               "enabled": true
             },
             {
               "id": "analise-rh",
-              "label": "AnÃ¡lise RH",
+              "label": "Análise RH",
               "enabled": true
             },
             {
@@ -484,32 +484,32 @@
             },
             {
               "id": "buscar-beneficio-atual",
-              "label": "Busca de benefÃ­cio atual",
+              "label": "Busca de benefício atual",
               "enabled": true
             },
             {
               "id": "buscar-vales-empresa",
-              "label": "Busca de vales disponÃ­veis por empresa",
+              "label": "Busca de vales disponíveis por empresa",
               "enabled": true
             },
             {
               "id": "gravar-beneficio",
-              "label": "GravaÃ§Ã£o do novo benefÃ­cio no Senior",
+              "label": "Gravação do novo benefício no Senior",
               "enabled": true
             },
             {
               "id": "revisao-pelo-solicitante",
-              "label": "RevisÃ£o pelo solicitante",
+              "label": "Revisão pelo solicitante",
               "enabled": true
             },
             {
               "id": "analise-rh-com-aprovacao",
-              "label": "AnÃ¡lise de RH com Aprovar/Revisar",
+              "label": "Análise de RH com Aprovar/Revisar",
               "enabled": true
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": true
             }
           ],
@@ -521,27 +521,27 @@
             },
             {
               "id": "beneficio-atual",
-              "label": "BenefÃ­cio Atual",
+              "label": "Benefício Atual",
               "enabled": true
             },
             {
               "id": "dados-solicitacao",
-              "label": "Dados da SolicitaÃ§Ã£o",
+              "label": "Dados da Solicitação",
               "enabled": true
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": true
             },
             {
               "id": "observacao-solicitante",
-              "label": "ObservaÃ§Ã£o do Solicitante",
+              "label": "Observação do Solicitante",
               "enabled": true
             },
             {
               "id": "termo-adesao",
-              "label": "Termo de AdesÃ£o",
+              "label": "Termo de Adesão",
               "enabled": true
             }
           ],
@@ -559,7 +559,7 @@
               {
                 "id": "solicitacao",
                 "type": "task",
-                "label": "SolicitaÃ§Ã£o",
+                "label": "Solicitação",
                 "x": 75,
                 "y": 160,
                 "w": 135,
@@ -569,7 +569,7 @@
               {
                 "id": "analise-rh",
                 "type": "task",
-                "label": "AnÃ¡lise - RH",
+                "label": "Análise - RH",
                 "x": 340,
                 "y": 160,
                 "w": 145,
@@ -623,7 +623,7 @@
                     185
                   ]
                 ],
-                "label": "Envio para AnÃ¡lise",
+                "label": "Envio para Análise",
                 "labelPos": [
                   275,
                   175
@@ -690,7 +690,7 @@
                     185
                   ]
                 ],
-                "label": "Retornar para AnÃ¡lise",
+                "label": "Retornar para Análise",
                 "labelPos": [
                   195,
                   120
@@ -726,12 +726,12 @@
     },
     {
       "id": "plano-saude-base",
-      "name": "Plano de SaÃºde Base",
-      "description": "Fluxo BPM para solicitaÃ§Ã£o e gestÃ£o de planos de saÃºde com integraÃ§Ã£o Senior XT, incluindo validaÃ§Ã£o de gestores, gerenciamento de dependentes e observaÃ§Ãµes de RH",
+      "name": "Plano de Saúde Base",
+      "description": "Fluxo BPM para solicitação e gestão de planos de saúde com integração Senior XT, incluindo validação de gestores, gerenciamento de dependentes e observações de RH",
       "models": [
         {
           "slug": "modelo-sem-dependentes-plano-saude",
-          "name": "Modelo Sem Dependentes Plano SaÃºde",
+          "name": "Modelo Sem Dependentes Plano Saúde",
           "presetId": "sem-dependentes",
           "presetLabel": "Sem Dependentes",
           "presetDescription": "Fluxo completo mas sem gerenciamento de dependentes",
@@ -742,17 +742,17 @@
           "steps": [
             {
               "id": "solicitacao",
-              "label": "SolicitaÃ§Ã£o",
+              "label": "Solicitação",
               "enabled": true
             },
             {
               "id": "revisao",
-              "label": "RevisÃ£o",
+              "label": "Revisão",
               "enabled": true
             },
             {
               "id": "analise-rh",
-              "label": "AnÃ¡lise RH",
+              "label": "Análise RH",
               "enabled": true
             },
             {
@@ -764,7 +764,7 @@
           "features": [
             {
               "id": "gestor-validation",
-              "label": "ValidaÃ§Ã£o de Gestor",
+              "label": "Validação de Gestor",
               "enabled": true
             },
             {
@@ -774,7 +774,7 @@
             },
             {
               "id": "planos-integration",
-              "label": "IntegraÃ§Ã£o com Planos",
+              "label": "Integração com Planos",
               "enabled": true
             },
             {
@@ -784,12 +784,12 @@
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": true
             },
             {
               "id": "senior-xt-integration",
-              "label": "IntegraÃ§Ã£o SeniorXT",
+              "label": "Integração SeniorXT",
               "enabled": true
             }
           ],
@@ -806,12 +806,12 @@
             },
             {
               "id": "dados-solicitacao",
-              "label": "Dados da SolicitaÃ§Ã£o",
+              "label": "Dados da Solicitação",
               "enabled": true
             },
             {
               "id": "observacao",
-              "label": "ObservaÃ§Ã£o",
+              "label": "Observação",
               "enabled": true
             },
             {
@@ -847,7 +847,7 @@
               {
                 "id": "solicitacao",
                 "type": "task",
-                "label": "SolicitaÃ§Ã£o",
+                "label": "Solicitação",
                 "x": 60,
                 "y": 160,
                 "w": 135,
@@ -857,7 +857,7 @@
               {
                 "id": "analise-rh",
                 "type": "task",
-                "label": "AnÃ¡lise RH",
+                "label": "Análise RH",
                 "x": 270,
                 "y": 160,
                 "w": 145,
@@ -921,7 +921,7 @@
                     185
                   ]
                 ],
-                "label": "Enviar para AnÃ¡lise",
+                "label": "Enviar para Análise",
                 "labelPos": [
                   232,
                   175
@@ -996,7 +996,7 @@
                     185
                   ]
                 ],
-                "label": "Retornar p/ AnÃ¡lise",
+                "label": "Retornar p/ Análise",
                 "labelPos": [
                   165,
                   100
@@ -1026,10 +1026,10 @@
         },
         {
           "slug": "modelo-simplificado-plano-saude",
-          "name": "Modelo Simplificado Plano SaÃºde",
+          "name": "Modelo Simplificado Plano Saúde",
           "presetId": "simplificado",
           "presetLabel": "Fluxo Simplificado",
-          "presetDescription": "ConfiguraÃ§Ã£o simplificada apenas com solicitaÃ§Ã£o e detalhes, sem validaÃ§Ã£o de gestor",
+          "presetDescription": "Configuração simplificada apenas com solicitação e detalhes, sem validação de gestor",
           "templateId": "plano-saude-base",
           "version": "1.0.0",
           "publishedAt": "2026-04-07T21:17:51.167Z",
@@ -1037,17 +1037,17 @@
           "steps": [
             {
               "id": "solicitacao",
-              "label": "SolicitaÃ§Ã£o",
+              "label": "Solicitação",
               "enabled": true
             },
             {
               "id": "revisao",
-              "label": "RevisÃ£o",
+              "label": "Revisão",
               "enabled": false
             },
             {
               "id": "analise-rh",
-              "label": "AnÃ¡lise RH",
+              "label": "Análise RH",
               "enabled": false
             },
             {
@@ -1059,7 +1059,7 @@
           "features": [
             {
               "id": "gestor-validation",
-              "label": "ValidaÃ§Ã£o de Gestor",
+              "label": "Validação de Gestor",
               "enabled": false
             },
             {
@@ -1069,7 +1069,7 @@
             },
             {
               "id": "planos-integration",
-              "label": "IntegraÃ§Ã£o com Planos",
+              "label": "Integração com Planos",
               "enabled": true
             },
             {
@@ -1079,12 +1079,12 @@
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": false
             },
             {
               "id": "senior-xt-integration",
-              "label": "IntegraÃ§Ã£o SeniorXT",
+              "label": "Integração SeniorXT",
               "enabled": true
             }
           ],
@@ -1101,12 +1101,12 @@
             },
             {
               "id": "dados-solicitacao",
-              "label": "Dados da SolicitaÃ§Ã£o",
+              "label": "Dados da Solicitação",
               "enabled": true
             },
             {
               "id": "observacao",
-              "label": "ObservaÃ§Ã£o",
+              "label": "Observação",
               "enabled": true
             },
             {
@@ -1202,7 +1202,7 @@
               {
                 "id": "solicitacao",
                 "type": "task",
-                "label": "SolicitaÃ§Ã£o",
+                "label": "Solicitação",
                 "x": 65,
                 "y": 75,
                 "w": 135,
@@ -1280,10 +1280,10 @@
         },
         {
           "slug": "modelo-completo-plano-saude",
-          "name": "Modelo Completo Plano SaÃºde",
+          "name": "Modelo Completo Plano Saúde",
           "presetId": "completo",
           "presetLabel": "Fluxo Completo",
-          "presetDescription": "ConfiguraÃ§Ã£o completa com todas as etapas e funcionalidades habilitadas",
+          "presetDescription": "Configuração completa com todas as etapas e funcionalidades habilitadas",
           "templateId": "plano-saude-base",
           "version": "1.0.0",
           "publishedAt": "2026-04-07T21:17:45.502Z",
@@ -1291,17 +1291,17 @@
           "steps": [
             {
               "id": "solicitacao",
-              "label": "SolicitaÃ§Ã£o",
+              "label": "Solicitação",
               "enabled": true
             },
             {
               "id": "revisao",
-              "label": "RevisÃ£o",
+              "label": "Revisão",
               "enabled": true
             },
             {
               "id": "analise-rh",
-              "label": "AnÃ¡lise RH",
+              "label": "Análise RH",
               "enabled": true
             },
             {
@@ -1313,7 +1313,7 @@
           "features": [
             {
               "id": "gestor-validation",
-              "label": "ValidaÃ§Ã£o de Gestor",
+              "label": "Validação de Gestor",
               "enabled": true
             },
             {
@@ -1323,7 +1323,7 @@
             },
             {
               "id": "planos-integration",
-              "label": "IntegraÃ§Ã£o com Planos",
+              "label": "Integração com Planos",
               "enabled": true
             },
             {
@@ -1333,12 +1333,12 @@
             },
             {
               "id": "observacao-rh",
-              "label": "ObservaÃ§Ã£o do RH",
+              "label": "Observação do RH",
               "enabled": true
             },
             {
               "id": "senior-xt-integration",
-              "label": "IntegraÃ§Ã£o SeniorXT",
+              "label": "Integração SeniorXT",
               "enabled": true
             }
           ],
@@ -1355,12 +1355,12 @@
             },
             {
               "id": "dados-solicitacao",
-              "label": "Dados da SolicitaÃ§Ã£o",
+              "label": "Dados da Solicitação",
               "enabled": true
             },
             {
               "id": "observacao",
-              "label": "ObservaÃ§Ã£o",
+              "label": "Observação",
               "enabled": true
             },
             {
@@ -1383,7 +1383,7 @@
               {
                 "id": "solicitacao",
                 "type": "task",
-                "label": "SolicitaÃ§Ã£o",
+                "label": "Solicitação",
                 "x": 60,
                 "y": 160,
                 "w": 135,
@@ -1393,7 +1393,7 @@
               {
                 "id": "analise-rh",
                 "type": "task",
-                "label": "AnÃ¡lise RH",
+                "label": "Análise RH",
                 "x": 270,
                 "y": 160,
                 "w": 145,
@@ -1457,7 +1457,7 @@
                     185
                   ]
                 ],
-                "label": "Enviar para AnÃ¡lise",
+                "label": "Enviar para Análise",
                 "labelPos": [
                   232,
                   175
@@ -1532,7 +1532,7 @@
                     185
                   ]
                 ],
-                "label": "Retornar p/ AnÃ¡lise",
+                "label": "Retornar p/ Análise",
                 "labelPos": [
                   165,
                   100
