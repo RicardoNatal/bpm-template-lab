@@ -5,7 +5,7 @@
     {
       "id": "va-vr-base",
       "name": "Adesão e Troca de VA/VR",
-      "description": "Fluxo BPM para solicitação de adesão e troca de vale alimentação/refeição (VA/VR) pelo colaborador, com análise do RH e gravação do benefício no sistema Senior.",
+      "description": "Fluxo BPM para solicitação de adesão e troca de vale alimentação/refeição (VA/VR) pelo colaborador. Inclui análise do RH e integração com o módulo de Benefícios do Senior.",
       "models": [
         {
           "slug": "va-vr-modelo-1",
@@ -727,13 +727,13 @@
     {
       "id": "plano-saude-base",
       "name": "Plano de Saúde Base",
-      "description": "Fluxo BPM para solicitação e gestão de planos de saúde com integração Senior XT, incluindo validação de gestores, gerenciamento de dependentes e observações de RH",
+      "description": "Fluxo BPM para solicitação e gestão de planos de saúde pelo colaborador. Inclui validação de gestores, gerenciamento de dependentes e integração com o módulo de Benefícios do Senior.",
       "models": [
         {
           "slug": "modelo-simplificado-plano-saude",
-          "name": "Plano Saúde Modelo 1 - Simplificado",
+          "name": "Plano Saúde Modelo 1 - Essencial",
           "presetId": "simplificado",
-          "presetLabel": "Modelo Simplificado",
+          "presetLabel": "Modelo Essencial",
           "presetDescription": "Configuração simplificada apenas com solicitação e detalhes, sem validação extra.",
           "templateId": "plano-saude-base",
           "version": "1.0.0",
