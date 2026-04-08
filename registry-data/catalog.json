@@ -1,17 +1,17 @@
 {
   "version": "1.0",
-  "updatedAt": "2026-04-07T21:17:51.213Z",
+  "updatedAt": "2026-04-08T09:17:48.213Z",
   "bpmCategories": [
     {
       "id": "va-vr-base",
-      "name": "Troca de Benefício VA/VR",
-      "description": "Fluxo BPM para solicitação de troca de vale alimentação/refeição (VA/VR) pelo colaborador, com análise do RH e gravação do benefício no sistema Senior.",
+      "name": "Adesão e Troca de VA/VR",
+      "description": "Fluxo BPM para solicitação de adesão e troca de vale alimentação/refeição (VA/VR) pelo colaborador, com análise do RH e gravação do benefício no sistema Senior.",
       "models": [
         {
           "slug": "va-vr-modelo-1",
-          "name": "VA/VR Modelo 1 - Básico",
+          "name": "VA/VR Modelo 1 - Essencial",
           "presetId": "modelo-1",
-          "presetLabel": "Modelo Básico",
+          "presetLabel": "Modelo Essencial",
           "presetDescription": "Fluxo mínimo: Solicitação → Detalhes. Sem análise de RH intermediária. Adequado para processos de baixa complexidade onde a aprovação é automática ou feita por outro mecanismo externo ao fluxo.",
           "templateId": "va-vr-base",
           "version": "1.0.0",
@@ -234,10 +234,10 @@
         },
         {
           "slug": "va-vr-modelo-2",
-          "name": "VA/VR Modelo 2 - Intermediário",
+          "name": "VA/VR Modelo 2 - Avançado",
           "presetId": "modelo-2",
-          "presetLabel": "Modelo Intermediário",
-          "presetDescription": "Fluxo Intermediário: Inclui etapa de solicitação, análise de RH, etapa de detalhes e gravação no módulo HCM, mas sem revisão pelo solicitante.",
+          "presetLabel": "Modelo Avançado",
+          "presetDescription": "Fluxo Avançado: Inclui etapa de solicitação, análise de RH, etapa de detalhes e gravação no módulo HCM, mas sem revisão pelo solicitante.",
           "templateId": "va-vr-base",
           "version": "1.0.0",
           "publishedAt": "2026-04-06T18:19:40.948Z",
@@ -730,11 +730,265 @@
       "description": "Fluxo BPM para solicitação e gestão de planos de saúde com integração Senior XT, incluindo validação de gestores, gerenciamento de dependentes e observações de RH",
       "models": [
         {
+          "slug": "modelo-simplificado-plano-saude",
+          "name": "Plano Saúde Modelo 1 - Simplificado",
+          "presetId": "simplificado",
+          "presetLabel": "Modelo Simplificado",
+          "presetDescription": "Configuração simplificada apenas com solicitação e detalhes, sem validação extra.",
+          "templateId": "plano-saude-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-07T21:17:51.167Z",
+          "aiGenerated": true,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": false
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "gestor-validation",
+              "label": "Validação de Gestor",
+              "enabled": false
+            },
+            {
+              "id": "dependentes-management",
+              "label": "Gerenciamento de Dependentes",
+              "enabled": false
+            },
+            {
+              "id": "planos-integration",
+              "label": "Integração com Planos",
+              "enabled": true
+            },
+            {
+              "id": "readonly-fields",
+              "label": "Campos Somente Leitura",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": false
+            },
+            {
+              "id": "senior-xt-integration",
+              "label": "Integração SeniorXT",
+              "enabled": true
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "dados-gestor",
+              "label": "Dados do Gestor",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao",
+              "label": "Observação",
+              "enabled": true
+            },
+            {
+              "id": "dados-dependentes",
+              "label": "Dados dos Dependentes",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 18,
+          "operations": [
+            {
+              "type": "disable_feature",
+              "target": "gestor-validation"
+            },
+            {
+              "type": "disable_feature",
+              "target": "dependentes-management"
+            },
+            {
+              "type": "disable_feature",
+              "target": "observacao-rh"
+            },
+            {
+              "type": "disable_step",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_step",
+              "target": "analise-rh"
+            },
+            {
+              "type": "disable_route",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_route",
+              "target": "analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-gestor-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-gestor-detalhes"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-gestor-revisao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-gestor-solicitacao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitante-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitacao-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitante-revisao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitacao-revisao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-revisao"
+            },
+            {
+              "type": "filter_process_variables_by_feature",
+              "target": "_all"
+            }
+          ],
+          "workflow": {
+            "viewBox": "0 0 460 200",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 30,
+                "cy": 100
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 65,
+                "y": 75,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "detalhes",
+                "type": "task",
+                "label": "Detalhes",
+                "x": 275,
+                "y": 75,
+                "w": 110,
+                "h": 50,
+                "stepId": "detalhes"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 435,
+                "cy": 100
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    44,
+                    100
+                  ],
+                  [
+                    65,
+                    100
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    200,
+                    100
+                  ],
+                  [
+                    275,
+                    100
+                  ]
+                ],
+                "label": "Prosseguir",
+                "labelPos": [
+                  237,
+                  87
+                ]
+              },
+              {
+                "points": [
+                  [
+                    385,
+                    100
+                  ],
+                  [
+                    423,
+                    100
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  404,
+                  87
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/modelo-simplificado-plano-saude/_meta",
+          "outputPath": "../../output/modelo-simplificado-plano-saude"
+        },
+        {
           "slug": "modelo-sem-dependentes-plano-saude",
-          "name": "Modelo Sem Dependentes Plano Saúde",
+          "name": "Plano Saúde Modelo 2 - Avançado",
           "presetId": "sem-dependentes",
-          "presetLabel": "Sem Dependentes",
-          "presetDescription": "Fluxo completo mas sem gerenciamento de dependentes",
+          "presetLabel": "Modelo Avançado",
+          "presetDescription": "Configuração avançada sem gerenciamento de dependentes, adequada para casos onde o plano de saúde é individual ou o controle de dependentes é feito externamente ao fluxo",
           "templateId": "plano-saude-base",
           "version": "1.0.0",
           "publishedAt": "2026-04-07T21:17:48.315Z",
@@ -1025,265 +1279,11 @@
           "outputPath": "../../output/modelo-sem-dependentes-plano-saude"
         },
         {
-          "slug": "modelo-simplificado-plano-saude",
-          "name": "Modelo Simplificado Plano Saúde",
-          "presetId": "simplificado",
-          "presetLabel": "Fluxo Simplificado",
-          "presetDescription": "Configuração simplificada apenas com solicitação e detalhes, sem validação de gestor",
-          "templateId": "plano-saude-base",
-          "version": "1.0.0",
-          "publishedAt": "2026-04-07T21:17:51.167Z",
-          "aiGenerated": true,
-          "steps": [
-            {
-              "id": "solicitacao",
-              "label": "Solicitação",
-              "enabled": true
-            },
-            {
-              "id": "revisao",
-              "label": "Revisão",
-              "enabled": false
-            },
-            {
-              "id": "analise-rh",
-              "label": "Análise RH",
-              "enabled": false
-            },
-            {
-              "id": "detalhes",
-              "label": "Detalhes",
-              "enabled": true
-            }
-          ],
-          "features": [
-            {
-              "id": "gestor-validation",
-              "label": "Validação de Gestor",
-              "enabled": false
-            },
-            {
-              "id": "dependentes-management",
-              "label": "Gerenciamento de Dependentes",
-              "enabled": false
-            },
-            {
-              "id": "planos-integration",
-              "label": "Integração com Planos",
-              "enabled": true
-            },
-            {
-              "id": "readonly-fields",
-              "label": "Campos Somente Leitura",
-              "enabled": true
-            },
-            {
-              "id": "observacao-rh",
-              "label": "Observação do RH",
-              "enabled": false
-            },
-            {
-              "id": "senior-xt-integration",
-              "label": "Integração SeniorXT",
-              "enabled": true
-            }
-          ],
-          "blocks": [
-            {
-              "id": "dados-solicitante",
-              "label": "Dados do Solicitante",
-              "enabled": true
-            },
-            {
-              "id": "dados-gestor",
-              "label": "Dados do Gestor",
-              "enabled": true
-            },
-            {
-              "id": "dados-solicitacao",
-              "label": "Dados da Solicitação",
-              "enabled": true
-            },
-            {
-              "id": "observacao",
-              "label": "Observação",
-              "enabled": true
-            },
-            {
-              "id": "dados-dependentes",
-              "label": "Dados dos Dependentes",
-              "enabled": true
-            }
-          ],
-          "operationsCount": 18,
-          "operations": [
-            {
-              "type": "disable_feature",
-              "target": "gestor-validation"
-            },
-            {
-              "type": "disable_feature",
-              "target": "dependentes-management"
-            },
-            {
-              "type": "disable_feature",
-              "target": "observacao-rh"
-            },
-            {
-              "type": "disable_step",
-              "target": "revisao"
-            },
-            {
-              "type": "disable_step",
-              "target": "analise-rh"
-            },
-            {
-              "type": "disable_route",
-              "target": "revisao"
-            },
-            {
-              "type": "disable_route",
-              "target": "analise-rh"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "dados-gestor-analise-rh"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "dados-gestor-detalhes"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "dados-gestor-revisao"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "dados-gestor-solicitacao"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "dados-solicitante-analise-rh"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "dados-solicitacao-analise-rh"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "observacao-analise-rh"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "dados-solicitante-revisao"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "dados-solicitacao-revisao"
-            },
-            {
-              "type": "remove_block_instance",
-              "target": "observacao-revisao"
-            },
-            {
-              "type": "filter_process_variables_by_feature",
-              "target": "_all"
-            }
-          ],
-          "workflow": {
-            "viewBox": "0 0 460 200",
-            "nodes": [
-              {
-                "id": "start",
-                "type": "start",
-                "cx": 30,
-                "cy": 100
-              },
-              {
-                "id": "solicitacao",
-                "type": "task",
-                "label": "Solicitação",
-                "x": 65,
-                "y": 75,
-                "w": 135,
-                "h": 50,
-                "stepId": "solicitacao"
-              },
-              {
-                "id": "detalhes",
-                "type": "task",
-                "label": "Detalhes",
-                "x": 275,
-                "y": 75,
-                "w": 110,
-                "h": 50,
-                "stepId": "detalhes"
-              },
-              {
-                "id": "end",
-                "type": "end",
-                "cx": 435,
-                "cy": 100
-              }
-            ],
-            "edges": [
-              {
-                "points": [
-                  [
-                    44,
-                    100
-                  ],
-                  [
-                    65,
-                    100
-                  ]
-                ]
-              },
-              {
-                "points": [
-                  [
-                    200,
-                    100
-                  ],
-                  [
-                    275,
-                    100
-                  ]
-                ],
-                "label": "Prosseguir",
-                "labelPos": [
-                  237,
-                  87
-                ]
-              },
-              {
-                "points": [
-                  [
-                    385,
-                    100
-                  ],
-                  [
-                    423,
-                    100
-                  ]
-                ],
-                "label": "Finalizar",
-                "labelPos": [
-                  404,
-                  87
-                ]
-              }
-            ]
-          },
-          "metaPath": "models/modelo-simplificado-plano-saude/_meta",
-          "outputPath": "../../output/modelo-simplificado-plano-saude"
-        },
-        {
           "slug": "modelo-completo-plano-saude",
-          "name": "Modelo Completo Plano Saúde",
+          "name": "Plano Saúde Modelo 3 - Completo",
           "presetId": "completo",
-          "presetLabel": "Fluxo Completo",
-          "presetDescription": "Configuração completa com todas as etapas e funcionalidades habilitadas",
+          "presetLabel": "Modelo Completo",
+          "presetDescription": "Configuração completa com todas as funcionalidades habilitadas, contendo solicitação, revisão, análise, detalhes, gerenciamnento de dependentes e integração com Senior XT, ideal para empresas que desejam um controle total sobre o processo de solicitação de plano de saúde",
           "templateId": "plano-saude-base",
           "version": "1.0.0",
           "publishedAt": "2026-04-07T21:17:45.502Z",
