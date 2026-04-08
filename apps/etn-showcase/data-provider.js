@@ -49,7 +49,9 @@ async function loadCatalog() {
 async function fetchCatalog(url) {
   const resp = await fetch(url);
   if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-  return resp.json();
+  const buf = await resp.arrayBuffer();
+  const text = new TextDecoder('utf-8').decode(buf);
+  return JSON.parse(text);
 }
 
 /**
