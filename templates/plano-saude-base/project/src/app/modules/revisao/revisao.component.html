@@ -1,0 +1,23 @@
+<app-dados-solicitante
+  data-template-block-instance="dados-solicitante-revisao">
+</app-dados-solicitante>
+
+<!-- TEMPLATE:OPTIONAL block="dados-gestor" instance="dados-gestor-revisao" -->
+<app-dados-gestor
+  data-template-block-instance="dados-gestor-revisao"
+  [hidden]="!ehGestor()">
+</app-dados-gestor>
+<!-- /TEMPLATE:OPTIONAL -->
+<!-- (emitColaborador)="novoColaborador($event)" -->
+
+<app-dados-solicitacao
+  data-template-block-instance="dados-solicitacao-revisao">
+</app-dados-solicitacao>
+
+<app-observacao
+  data-template-block-instance="observacao-revisao"
+  #observacaoRhComponent
+  title="Observação RH"
+  label="Observação RH"
+  [mostrarCard]="true">
+</app-observacao>

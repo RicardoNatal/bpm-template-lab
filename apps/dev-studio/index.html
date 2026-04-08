@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BPM Template Lab — Dev Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      :root {
+        --accent: #0f766e;
+        --accent-light: #f0fdfa;
+        --text: #1e293b;
+        --text-secondary: #64748b;
+        --text-muted: #94a3b8;
+        --border: #e2e8f0;
+        --bg: #f8fafc;
+        --white: #ffffff;
+        --red: #dc2626;
+        --green: #16a34a;
+        --font: 'Inter', system-ui, sans-serif;
+      }
+      html { scroll-behavior: smooth; }
+      body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; }
+
+      /* Header */
+      .header { background: var(--white); border-bottom: 1px solid var(--border); padding: 20px 0; }
+      .header-inner { max-width: 900px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+      .header h1 { font-size: 18px; font-weight: 700; }
+      .header h1 span { color: var(--accent); }
+      .header-meta { font-size: 12px; color: var(--text-muted); }
+
+      /* Container */
+      .container { max-width: 900px; margin: 0 auto; padding: 32px 24px 80px; }
+
+      /* Section */
+      .section { margin-bottom: 40px; }
+      .section-title { font-size: 14px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+
+      /* Template header */
+      .tmpl-header { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-bottom: 32px; }
+      .tmpl-header h2 { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+      .tmpl-header p { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
+      .tmpl-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+      .tmpl-stat { font-size: 13px; color: var(--text-secondary); }
+      .tmpl-stat strong { color: var(--text); font-weight: 600; }
+
+      /* Preset cards */
+      .preset-grid { display: grid; gap: 16px; }
+      .preset-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; transition: border-color 0.15s; }
+      .preset-card:hover { border-color: #cbd5e1; }
+      .preset-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+      .preset-name { font-size: 16px; font-weight: 700; }
+      .preset-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 14px; }
+
+      /* Status badge */
+      .status { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+      .status-published { background: #f0fdf4; color: var(--green); }
+      .status-not-generated { background: #fef2f2; color: var(--red); }
+
+      /* Steps flow */
+      .flow { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+      .flow-step { font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 6px; background: var(--accent-light); color: var(--accent); }
+      .flow-step.off { background: #f1f5f9; color: var(--text-muted); text-decoration: line-through; }
+
+      /* Preset meta row */
+      .preset-meta { display: flex; gap: 16px; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+
+      /* Playground section */
+      .file-list { display: flex; flex-direction: column; gap: 8px; }
+      .file-item { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; }
+      .file-info { display: flex; align-items: center; gap: 10px; }
+      .file-icon { width: 32px; height: 32px; border-radius: 6px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+      .file-name { font-size: 14px; font-weight: 600; }
+      .file-path { font-size: 11px; color: var(--text-muted); font-family: 'Consolas', monospace; }
+      .file-preset-tag { font-size: 11px; font-weight: 600; color: var(--accent); background: var(--accent-light); padding: 2px 8px; border-radius: 4px; }
+
+      /* Instructions */
+      .instructions { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+      .instructions h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; }
+      .step-list { counter-reset: step-counter; }
+      .step-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+      .step-item:last-child { border-bottom: none; }
+      .step-num { counter-increment: step-counter; width: 28px; height: 28px; border-radius: 50%; background: var(--accent-light); color: var(--accent); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px; }
+      .step-num::before { content: counter(step-counter); }
+      .step-body h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+      .step-body p { font-size: 13px; color: var(--text-secondary); }
+      .cmd { font-family: 'Consolas', 'Courier New', monospace; font-size: 12px; background: #1e293b; color: #e2e8f0; padding: 10px 14px; border-radius: 6px; margin-top: 8px; display: block; white-space: pre; overflow-x: auto; line-height: 1.6; }
+      .cmd .comment { color: #64748b; }
+
+      /* Request editor */
+      .editor-section { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 24px; }
+      .editor-section h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+      .editor-section > p { font-size: 13px; color: var(--text-secondary); margin-bottom: 16px; }
+      .req-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+      .req-tab { padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600; border: 1px solid var(--border); background: var(--white); color: var(--text-secondary); cursor: pointer; transition: 0.15s; }
+      .req-tab:hover { background: var(--bg); color: var(--text); }
+      .req-tab.active { background: var(--accent); color: var(--white); border-color: var(--accent); }
+      .editor-area { width: 100%; min-height: 180px; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; border: 1px solid var(--border); border-radius: 8px; padding: 14px; resize: vertical; background: #f8fafc; color: var(--text); line-height: 1.5; }
+      .editor-area:focus { outline: none; border-color: var(--accent); }
+      .btn-row { display: flex; gap: 10px; margin-top: 14px; }
+      .btn { padding: 9px 18px; border-radius: 8px; font-size: 13px; font-weight: 600; border: none; cursor: pointer; transition: 0.15s; }
+      .btn-dark { background: var(--text); color: var(--white); }
+      .btn-dark:hover { background: #0f172a; }
+      .btn-outline { background: var(--white); color: var(--text-secondary); border: 1px solid var(--border); }
+      .btn-outline:hover { background: var(--bg); color: var(--text); }
+
+      /* Feedback */
+      .feedback { padding: 14px 16px; border-radius: 8px; margin-top: 14px; font-size: 13px; display: none; white-space: pre-wrap; line-height: 1.6; }
+      .feedback.show { display: block; }
+      .feedback.success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
+      .feedback.error { background: #fef2f2; border: 1px solid #fecaca; color: #b91c1c; }
+      .feedback.info { background: #f0f9ff; border: 1px solid #bae6fd; color: #0369a1; }
+
+      .loading { text-align: center; padding: 80px 24px; color: var(--text-muted); font-size: 14px; }
+
+      /* Tabs */
+      .tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 32px; }
+      .tab { padding: 10px 20px; font-size: 13px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: 0.15s; background: none; border-top: none; border-left: none; border-right: none; }
+      .tab:hover { color: var(--text); }
+      .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+      .tab-content { display: none; }
+      .tab-content.active { display: block; }
+
+      /* Onboarding */
+      .onboard-phase { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-bottom: 16px; }
+      .onboard-phase h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 10px; }
+      .onboard-phase p { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+      .phase-num { width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: var(--white); font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+      .phase-tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; text-transform: uppercase; }
+      .phase-tag.auto { background: var(--accent-light); color: var(--accent); }
+      .phase-tag.manual { background: #fef3c7; color: #92400e; }
+      .phase-tag.ia { background: #ede9fe; color: #6d28d9; }
+      .onboard-note { font-size: 12px; color: var(--text-muted); padding: 10px 14px; border-left: 3px solid var(--border); margin-top: 10px; }
+
+      /* Pipeline */
+      .pipeline { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+      .pipe-step { padding: 8px 16px; border-radius: 8px; font-size: 12px; font-weight: 600; background: var(--white); border: 1px solid var(--border); color: var(--text-secondary); display: flex; align-items: center; gap: 6px; cursor: pointer; text-decoration: none; transition: 0.15s; }
+      .pipe-step:hover { border-color: var(--accent); color: var(--accent); }
+      .pipe-step .pipe-icon { font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-inner">
+        <h1>BPM Template <span>Lab</span> — Dev Studio</h1>
+        <span class="header-meta">Hackathon 2026</span>
+      </div>
+    </header>
+
+    <div class="container" id="app">
+      <div class="loading">Carregando dados do template...</div>
+    </div>
+
+    <script src="./data-provider.js"></script>
+    <script>
+      let templates = [];
+      let catalog = null;
+      let playgroundRequests = [];
+
+      document.addEventListener('DOMContentLoaded', async () => {
+        try {
+          templates = await window.DevStudioData.loadAllTemplates();
+          try { catalog = await window.DevStudioData.loadCatalog(); } catch(_) {}
+          try { playgroundRequests = await window.DevStudioData.getPlaygroundRequests(); } catch(_) {}
+          render();
+        } catch (err) {
+          document.getElementById('app').innerHTML =
+            '<div class="loading">Erro ao carregar: ' + esc(err.message) + '</div>';
+        }
+      });
+
+      function getPublishedModel(slug) {
+        if (!catalog || !catalog.bpmCategories) return null;
+        for (const cat of catalog.bpmCategories) {
+          const m = (cat.models || []).find(m => m.slug === slug);
+          if (m) return m;
+        }
+        return null;
+      }
+
+      function render() {
+        const app = document.getElementById('app');
+        if (templates.length === 0) {
+          app.innerHTML = '<div class="loading">Nenhum template encontrado em templates/</div>';
+          return;
+        }
+
+        const tmpl = templates[0];
+        const m = tmpl.manifest;
+        const knownRequests = playgroundRequests;
+
+        let html = '';
+
+        // ── Tabs
+        html += '<div class="tabs">';
+        html += '<button class="tab active" onclick="switchTab(\'templates\', this)">Templates</button>';
+        html += '<button class="tab" onclick="switchTab(\'onboarding\', this)">Onboarding de Template</button>';
+        html += '</div>';
+
+        // ══════════════════════════════════════════════════════════
+        // TAB: Templates
+        // ══════════════════════════════════════════════════════════
+        html += '<div class="tab-content active" id="tab-templates">';
+
+        // ── Template header
+        html += '<div class="tmpl-header">';
+        html += '<h2>' + esc(m.name) + '</h2>';
+        html += '<p>' + esc(m.description) + '</p>';
+        html += '<div class="tmpl-stats">';
+        html += '<span class="tmpl-stat"><strong>' + tmpl.steps.length + '</strong> etapas</span>';
+        html += '<span class="tmpl-stat"><strong>' + (m.features || []).length + '</strong> features</span>';
+        html += '<span class="tmpl-stat"><strong>' + tmpl.blocks.length + '</strong> blocos</span>';
+        html += '<span class="tmpl-stat"><strong>' + tmpl.presets.length + '</strong> presets</span>';
+        html += '<span class="tmpl-stat">ID: <strong>' + esc(m.templateId || tmpl.id) + '</strong></span>';
+        html += '<span class="tmpl-stat">v<strong>' + esc(m.version) + '</strong></span>';
+        html += '</div></div>';
+
+        // ── Presets & Models
+        html += '<div class="section">';
+        html += '<div class="section-title">Presets e Modelos Gerados</div>';
+        html += '<div class="preset-grid">';
+
+        tmpl.presets.forEach(preset => {
+          const slug = tmpl.id + '-' + preset.id.replace(/[^a-z0-9-]/gi, '-');
+          const rebuildSlug = 'va-vr-' + preset.id;
+          const published = getPublishedModel(rebuildSlug);
+          const allSteps = tmpl.steps;
+          const enabledSet = new Set(preset.enabledSteps);
+          const enabledFeatureSet = new Set(preset.enabledFeatures);
+          const allFeatures = m.features || [];
+
+          html += '<div class="preset-card">';
+          html += '<div class="preset-top">';
+          html += '<span class="preset-name">' + esc(preset.label) + '</span>';
+          if (published) {
+            html += '<span class="status status-published">&#10003; Publicado</span>';
+          } else {
+            html += '<span class="status status-not-generated">Não gerado</span>';
+          }
+          html += '</div>';
+          html += '<div class="preset-desc">' + esc(preset.description) + '</div>';
+
+          // Steps
+          html += '<div class="flow">';
+          allSteps.forEach((step) => {
+            const on = enabledSet.has(step.id);
+            html += '<span class="flow-step' + (on ? '' : ' off') + '">' + esc(step.label) + '</span>';
+          });
+          html += '</div>';
+
+          // Meta
+          html += '<div class="preset-meta">';
+          html += '<span>' + preset.enabledSteps.length + '/' + allSteps.length + ' etapas</span>';
+          html += '<span>' + preset.enabledFeatures.length + '/' + allFeatures.length + ' features</span>';
+          if (published) {
+            html += '<span>' + published.operationsCount + ' operações aplicadas</span>';
+            html += '<span>Publicado em ' + new Date(published.publishedAt).toLocaleDateString('pt-BR') + '</span>';
+          }
+          html += '</div>';
+
+          html += '</div>';
+        });
+
+        html += '</div></div>';
+
+        // ── Playground files
+        html += '<div class="section">';
+        html += '<div class="section-title">Requests do Playground</div>';
+        html += '<div class="file-list">';
+
+        knownRequests.forEach(r => {
+          const presetHint = r.filename.replace('.json', '').replace('customizacao-teste', 'custom');
+          html += '<div class="file-item">';
+          html += '<div class="file-info">';
+          html += '<div class="file-icon">{ }</div>';
+          html += '<div><div class="file-name">' + esc(r.label) + '</div>';
+          html += '<div class="file-path">playground/requests/' + esc(r.filename) + '</div></div>';
+          html += '</div>';
+          html += '<span class="file-preset-tag">' + esc(presetHint) + '</span>';
+          html += '</div>';
+        });
+
+        html += '</div></div>';
+
+        // ── How to generate
+        html += '<div class="section">';
+        html += '<div class="section-title">Como Gerar e Publicar</div>';
+        html += '<div class="instructions">';
+        html += '<h3>Instruções para gerar modelos adicionais</h3>';
+        html += '<div class="step-list">';
+
+        html += '<div class="step-item"><div class="step-num"></div><div class="step-body">';
+        html += '<h4>Acesse o diretório do gerador</h4>';
+        html += '<p>Todos os comandos devem ser executados a partir da pasta do generator-core.</p>';
+        html += '<code class="cmd">cd packages/generator-core</code>';
+        html += '</div></div>';
+
+        html += '<div class="step-item"><div class="step-num"></div><div class="step-body">';
+        html += '<h4>Gerar variante a partir de um request existente</h4>';
+        html += '<p>Use um dos arquivos JSON do playground para gerar o projeto Angular correspondente.</p>';
+        html += '<code class="cmd">npm run generate -- ../../playground/requests/modelo-1.json\nnpm run generate -- ../../playground/requests/modelo-2.json\nnpm run generate -- ../../playground/requests/modelo-3.json</code>';
+        html += '</div></div>';
+
+        html += '<div class="step-item"><div class="step-num"></div><div class="step-body">';
+        html += '<h4>Publicar modelo no catálogo</h4>';
+        html += '<p>Após gerar, publique o modelo para que ele apareça no catálogo do ETN Showcase.</p>';
+        html += '<code class="cmd"><span class="comment"># Publicar um modelo específico</span>\nnpm run publish -- va-vr-modelo-1\n\n<span class="comment"># Publicar todos os modelos gerados</span>\nnpm run publish -- --all</code>';
+        html += '</div></div>';
+
+        html += '<div class="step-item"><div class="step-num"></div><div class="step-body">';
+        html += '<h4>Criar request para nova variante</h4>';
+        html += '<p>Para gerar uma variante customizada, crie um arquivo JSON no playground e execute o gerador.</p>';
+        html += '<code class="cmd"><span class="comment"># Estrutura de um request de geração</span>\n{\n  "templateId": "' + esc(tmpl.id) + '",\n  "presetId": "modelo-1",\n  "project": {\n    "name": "Minha variante",\n    "slug": "minha-variante"\n  },\n  "customizations": []\n}</code>';
+        html += '</div></div>';
+
+        html += '</div></div></div>';
+
+        // ── Request editor
+        html += '<div class="section">';
+        html += '<div class="section-title">Editor de Request</div>';
+        html += '<div class="editor-section">';
+        html += '<h3>Montar request personalizado</h3>';
+        html += '<p>Selecione um request de exemplo ou edite manualmente o JSON para gerar uma variante.</p>';
+
+        html += '<div class="req-tabs">';
+        knownRequests.forEach((r, i) => {
+          html += '<button class="req-tab' + (i === 0 ? ' active' : '') + '" onclick="loadReq(\'' + esc(r.filename) + '\', this)">' + esc(r.label) + '</button>';
+        });
+        html += '</div>';
+
+        const defaultReq = { templateId: tmpl.id, presetId: tmpl.presets[0]?.id || 'modelo-1', project: { name: m.name + ' - Variante', slug: tmpl.id + '-variante' }, customizations: [] };
+        html += '<textarea class="editor-area" id="request-editor">' + esc(JSON.stringify(defaultReq, null, 2)) + '</textarea>';
+
+        html += '<div class="btn-row">';
+        html += '<button class="btn btn-dark" onclick="runGenerate()">Gerar variante</button>';
+        html += '<button class="btn btn-outline" onclick="runPublish()">Publicar no catálogo</button>';
+        html += '</div>';
+
+        html += '<div class="feedback" id="gen-feedback"></div>';
+        html += '</div></div>';
+
+        html += '</div>'; // close tab-templates
+
+        // ══════════════════════════════════════════════════════════
+        // TAB: Onboarding de Template
+        // ══════════════════════════════════════════════════════════
+        html += '<div class="tab-content" id="tab-onboarding">';
+
+        html += '<div class="section">';
+        html += '<div class="section-title">Pipeline de Onboarding</div>';
+        html += '<p style="font-size:13px;color:var(--text-secondary);margin-bottom:20px">O fluxo completo para transformar um projeto Angular BPM existente em um template gerenciado pelo Template Lab.</p>';
+
+        // Pipeline visual
+        html += '<div class="pipeline">';
+        html += '<a class="pipe-step" href="#phase-1"><span class="pipe-icon">1</span> init-template</a>';
+        html += '<a class="pipe-step" href="#phase-2"><span class="pipe-icon">2</span> adapt-project</a>';
+        html += '<a class="pipe-step" href="#phase-3"><span class="pipe-icon">3</span> ai-bootstrap-meta</a>';
+        html += '<a class="pipe-step" href="#phase-4"><span class="pipe-icon">4</span> Revisar presets</a>';
+        html += '<a class="pipe-step" href="#phase-5"><span class="pipe-icon">5</span> sync-meta</a>';
+        html += '<a class="pipe-step" href="#phase-6"><span class="pipe-icon">6</span> validate-template</a>';
+        html += '<a class="pipe-step" href="#phase-7"><span class="pipe-icon">7</span> generate</a>';
+        html += '<a class="pipe-step" href="#phase-8"><span class="pipe-icon">8</span> publish</a>';
+        html += '</div>';
+        html += '</div>';
+
+        // Phase 1
+        html += '<div class="onboard-phase" id="phase-1">';
+        html += '<h3><span class="phase-num">1</span> Importar o projeto Angular <span class="phase-tag auto">CLI</span></h3>';
+        html += '<p>Copie o projeto Angular BPM para dentro do monorepo, criando a estrutura de diretórios do template.</p>';
+        html += '<code class="cmd">cd packages/generator-core\nnpm run init-template -- --template-id plano-saude-base --from ../../../caminho/do/projeto</code>';
+        html += '<div class="onboard-note">Isso cria <strong>templates/plano-saude-base/</strong> com as subpastas <strong>project/</strong>, <strong>meta-source/</strong> e <strong>meta/</strong>. O projeto Angular é copiado para project/.</div>';
+        html += '</div>';
+
+        // Phase 2
+        html += '<div class="onboard-phase" id="phase-2">';
+        html += '<h3><span class="phase-num">2</span> Adaptar o projeto aos padrões <span class="phase-tag ia">IA</span></h3>';
+        html += '<p>A IA analisa o projeto e aplica refatorações automáticas para conformidade com os padrões do Template Lab. Isso inclui:</p>';
+        html += '<ul style="font-size:13px;color:var(--text-secondary);margin:0 0 12px 20px;line-height:2">';
+        html += '<li>Criar pasta <code>template/config/</code>, <code>template/types/</code> e <code>template/helpers/</code></li>';
+        html += '<li>Refatorar <code>app-routing.module.ts</code> para usar <code>STEP_ROUTE_MAP</code> e <code>routeDataFor()</code></li>';
+        html += '<li>Substituir <code>router.url.startsWith()</code> por <code>resolveStepRouteData()</code></li>';
+        html += '<li>Adicionar <code>data-template-block-instance</code> nos componentes HTML</li>';
+        html += '<li>Marcar blocos opcionais com comentários <code>TEMPLATE:OPTIONAL</code></li>';
+        html += '<li>Garantir lazy loading por etapa</li>';
+        html += '</ul>';
+        html += '<code class="cmd">npm run adapt-project -- --template-id plano-saude-base</code>';
+        html += '<div class="onboard-note">Requer <strong>OPENAI_API_KEY</strong> configurada no <code>.env</code>. A IA usa o <strong>ANGULAR_PROJECT_STANDARDS.md</strong> como autoridade primária de padrões e o <strong>TEMPLATE_CONCEPT_SPEC.md</strong> como contexto conceitual. Templates existentes (VA/VR) servem apenas como exemplo secundário opcional. Revise as alterações aplicadas antes de prosseguir.</div>';
+        html += '</div>';
+
+        // Phase 3
+        html += '<div class="onboard-phase" id="phase-3">';
+        html += '<h3><span class="phase-num">3</span> Gerar metadados com IA <span class="phase-tag ia">IA</span></h3>';
+        html += '<p>Com o projeto já adaptado, a IA infere automaticamente os arquivos de meta-source (steps, blocks, features, routes, field schemas, etc.).</p>';
+        html += '<code class="cmd">npm run ai-bootstrap-meta -- --template-id plano-saude-base</code>';
+        html += '<div class="onboard-note">A IA usa o <strong>TEMPLATE_CONCEPT_SPEC.md</strong> como autoridade primária para entender entidades, invariantes e regras de inferência. Templates existentes (VA/VR) são usados apenas como exemplo complementar. Todos os arquivos são gerados em <strong>meta-source/</strong>. Os presets são sugestões iniciais — vá para o próximo passo para refiná-los.</div>';
+        html += '</div>';
+
+        // Phase 4
+        html += '<div class="onboard-phase" id="phase-4">';
+        html += '<h3><span class="phase-num">4</span> Revisar e definir presets <span class="phase-tag manual">Manual</span></h3>';
+        html += '<p>Esta é a <strong>única etapa que exige decisão humana</strong>. Abra o arquivo de presets e defina quais combinações de etapas e features fazem sentido como produtos.</p>';
+        html += '<code class="cmd"><span class="comment"># Editar presets em:</span>\ntemplates/plano-saude-base/meta-source/workflow-presets.config.ts</code>';
+        html += '<div class="onboard-note">A IA sugere presets, mas a decisão de negócio é sua: "quais variantes do fluxo oferecer como modelo para ETNs?" Defina pelo menos um preset completo e um simplificado.</div>';
+        html += '</div>';
+
+        // Phase 5
+        html += '<div class="onboard-phase" id="phase-5">';
+        html += '<h3><span class="phase-num">5</span> Compilar metadados <span class="phase-tag auto">CLI</span></h3>';
+        html += '<p>Converte os arquivos TypeScript de meta-source/ em JSONs consumidos pelo gerador e pela UI.</p>';
+        html += '<code class="cmd">npm run sync-meta -- --template-id plano-saude-base</code>';
+        html += '</div>';
+
+        // Phase 6
+        html += '<div class="onboard-phase" id="phase-6">';
+        html += '<h3><span class="phase-num">6</span> Validar template <span class="phase-tag auto">CLI</span></h3>';
+        html += '<p>Verifica consistência: presets referenciando steps que existem, blocos declarados corretamente, etc.</p>';
+        html += '<code class="cmd">npm run validate-template -- --template-id plano-saude-base</code>';
+        html += '</div>';
+
+        // Phase 7
+        html += '<div class="onboard-phase" id="phase-7">';
+        html += '<h3><span class="phase-num">7</span> Gerar variantes <span class="phase-tag auto">CLI</span></h3>';
+        html += '<p>Crie requests no playground e execute o gerador para produzir os projetos Angular de cada variante.</p>';
+        html += '<code class="cmd"><span class="comment"># Criar requests no playground:</span>\nplayground/requests/ps-completo.json\nplayground/requests/ps-basico.json\n\n<span class="comment"># Gerar:</span>\nnpm run generate -- ../../playground/requests/ps-completo.json\nnpm run generate -- ../../playground/requests/ps-basico.json</code>';
+        html += '<div class="onboard-note">Não esqueça de adicionar os requests ao <strong>playground/requests/index.json</strong> para que apareçam no Dev Studio.</div>';
+        html += '</div>';
+
+        // Phase 8
+        html += '<div class="onboard-phase" id="phase-8">';
+        html += '<h3><span class="phase-num">8</span> Publicar e registrar <span class="phase-tag auto">CLI</span></h3>';
+        html += '<p>Publique os modelos no catálogo e registre o template no índice para que ele apareça no Dev Studio e no ETN Showcase.</p>';
+        html += '<code class="cmd"><span class="comment"># Publicar modelos:</span>\nnpm run publish -- ps-modelo-completo\nnpm run publish -- ps-modelo-basico\n\n<span class="comment"># Registrar template no índice:</span>\n<span class="comment"># Adicione "plano-saude-base" em templates/index.json</span></code>';
+        html += '</div>';
+
+        // Summary
+        html += '<div class="section" style="margin-top:32px">';
+        html += '<div class="section-title">Resumo: O que é automático vs. manual</div>';
+        html += '<div class="instructions">';
+        html += '<table style="width:100%;border-collapse:collapse;font-size:13px">';
+        html += '<thead><tr style="border-bottom:2px solid var(--border);text-align:left"><th style="padding:10px 12px">Etapa</th><th style="padding:10px 12px">Execução</th><th style="padding:10px 12px">Quem faz</th></tr></thead>';
+        html += '<tbody>';
+        html += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px">init-template</td><td style="padding:10px 12px"><span class="phase-tag auto">CLI</span></td><td style="padding:10px 12px">Cópia automática do projeto</td></tr>';
+        html += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px">adapt-project</td><td style="padding:10px 12px"><span class="phase-tag ia">IA</span></td><td style="padding:10px 12px">IA refatora + dev revisa</td></tr>';
+        html += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px">ai-bootstrap-meta</td><td style="padding:10px 12px"><span class="phase-tag ia">IA</span></td><td style="padding:10px 12px">IA gera metadados</td></tr>';
+        html += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px;font-weight:700">Definir presets</td><td style="padding:10px 12px"><span class="phase-tag manual">Manual</span></td><td style="padding:10px 12px;font-weight:700">Decisão de negócio do dev</td></tr>';
+        html += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px">sync-meta</td><td style="padding:10px 12px"><span class="phase-tag auto">CLI</span></td><td style="padding:10px 12px">Automático</td></tr>';
+        html += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px">validate-template</td><td style="padding:10px 12px"><span class="phase-tag auto">CLI</span></td><td style="padding:10px 12px">Automático</td></tr>';
+        html += '<tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 12px">generate</td><td style="padding:10px 12px"><span class="phase-tag auto">CLI</span></td><td style="padding:10px 12px">Automático</td></tr>';
+        html += '<tr><td style="padding:10px 12px">publish</td><td style="padding:10px 12px"><span class="phase-tag auto">CLI</span></td><td style="padding:10px 12px">Automático</td></tr>';
+        html += '</tbody></table>';
+        html += '</div></div>';
+
+        html += '</div>'; // close tab-onboarding
+
+        app.innerHTML = html;
+      }
+
+      // ── Tab switching
+      function switchTab(tabId, btn) {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        var el = document.getElementById('tab-' + tabId);
+        if (el) el.classList.add('active');
+      }
+
+      // ── Load request into editor
+      async function loadReq(filename, btn) {
+        document.querySelectorAll('.req-tab').forEach(t => t.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+        try {
+          const req = await window.DevStudioData.loadPlaygroundRequest(filename);
+          document.getElementById('request-editor').value = JSON.stringify(req, null, 2);
+          showFeedback('gen-feedback', 'info', 'Request "' + filename + '" carregado.');
+        } catch (err) {
+          showFeedback('gen-feedback', 'error', 'Erro: ' + err.message);
+        }
+      }
+
+      // ── Generate
+      function runGenerate() {
+        const editor = document.getElementById('request-editor');
+        let req;
+        try { req = JSON.parse(editor.value); }
+        catch (err) { showFeedback('gen-feedback', 'error', 'JSON inválido: ' + err.message); return; }
+
+        if (!req.templateId || !req.presetId || !req.project?.slug) {
+          showFeedback('gen-feedback', 'error', 'Campos obrigatórios: templateId, presetId, project.slug');
+          return;
+        }
+
+        const tmpl = templates.find(t => t.id === req.templateId);
+        if (!tmpl) { showFeedback('gen-feedback', 'error', 'Template não encontrado.'); return; }
+
+        const preset = tmpl.presets.find(p => p.id === req.presetId);
+        if (!preset) { showFeedback('gen-feedback', 'error', 'Preset "' + req.presetId + '" não existe.'); return; }
+
+        const slug = req.project.slug;
+        showFeedback('gen-feedback', 'success',
+          'Request válido — para gerar, execute:\n\n' +
+          'cd packages/generator-core\n' +
+          'npm run generate -- ../../playground/requests/' + slug + '-request.json\n\n' +
+          'O projeto será gerado em output/' + slug + '/\n' +
+          'Preset: ' + preset.label + ' (' + preset.enabledSteps.length + ' etapas)');
+      }
+
+      // ── Publish
+      function runPublish() {
+        const editor = document.getElementById('request-editor');
+        let req;
+        try { req = JSON.parse(editor.value); }
+        catch (err) { showFeedback('gen-feedback', 'error', 'JSON inválido: ' + err.message); return; }
+
+        if (!req.project?.slug) { showFeedback('gen-feedback', 'error', 'Campo project.slug é necessário.'); return; }
+
+        showFeedback('gen-feedback', 'success',
+          'Para publicar, execute:\n\n' +
+          'cd packages/generator-core\n' +
+          'npm run publish -- ' + req.project.slug + '\n\n' +
+          'O modelo precisa ter sido gerado antes (output/' + req.project.slug + '/).\n' +
+          'Após publicar, ele aparecerá no ETN Showcase.');
+      }
+
+      function showFeedback(id, type, message) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.className = 'feedback show ' + type;
+        el.textContent = message;
+      }
+
+      function esc(s) {
+        if (!s) return '';
+        var d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+      }
+    </script>
+  </body>
+</html>

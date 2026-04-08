@@ -220,6 +220,7 @@ export class InvokeService {
     usuarioLogin?: string,
     ticketRequest?: string,
   ) {
+    const usarUsuarioESenhaFixo = true;
     const payload = {
       inputData: {
         port: port,

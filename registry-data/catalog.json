@@ -1,0 +1,1566 @@
+{
+  "version": "1.0",
+  "updatedAt": "2026-04-07T21:17:51.213Z",
+  "bpmCategories": [
+    {
+      "id": "va-vr-base",
+      "name": "Troca de Benefício VA/VR",
+      "description": "Fluxo BPM para solicitação de troca de vale alimentação/refeição (VA/VR) pelo colaborador, com análise do RH e gravação do benefício no sistema Senior.",
+      "models": [
+        {
+          "slug": "va-vr-modelo-1",
+          "name": "VA/VR Modelo 1 - Básico",
+          "presetId": "modelo-1",
+          "presetLabel": "Modelo Básico",
+          "presetDescription": "Fluxo mínimo: Solicitação → Detalhes. Sem análise de RH intermediária. Adequado para processos de baixa complexidade onde a aprovação é automática ou feita por outro mecanismo externo ao fluxo.",
+          "templateId": "va-vr-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-07T11:22:43.874Z",
+          "aiGenerated": true,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão pelo Solicitante",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": false
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "buscar-dados-solicitante",
+              "label": "Busca de dados do solicitante",
+              "enabled": true
+            },
+            {
+              "id": "buscar-beneficio-atual",
+              "label": "Busca de benefício atual",
+              "enabled": true
+            },
+            {
+              "id": "buscar-vales-empresa",
+              "label": "Busca de vales disponíveis por empresa",
+              "enabled": true
+            },
+            {
+              "id": "gravar-beneficio",
+              "label": "Gravação do novo benefício no Senior",
+              "enabled": false
+            },
+            {
+              "id": "revisao-pelo-solicitante",
+              "label": "Revisão pelo solicitante",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh-com-aprovacao",
+              "label": "Análise de RH com Aprovar/Revisar",
+              "enabled": false
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": false
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "beneficio-atual",
+              "label": "Benefício Atual",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            },
+            {
+              "id": "observacao-solicitante",
+              "label": "Observação do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "termo-adesao",
+              "label": "Termo de Adesão",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 15,
+          "operations": [
+            {
+              "type": "disable_feature",
+              "target": "gravar-beneficio"
+            },
+            {
+              "type": "disable_feature",
+              "target": "revisao-pelo-solicitante"
+            },
+            {
+              "type": "disable_feature",
+              "target": "analise-rh-com-aprovacao"
+            },
+            {
+              "type": "disable_feature",
+              "target": "observacao-rh"
+            },
+            {
+              "type": "disable_step",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_step",
+              "target": "analise-rh"
+            },
+            {
+              "type": "disable_route",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_route",
+              "target": "analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-rh-solicitacao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-rh-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-rh-detalhes"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitante-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "beneficio-atual-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitacao-analise-rh"
+            },
+            {
+              "type": "filter_process_variables_by_feature",
+              "target": "_all"
+            }
+          ],
+          "workflow": {
+            "viewBox": "0 0 400 200",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 40,
+                "cy": 100
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 85,
+                "y": 75,
+                "w": 145,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 330,
+                "cy": 100
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    54,
+                    100
+                  ],
+                  [
+                    85,
+                    100
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    230,
+                    100
+                  ],
+                  [
+                    318,
+                    100
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  274,
+                  67
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/va-vr-modelo-1/_meta",
+          "outputPath": "../../output/va-vr-modelo-1"
+        },
+        {
+          "slug": "va-vr-modelo-2",
+          "name": "VA/VR Modelo 2 - Intermediário",
+          "presetId": "modelo-2",
+          "presetLabel": "Modelo Intermediário",
+          "presetDescription": "Fluxo Intermediário: Inclui etapa de solicitação, análise de RH, etapa de detalhes e gravação no módulo HCM, mas sem revisão pelo solicitante.",
+          "templateId": "va-vr-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-06T18:19:40.948Z",
+          "aiGenerated": true,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão pelo Solicitante",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": true
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "buscar-dados-solicitante",
+              "label": "Busca de dados do solicitante",
+              "enabled": true
+            },
+            {
+              "id": "buscar-beneficio-atual",
+              "label": "Busca de benefício atual",
+              "enabled": true
+            },
+            {
+              "id": "buscar-vales-empresa",
+              "label": "Busca de vales disponíveis por empresa",
+              "enabled": true
+            },
+            {
+              "id": "gravar-beneficio",
+              "label": "Gravação do novo benefício no Senior",
+              "enabled": true
+            },
+            {
+              "id": "revisao-pelo-solicitante",
+              "label": "Revisão pelo solicitante",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh-com-aprovacao",
+              "label": "Análise de RH com Aprovar/Revisar",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "beneficio-atual",
+              "label": "Benefício Atual",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            },
+            {
+              "id": "observacao-solicitante",
+              "label": "Observação do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "termo-adesao",
+              "label": "Termo de Adesão",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 5,
+          "operations": [
+            {
+              "type": "disable_feature",
+              "target": "revisao-pelo-solicitante"
+            },
+            {
+              "type": "disable_step",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_route",
+              "target": "revisao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-rh-solicitacao"
+            },
+            {
+              "type": "filter_process_variables_by_feature",
+              "target": "_all"
+            }
+          ],
+          "workflow": {
+            "viewBox": "0 0 560 200",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 30,
+                "cy": 100
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 75,
+                "y": 75,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "analise-rh",
+                "type": "task",
+                "label": "Análise - RH",
+                "x": 290,
+                "y": 75,
+                "w": 145,
+                "h": 50,
+                "stepId": "analise-rh"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 505,
+                "cy": 100
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    44,
+                    100
+                  ],
+                  [
+                    75,
+                    100
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    210,
+                    100
+                  ],
+                  [
+                    290,
+                    100
+                  ]
+                ],
+                "label": "Envio para Análise",
+                "labelPos": [
+                  250,
+                  67
+                ]
+              },
+              {
+                "points": [
+                  [
+                    435,
+                    100
+                  ],
+                  [
+                    493,
+                    100
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  464,
+                  67
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/va-vr-modelo-2/_meta",
+          "outputPath": "../../output/va-vr-modelo-2"
+        },
+        {
+          "slug": "va-vr-modelo-3",
+          "name": "VA/VR Modelo 3 - Completo",
+          "presetId": "modelo-3",
+          "presetLabel": "Modelo Completo",
+          "presetDescription": "Fluxo completo: Contendo solicitação, análise, revisão pelo solicitante, etapa de detalhes, gravação no módulo HCM.",
+          "templateId": "va-vr-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-06T18:19:40.984Z",
+          "aiGenerated": false,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão pelo Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": true
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "buscar-dados-solicitante",
+              "label": "Busca de dados do solicitante",
+              "enabled": true
+            },
+            {
+              "id": "buscar-beneficio-atual",
+              "label": "Busca de benefício atual",
+              "enabled": true
+            },
+            {
+              "id": "buscar-vales-empresa",
+              "label": "Busca de vales disponíveis por empresa",
+              "enabled": true
+            },
+            {
+              "id": "gravar-beneficio",
+              "label": "Gravação do novo benefício no Senior",
+              "enabled": true
+            },
+            {
+              "id": "revisao-pelo-solicitante",
+              "label": "Revisão pelo solicitante",
+              "enabled": true
+            },
+            {
+              "id": "analise-rh-com-aprovacao",
+              "label": "Análise de RH com Aprovar/Revisar",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "beneficio-atual",
+              "label": "Benefício Atual",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            },
+            {
+              "id": "observacao-solicitante",
+              "label": "Observação do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "termo-adesao",
+              "label": "Termo de Adesão",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 0,
+          "operations": [],
+          "workflow": {
+            "viewBox": "0 0 740 300",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 28,
+                "cy": 185
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 75,
+                "y": 160,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "analise-rh",
+                "type": "task",
+                "label": "Análise - RH",
+                "x": 340,
+                "y": 160,
+                "w": 145,
+                "h": 50,
+                "stepId": "analise-rh"
+              },
+              {
+                "id": "gateway1",
+                "type": "gateway",
+                "cx": 570,
+                "cy": 185
+              },
+              {
+                "id": "revisar",
+                "type": "task",
+                "label": "Revisar",
+                "x": 350,
+                "y": 28,
+                "w": 125,
+                "h": 45,
+                "stepId": "revisao"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 665,
+                "cy": 270
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    40,
+                    185
+                  ],
+                  [
+                    75,
+                    185
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    210,
+                    185
+                  ],
+                  [
+                    340,
+                    185
+                  ]
+                ],
+                "label": "Envio para Análise",
+                "labelPos": [
+                  275,
+                  175
+                ]
+              },
+              {
+                "points": [
+                  [
+                    485,
+                    185
+                  ],
+                  [
+                    545,
+                    185
+                  ]
+                ],
+                "label": "Prosseguir",
+                "labelPos": [
+                  515,
+                  175
+                ]
+              },
+              {
+                "points": [
+                  [
+                    595,
+                    185
+                  ],
+                  [
+                    680,
+                    185
+                  ],
+                  [
+                    680,
+                    50
+                  ],
+                  [
+                    475,
+                    50
+                  ]
+                ],
+                "label": "Revisar",
+                "labelPos": [
+                  695,
+                  120
+                ]
+              },
+              {
+                "points": [
+                  [
+                    350,
+                    50
+                  ],
+                  [
+                    300,
+                    50
+                  ],
+                  [
+                    300,
+                    185
+                  ],
+                  [
+                    340,
+                    185
+                  ]
+                ],
+                "label": "Retornar para Análise",
+                "labelPos": [
+                  195,
+                  120
+                ]
+              },
+              {
+                "points": [
+                  [
+                    570,
+                    210
+                  ],
+                  [
+                    570,
+                    270
+                  ],
+                  [
+                    653,
+                    270
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  585,
+                  255
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/va-vr-modelo-3/_meta",
+          "outputPath": "../../output/va-vr-modelo-3"
+        }
+      ]
+    },
+    {
+      "id": "plano-saude-base",
+      "name": "Plano de Saúde Base",
+      "description": "Fluxo BPM para solicitação e gestão de planos de saúde com integração Senior XT, incluindo validação de gestores, gerenciamento de dependentes e observações de RH",
+      "models": [
+        {
+          "slug": "modelo-completo-plano-saude",
+          "name": "Modelo Completo Plano Saúde",
+          "presetId": "completo",
+          "presetLabel": "Fluxo Completo",
+          "presetDescription": "Configuração completa com todas as etapas e funcionalidades habilitadas",
+          "templateId": "plano-saude-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-07T21:17:45.502Z",
+          "aiGenerated": false,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão",
+              "enabled": true
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": true
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "gestor-validation",
+              "label": "Validação de Gestor",
+              "enabled": true
+            },
+            {
+              "id": "dependentes-management",
+              "label": "Gerenciamento de Dependentes",
+              "enabled": true
+            },
+            {
+              "id": "planos-integration",
+              "label": "Integração com Planos",
+              "enabled": true
+            },
+            {
+              "id": "readonly-fields",
+              "label": "Campos Somente Leitura",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            },
+            {
+              "id": "senior-xt-integration",
+              "label": "Integração SeniorXT",
+              "enabled": true
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "dados-gestor",
+              "label": "Dados do Gestor",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao",
+              "label": "Observação",
+              "enabled": true
+            },
+            {
+              "id": "dados-dependentes",
+              "label": "Dados dos Dependentes",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 0,
+          "operations": [],
+          "workflow": {
+            "viewBox": "0 0 760 300",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 28,
+                "cy": 185
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 60,
+                "y": 160,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "analise-rh",
+                "type": "task",
+                "label": "Análise RH",
+                "x": 270,
+                "y": 160,
+                "w": 145,
+                "h": 50,
+                "stepId": "analise-rh"
+              },
+              {
+                "id": "gateway1",
+                "type": "gateway",
+                "cx": 470,
+                "cy": 185
+              },
+              {
+                "id": "revisar",
+                "type": "task",
+                "label": "Revisar",
+                "x": 285,
+                "y": 28,
+                "w": 125,
+                "h": 45,
+                "stepId": "revisao"
+              },
+              {
+                "id": "detalhes",
+                "type": "task",
+                "label": "Detalhes",
+                "x": 520,
+                "y": 160,
+                "w": 120,
+                "h": 50,
+                "stepId": "detalhes"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 700,
+                "cy": 185
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    42,
+                    185
+                  ],
+                  [
+                    60,
+                    185
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    195,
+                    185
+                  ],
+                  [
+                    270,
+                    185
+                  ]
+                ],
+                "label": "Enviar para Análise",
+                "labelPos": [
+                  232,
+                  175
+                ]
+              },
+              {
+                "points": [
+                  [
+                    415,
+                    185
+                  ],
+                  [
+                    445,
+                    185
+                  ]
+                ],
+                "label": "Prosseguir",
+                "labelPos": [
+                  430,
+                  172
+                ]
+              },
+              {
+                "points": [
+                  [
+                    495,
+                    185
+                  ],
+                  [
+                    520,
+                    185
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    470,
+                    160
+                  ],
+                  [
+                    470,
+                    50
+                  ],
+                  [
+                    410,
+                    50
+                  ]
+                ],
+                "label": "Revisar",
+                "labelPos": [
+                  485,
+                  100
+                ]
+              },
+              {
+                "points": [
+                  [
+                    285,
+                    50
+                  ],
+                  [
+                    240,
+                    50
+                  ],
+                  [
+                    240,
+                    185
+                  ],
+                  [
+                    270,
+                    185
+                  ]
+                ],
+                "label": "Retornar p/ Análise",
+                "labelPos": [
+                  165,
+                  100
+                ]
+              },
+              {
+                "points": [
+                  [
+                    640,
+                    185
+                  ],
+                  [
+                    688,
+                    185
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  664,
+                  175
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/modelo-completo-plano-saude/_meta",
+          "outputPath": "../../output/modelo-completo-plano-saude"
+        },
+        {
+          "slug": "modelo-sem-dependentes-plano-saude",
+          "name": "Modelo Sem Dependentes Plano Saúde",
+          "presetId": "sem-dependentes",
+          "presetLabel": "Sem Dependentes",
+          "presetDescription": "Fluxo completo mas sem gerenciamento de dependentes",
+          "templateId": "plano-saude-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-07T21:17:48.315Z",
+          "aiGenerated": true,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão",
+              "enabled": true
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": true
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "gestor-validation",
+              "label": "Validação de Gestor",
+              "enabled": true
+            },
+            {
+              "id": "dependentes-management",
+              "label": "Gerenciamento de Dependentes",
+              "enabled": false
+            },
+            {
+              "id": "planos-integration",
+              "label": "Integração com Planos",
+              "enabled": true
+            },
+            {
+              "id": "readonly-fields",
+              "label": "Campos Somente Leitura",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": true
+            },
+            {
+              "id": "senior-xt-integration",
+              "label": "Integração SeniorXT",
+              "enabled": true
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "dados-gestor",
+              "label": "Dados do Gestor",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao",
+              "label": "Observação",
+              "enabled": true
+            },
+            {
+              "id": "dados-dependentes",
+              "label": "Dados dos Dependentes",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 3,
+          "operations": [
+            {
+              "type": "disable_feature",
+              "target": "dependentes-management"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-dependentes-table"
+            },
+            {
+              "type": "filter_process_variables_by_feature",
+              "target": "_all"
+            }
+          ],
+          "workflow": {
+            "viewBox": "0 0 760 300",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 28,
+                "cy": 185
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 60,
+                "y": 160,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "analise-rh",
+                "type": "task",
+                "label": "Análise RH",
+                "x": 270,
+                "y": 160,
+                "w": 145,
+                "h": 50,
+                "stepId": "analise-rh"
+              },
+              {
+                "id": "gateway1",
+                "type": "gateway",
+                "cx": 470,
+                "cy": 185
+              },
+              {
+                "id": "revisar",
+                "type": "task",
+                "label": "Revisar",
+                "x": 285,
+                "y": 28,
+                "w": 125,
+                "h": 45,
+                "stepId": "revisao"
+              },
+              {
+                "id": "detalhes",
+                "type": "task",
+                "label": "Detalhes",
+                "x": 520,
+                "y": 160,
+                "w": 120,
+                "h": 50,
+                "stepId": "detalhes"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 700,
+                "cy": 185
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    42,
+                    185
+                  ],
+                  [
+                    60,
+                    185
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    195,
+                    185
+                  ],
+                  [
+                    270,
+                    185
+                  ]
+                ],
+                "label": "Enviar para Análise",
+                "labelPos": [
+                  232,
+                  175
+                ]
+              },
+              {
+                "points": [
+                  [
+                    415,
+                    185
+                  ],
+                  [
+                    445,
+                    185
+                  ]
+                ],
+                "label": "Prosseguir",
+                "labelPos": [
+                  430,
+                  172
+                ]
+              },
+              {
+                "points": [
+                  [
+                    495,
+                    185
+                  ],
+                  [
+                    520,
+                    185
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    470,
+                    160
+                  ],
+                  [
+                    470,
+                    50
+                  ],
+                  [
+                    410,
+                    50
+                  ]
+                ],
+                "label": "Revisar",
+                "labelPos": [
+                  485,
+                  100
+                ]
+              },
+              {
+                "points": [
+                  [
+                    285,
+                    50
+                  ],
+                  [
+                    240,
+                    50
+                  ],
+                  [
+                    240,
+                    185
+                  ],
+                  [
+                    270,
+                    185
+                  ]
+                ],
+                "label": "Retornar p/ Análise",
+                "labelPos": [
+                  165,
+                  100
+                ]
+              },
+              {
+                "points": [
+                  [
+                    640,
+                    185
+                  ],
+                  [
+                    688,
+                    185
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  664,
+                  175
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/modelo-sem-dependentes-plano-saude/_meta",
+          "outputPath": "../../output/modelo-sem-dependentes-plano-saude"
+        },
+        {
+          "slug": "modelo-simplificado-plano-saude",
+          "name": "Modelo Simplificado Plano Saúde",
+          "presetId": "simplificado",
+          "presetLabel": "Fluxo Simplificado",
+          "presetDescription": "Configuração simplificada apenas com solicitação e detalhes, sem validação de gestor",
+          "templateId": "plano-saude-base",
+          "version": "1.0.0",
+          "publishedAt": "2026-04-07T21:17:51.167Z",
+          "aiGenerated": true,
+          "steps": [
+            {
+              "id": "solicitacao",
+              "label": "Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "revisao",
+              "label": "Revisão",
+              "enabled": false
+            },
+            {
+              "id": "analise-rh",
+              "label": "Análise RH",
+              "enabled": false
+            },
+            {
+              "id": "detalhes",
+              "label": "Detalhes",
+              "enabled": true
+            }
+          ],
+          "features": [
+            {
+              "id": "gestor-validation",
+              "label": "Validação de Gestor",
+              "enabled": false
+            },
+            {
+              "id": "dependentes-management",
+              "label": "Gerenciamento de Dependentes",
+              "enabled": false
+            },
+            {
+              "id": "planos-integration",
+              "label": "Integração com Planos",
+              "enabled": true
+            },
+            {
+              "id": "readonly-fields",
+              "label": "Campos Somente Leitura",
+              "enabled": true
+            },
+            {
+              "id": "observacao-rh",
+              "label": "Observação do RH",
+              "enabled": false
+            },
+            {
+              "id": "senior-xt-integration",
+              "label": "Integração SeniorXT",
+              "enabled": true
+            }
+          ],
+          "blocks": [
+            {
+              "id": "dados-solicitante",
+              "label": "Dados do Solicitante",
+              "enabled": true
+            },
+            {
+              "id": "dados-gestor",
+              "label": "Dados do Gestor",
+              "enabled": true
+            },
+            {
+              "id": "dados-solicitacao",
+              "label": "Dados da Solicitação",
+              "enabled": true
+            },
+            {
+              "id": "observacao",
+              "label": "Observação",
+              "enabled": true
+            },
+            {
+              "id": "dados-dependentes",
+              "label": "Dados dos Dependentes",
+              "enabled": true
+            }
+          ],
+          "operationsCount": 18,
+          "operations": [
+            {
+              "type": "disable_feature",
+              "target": "gestor-validation"
+            },
+            {
+              "type": "disable_feature",
+              "target": "dependentes-management"
+            },
+            {
+              "type": "disable_feature",
+              "target": "observacao-rh"
+            },
+            {
+              "type": "disable_step",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_step",
+              "target": "analise-rh"
+            },
+            {
+              "type": "disable_route",
+              "target": "revisao"
+            },
+            {
+              "type": "disable_route",
+              "target": "analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-gestor-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-gestor-detalhes"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-gestor-revisao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-gestor-solicitacao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitante-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitacao-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-analise-rh"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitante-revisao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "dados-solicitacao-revisao"
+            },
+            {
+              "type": "remove_block_instance",
+              "target": "observacao-revisao"
+            },
+            {
+              "type": "filter_process_variables_by_feature",
+              "target": "_all"
+            }
+          ],
+          "workflow": {
+            "viewBox": "0 0 460 200",
+            "nodes": [
+              {
+                "id": "start",
+                "type": "start",
+                "cx": 30,
+                "cy": 100
+              },
+              {
+                "id": "solicitacao",
+                "type": "task",
+                "label": "Solicitação",
+                "x": 65,
+                "y": 75,
+                "w": 135,
+                "h": 50,
+                "stepId": "solicitacao"
+              },
+              {
+                "id": "detalhes",
+                "type": "task",
+                "label": "Detalhes",
+                "x": 275,
+                "y": 75,
+                "w": 110,
+                "h": 50,
+                "stepId": "detalhes"
+              },
+              {
+                "id": "end",
+                "type": "end",
+                "cx": 435,
+                "cy": 100
+              }
+            ],
+            "edges": [
+              {
+                "points": [
+                  [
+                    44,
+                    100
+                  ],
+                  [
+                    65,
+                    100
+                  ]
+                ]
+              },
+              {
+                "points": [
+                  [
+                    200,
+                    100
+                  ],
+                  [
+                    275,
+                    100
+                  ]
+                ],
+                "label": "Prosseguir",
+                "labelPos": [
+                  237,
+                  87
+                ]
+              },
+              {
+                "points": [
+                  [
+                    385,
+                    100
+                  ],
+                  [
+                    423,
+                    100
+                  ]
+                ],
+                "label": "Finalizar",
+                "labelPos": [
+                  404,
+                  87
+                ]
+              }
+            ]
+          },
+          "metaPath": "models/modelo-simplificado-plano-saude/_meta",
+          "outputPath": "../../output/modelo-simplificado-plano-saude"
+        }
+      ]
+    }
+  ]
+}

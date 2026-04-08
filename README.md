@@ -4,134 +4,137 @@ Plataforma para criação, configuração e geração automatizada de variantes 
 
 O projeto resolve o problema de manter múltiplas variantes de um mesmo fluxo BPM — em vez de forks manuais, um único template gera N variantes por **subtração** do modelo mais completo.
 
-## Estrutura do Repositório
+---
+
+## Estrutura do Repositório (Monorepo)
 
 ```
 bpm-template-lab/
-├── templates/                    # Templates de fluxos BPM
-│   ├── TEMPLATE_ARCHITECTURE.md  # Documentação da arquitetura de templates
+├── apps/
+│   ├── dev-studio/              # Interface para desenvolvedores
+│   │   ├── index.html           #   Listar templates, montar requests, gerar variantes
+│   │   └── data-provider.js     #   Camada de acesso a dados (desacoplada)
+│   └── etn-showcase/            # Interface para ETNs consultarem catálogo
+│       ├── index.html           #   Catálogo visual com BPMN, comparação de features
+│       ├── data-provider.js     #   Camada de acesso a dados (desacoplada)
+│       └── image.png            #   Logo
+│
+├── packages/
+│   ├── generator-core/          # Motor de geração BPM (CLI Node.js/TypeScript)
+│   │   ├── src/
+│   │   │   ├── cli.ts           #   CLI com 6 subcomandos
+│   │   │   ├── core/            #   Motor: load → validate → plan → apply
+│   │   │   ├── transforms/      #   6 operações subtrativas
+│   │   │   ├── commands/        #   Handlers de cada subcomando
+│   │   │   ├── scaffolding/     #   Bootstrap de novos templates
+│   │   │   ├── sync/            #   Conversão meta-source (TS) → meta (JSON)
+│   │   │   ├── ai/              #   Bootstrap assistido por IA (OpenAI)
+│   │   │   ├── io/              #   Utilitários de leitura/escrita
+│   │   │   ├── types/           #   Tipos internos do gerador
+│   │   │   └── reports/         #   Geração de relatórios
+│   │   └── package.json
+│   ├── registry-core/           # Lógica de acesso ao catálogo
+│   │   └── src/
+│   │       ├── catalog.ts       #   Ler, validar, escrever, upsert modelos
+│   │       ├── catalog-schema.ts#   Schema de validação do catalog.json
+│   │       └── index.ts
+│   └── shared-types/            # Tipos compartilhados entre apps e packages
+│       └── src/
+│           ├── catalog.types.ts #   RegistryCatalog, BpmCategory, PublishedModel...
+│           ├── template.types.ts#   TemplateSummary, GenerationRequestDTO...
+│           └── index.ts
+│
+├── templates/                   # Templates fonte de fluxos BPM
+│   ├── TEMPLATE_ARCHITECTURE.md
 │   └── va-vr-base/              # Template real: Troca de VA/VR
-│       ├── project/             # Projeto Angular base (código-fonte completo)
-│       ├── meta-source/         # Configuração em TypeScript (fonte humana, tipada)
-│       └── meta/                # JSON gerado a partir do meta-source (consumo do gerador)
+│       ├── project/             #   Projeto Angular base completo
+│       ├── meta-source/         #   Configuração tipada (TypeScript)
+│       └── meta/                #   JSON gerado a partir do meta-source
 │
-├── tools/
-│   └── generator-node/          # Gerador BPM (Node.js / TypeScript)
-│       ├── src/
-│       │   ├── cli.ts           # CLI com 5 subcomandos
-│       │   ├── core/            # Motor de geração (load → validate → plan → apply)
-│       │   ├── transforms/      # 6 operações subtrativas (disable_step, remove_block, etc.)
-│       │   ├── commands/        # Handlers de cada subcomando
-│       │   ├── scaffolding/     # Bootstrap de novos templates (init-template)
-│       │   ├── sync/            # Conversão meta-source (TS) → meta (JSON)
-│       │   ├── ai/              # Bootstrap assistido por IA (OpenAI)
-│       │   ├── io/              # Utilitários de leitura/escrita de arquivos
-│       │   ├── types/           # Tipos compartilhados
-│       │   └── reports/         # Geração de relatórios
-│       └── package.json
+├── registry-data/               # Catálogo publicado (dados, não lógica)
+│   ├── catalog.json             #   Catálogo com categorias e modelos
+│   └── models/                  #   Metadados copiados de cada modelo publicado
+│       ├── va-vr-modelo-1/
+│       ├── va-vr-modelo-2/
+│       └── va-vr-modelo-3/
 │
-├── playground/
-│   └── requests/                # Requests de exemplo para gerar variantes
-│       ├── modelo-1.json        # Variante básica (2 etapas)
-│       ├── modelo-2.json        # Variante intermediária (3 etapas)
-│       └── modelo-3.json        # Variante completa (4 etapas)
+├── playground/                  # Requests de exemplo para gerar variantes
+│   └── requests/
+│       ├── modelo-1.json
+│       ├── modelo-2.json
+│       ├── modelo-3.json
+│       └── customizacao-teste.json
 │
-└── output/                      # Projetos Angular gerados (resultado do generate)
-    ├── va-vr-modelo-1/
-    ├── va-vr-modelo-2/
-    └── va-vr-modelo-3/
+├── output/                      # Artefatos gerados (temporário, gitignored)
+│   ├── va-vr-modelo-1/
+│   ├── va-vr-modelo-2/
+│   └── va-vr-modelo-3/
+│
+├── .gitignore
+└── README.md
 ```
+
+### Separação de responsabilidades
+
+| Diretório | Propósito | Persistência |
+|-----------|-----------|--------------|
+| `apps/` | Interfaces visuais (ETN + Dev) | Código-fonte |
+| `packages/` | Lógica reutilizável (gerador, registry, tipos) | Código-fonte |
+| `templates/` | Templates BPM fonte | Código-fonte |
+| `registry-data/` | Catálogo publicado + metadados | Dados publicados |
+| `playground/` | Requests de exemplo | Código-fonte |
+| `output/` | Projetos Angular gerados | **Temporário** (gitignored) |
+
+---
 
 ## Conceito Principal: Geração Subtrativa
 
 O template define o **modelo máximo** (todas as etapas, blocos, campos, features). Cada variante (**preset**) seleciona um subconjunto — o gerador **remove** o que não faz parte do preset.
 
 ```
-modelo-3 (completo)     →  4 etapas: solicitação → revisão → análise RH → detalhes
-modelo-2 (intermediário) →  3 etapas: solicitação → análise RH → detalhes
-modelo-1 (básico)        →  2 etapas: solicitação → detalhes
+modelo-3 (completo)      → 4 etapas: Solicitação → Revisão → Análise RH → Detalhes
+modelo-2 (intermediário)  → 3 etapas: Solicitação → Análise RH → Detalhes
+modelo-1 (básico)         → 2 etapas: Solicitação → Detalhes
 ```
 
-## As 3 Camadas de um Template
+---
 
-| Camada | Diretório | Formato | Quem edita | Quem consome |
-|--------|-----------|---------|------------|--------------|
-| **Código Angular** | `project/` | Angular completo | Desenvolvedor | `generate` (copia como base) |
-| **Configuração tipada** | `meta-source/` | TypeScript | Desenvolvedor / IA | `sync-meta` (converte) |
-| **Metadados serializados** | `meta/` | JSON | `sync-meta` (gera automaticamente) | `generate` (lê para gerar) |
+## Fluxo de Uso
 
-**Regra fundamental:** o comando `generate` lê **somente** `meta/*.json`. Nunca lê `meta-source/`.
-
-### Arquivos do meta-source (10 arquivos TypeScript)
-
-| Arquivo | Conteúdo |
-|---------|----------|
-| `template.types.ts` | Tipos: StepId, BlockId, FeatureId, PresetId, interfaces |
-| `workflow-steps.config.ts` | Etapas do fluxo BPM (id, label, route, mode, blocks, features) |
-| `workflow-routes.config.ts` | Mapa de rotas Angular × steps |
-| `workflow-presets.config.ts` | Presets (variantes) com steps/features habilitados |
-| `ui-blocks.config.ts` | Blocos de UI reutilizáveis (componentes Angular) |
-| `ui-block-instances.config.ts` | Instâncias de blocos em cada step/host |
-| `field-schemas.config.ts` | Schemas de campos de formulário com validadores |
-| `process-variables.config.ts` | Variáveis de processo trafegadas entre etapas |
-| `dependencies.config.ts` | Regras de dependência entre entidades |
-| `workflow-template.manifest.ts` | Entrypoint — importa e re-exporta todos os configs |
-
-## Comandos Disponíveis
-
-Todos executados a partir de `tools/generator-node/`:
+### 1. Cadastrar um template
 
 ```bash
-cd tools/generator-node
+cd packages/generator-core
 npm install
+
+# Bootstrap a partir de um projeto Angular existente
+npm run init-template -- --template-id meu-template --from /caminho/do/projeto
+
+# (Opcional) IA gera meta-source com dados reais
+npm run ai-bootstrap-meta -- --template-id meu-template    # requer OPENAI_API_KEY
+
+# Revisar e ajustar meta-source/ manualmente
+# Marcar HTMLs com data-template-block-instance
+
+# Converter meta-source → meta JSON
+npm run sync-meta -- --template-id meu-template
+
+# Validar integridade
+npm run validate-template -- --template-id meu-template
 ```
 
-### 1. `init-template` — Bootstrap de novo template
-
-Cria a estrutura inicial de um template a partir de um projeto Angular existente.
+### 2. Gerar uma variante
 
 ```bash
-npm run init-template -- --template-id <id> --from <caminho-projeto-angular>
-```
+cd packages/generator-core
 
-Cria `project/`, `meta-source/` (com placeholders), e `meta/`. Infere rotas e componentes por regex.
-
-### 2. `ai-bootstrap-meta` — Bootstrap meta-source via IA
-
-Usa a OpenAI para analisar o código Angular e gerar os 10 arquivos de `meta-source/` com dados reais em vez de placeholders.
-
-```bash
-npm run ai-bootstrap-meta -- --template-id <id>
-```
-
-Requer `OPENAI_API_KEY` no arquivo `.env` (copiar de `.env.example`). Usa structured output com JSON Schema e o template VA/VR como referência. O resultado ainda requer revisão humana.
-
-### 3. `sync-meta` — Converter meta-source → meta JSON
-
-Carrega os TypeScript de `meta-source/`, resolve imports, e gera os JSONs individuais em `meta/`.
-
-```bash
-npm run sync-meta -- --template-id <id>
-```
-
-### 4. `validate-template` — Validar template
-
-Verifica integridade referencial: steps × routes × presets × blocks × block-instances × dependencies. Retorna erros, warnings e grau de completude (0-100%).
-
-```bash
-npm run validate-template -- --template-id <id>
-```
-
-### 5. `generate` — Gerar variante
-
-Lê `meta/*.json`, resolve o preset, monta um plano de operações subtrativas, e gera o projeto Angular final em `output/`.
-
-```bash
+# Usando um request pronto do playground
 npm run generate -- ../../playground/requests/modelo-1.json
+
+# O projeto será gerado em output/va-vr-modelo-1/
 ```
 
-Exemplo de request:
-
+Exemplo de request JSON:
 ```json
 {
   "templateId": "va-vr-base",
@@ -144,35 +147,117 @@ Exemplo de request:
 }
 ```
 
-## Operações Subtrativas do Gerador
+### 3. Publicar no catálogo
 
-O plano de geração aplica estas operações no projeto Angular copiado:
+```bash
+cd packages/generator-core
+
+# Publicar um modelo específico
+npm run publish -- va-vr-modelo-1
+
+# Publicar todos os modelos gerados
+npm run publish -- --all
+```
+
+O comando copia os metadados para `registry-data/models/` e atualiza `registry-data/catalog.json`.
+
+### 4. Consultar o catálogo (ETN Showcase)
+
+Abra `apps/etn-showcase/index.html` em um servidor HTTP local:
+
+```bash
+# Opção 1: usando npx
+npx serve . -p 3000
+# Abrir http://localhost:3000/apps/etn-showcase/
+
+# Opção 2: usando Python
+python -m http.server 3000
+# Abrir http://localhost:3000/apps/etn-showcase/
+```
+
+> **Importante:** O showcase precisa de um servidor HTTP (não funciona abrindo o arquivo diretamente) porque usa `fetch()` para carregar o catálogo.
+
+### 5. Dev Studio (Interface do Desenvolvedor)
+
+Abra `apps/dev-studio/index.html` no mesmo servidor HTTP:
+
+```bash
+# Abrir http://localhost:3000/apps/dev-studio/
+```
+
+O Dev Studio permite:
+- Listar templates disponíveis e seus metadados
+- Visualizar presets com fluxo de etapas e features
+- Montar requests de geração (JSON editor)
+- Carregar requests de exemplo do playground
+- Obter comandos CLI para gerar e publicar
+
+---
+
+## Comandos do Generator (referência rápida)
+
+Todos executados a partir de `packages/generator-core/`:
+
+| Comando | Descrição |
+|---------|-----------|
+| `npm run generate -- <request.json>` | Gerar variante a partir de request |
+| `npm run init-template -- --template-id X --from Y` | Bootstrap de novo template |
+| `npm run sync-meta -- --template-id X` | Converter meta-source → meta JSON |
+| `npm run validate-template -- --template-id X` | Validar integridade do template |
+| `npm run ai-bootstrap-meta -- --template-id X` | Bootstrap meta-source via IA |
+| `npm run publish -- <slug>` | Publicar modelo no catálogo |
+| `npm run publish -- --all` | Publicar todos os modelos |
+
+---
+
+## Operações Subtrativas do Gerador
 
 | Operação | O que faz |
 |----------|-----------|
-| `disable_step` | Remove a etapa do workflow (steps.json, manifest) |
-| `disable_route` | Remove a rota do app-routing.module.ts |
-| `disable_feature` | Remove a feature e dependências associadas |
-| `remove_block_instance` | Remove o bloco do HTML usando `data-template-block-instance` |
-| `filter_process_variables_by_feature` | Remove variáveis de processo de features desabilitadas |
+| `disable_step` | Remove etapa do workflow |
+| `disable_route` | Remove rota do Angular |
+| `disable_feature` | Remove feature e dependências |
+| `remove_block_instance` | Remove bloco do HTML |
+| `filter_process_variables_by_feature` | Remove variáveis de processo |
 | `rename_label` | Renomeia labels em componentes |
 
-## Fluxo Completo para um Novo Template
+---
 
-```
-1. init-template          →  Copia projeto e cria estrutura de diretórios
-2. ai-bootstrap-meta      →  (Opcional) IA gera meta-source/ com dados reais
-3. Revisar meta-source/   →  Ajustar tipos, IDs, labels, validadores
-4. Marcar HTMLs            →  Adicionar data-template-block-instance nos HTMLs
-5. sync-meta              →  Gerar meta/ (JSON) a partir do meta-source/ (TS)
-6. validate-template      →  Verificar integridade referencial
-7. Iterar 3-6             →  Até validação passar sem erros
-8. Criar request JSON     →  Definir preset e gerar variante
-```
+## Limitações Atuais
+
+- **Dev Studio em modo CLI**: a interface mostra os comandos a executar no terminal, mas não executa diretamente (requer backend/API futura)
+- **Templates estáticos**: a lista de templates conhecidos no dev-studio é hardcoded; não há discovery automático
+- **Sem autenticação**: todas as interfaces são abertas
+- **Sem banco de dados**: catálogo é arquivo JSON no filesystem
+- **Sem CI/CD**: geração e publicação são manuais via CLI
+- **Mono-repositório**: tudo em um repo; no futuro pode ser separado
+
+---
+
+## Próximos Passos (Pós-hackathon)
+
+1. **API Backend** — Criar servidor Node.js para executar geração/publicação via HTTP (substituindo modo CLI do dev-studio)
+2. **Integração GitLab** — Criar repositório automático por variante gerada
+3. **Múltiplos templates** — Adicionar outros fluxos BPM além de VA/VR
+4. **Discovery de templates** — Listar templates automaticamente a partir do filesystem
+5. **Autenticação** — Controle de acesso por perfil (dev vs ETN)
+6. **Notificações** — Avisar ETNs quando novos modelos forem publicados
+7. **Versionamento** — Histórico de versões por modelo publicado
+8. **Separação em repos** — Se necessário, extrair packages em repositórios independentes
+
+---
 
 ## Tecnologias
 
-- **Node.js / TypeScript** — Gerador, CLI, módulo de IA
+- **Node.js / TypeScript** — Generator core, CLI, módulo IA
 - **Angular** — Projetos base e variantes geradas
+- **HTML/CSS/JS** — Dev Studio e ETN Showcase (single-page apps estáticas)
 - **OpenAI API** — Bootstrap assistido por IA (structured output, JSON Schema)
-- **tsx** — Execução de TypeScript sem build prévio (dev)
+- **tsx** — Execução de TypeScript sem build prévio
+
+---
+
+## Hackathon 2026
+
+Projeto criado para o hackathon da Senior Sistemas. Foco em demonstrar o fluxo completo:
+template armazenado → variante gerada → modelo publicado → ETN consultando catálogo.

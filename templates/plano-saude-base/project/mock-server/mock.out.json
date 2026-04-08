@@ -1,0 +1,101 @@
+{
+  "rubi": {
+    "br.com.senior.beneficios": {
+      "retornarPlanoAtual": {
+        "ARetorno": "OK",
+        "NSize": 3,
+        "LDependentes": [
+          {
+            "NCodDep": "0",
+            "ANomDep": "Titular",
+            "NCodPla": "0",
+            "NCodOem": "0",
+            "AGraPar": "Titular",
+            "DDatNas":"01/01/1980"
+          },
+          {
+            "NCodDep": "1",
+            "ANomDep": "Dependente 1",
+            "NCodPla": "0",
+            "NCodOem": "0",
+            "AGraPar": "Mãe",
+            "DDatNas":"01/01/1960"
+          },
+          {
+            "NCodDep": "2",
+            "ANomDep": "Dependente 2",
+            "NCodPla": "0",
+            "NCodOem": "0",
+            "AGraPar": "Filho",
+            "DDatNas":"01/01/2010"
+          }
+        ]
+      },
+      "buscarPlanos": {
+        "ARetorno": "OK",
+        "NSize": 2,
+        "LPlanos": [
+          {
+            "NCodOem": "1",
+            "NCodPla": "1",
+            "ANomPla": "Farmacia"
+          },
+          {
+            "NCodOem": "2",
+            "NCodPla": "2",
+            "ANomPla": "Apartamento"
+          }
+        ]
+      }
+    },
+    "br.com.senior.geral": {
+      "dadosSolicitante": {
+        "NNumEmp": "1",
+        "NTipCol": "1",
+        "NNumCad": "1",
+        "ANomFun": "ADM",
+        "NCodFil": "1",
+        "ANomFil": "Matriz Blumenau",
+        "ANomEmp": "Senior",
+        "ACodLoc": "1",
+        "ANomLoc": "Blumenau",
+        "ACodCcu": "1",
+        "ANomCCU": "Torre HCM",
+        "AEhGestor": "N",
+        "ARetorno": "OK"
+      },
+      "buscarColaboradores": {
+        "ARetorno": "OK",
+        "NSize": 2,
+        "LColaboradores": [
+          {
+            "NNumEmp": "1",
+            "NTipCol": "1",
+            "NNumCad": "1000",
+            "ANomFun": "Fulano",
+            "ANomEmp": "Senior",
+            "NCodFil": "1",
+            "ANomFil": "Matriz Blumenau",
+            "ANomCCU": "Torre HCM"
+          },
+          {
+            "NNumEmp": "2",
+            "NTipCol": "1",
+            "NNumCad": "1001",
+            "ANomFun": "Ciclano",
+            "ANomEmp": "Senior SP",
+            "NCodFil": "1",
+            "ANomFil": "Matriz SP",
+            "ANomCCU": "Torre SP"
+          }
+        ]
+      }
+    },
+    "br.com.senior.validacao.composable": {
+      "getVersao": {
+        "ARetorno": "OK",
+        "versao": "1.0.0"
+      }
+    }
+  }
+}

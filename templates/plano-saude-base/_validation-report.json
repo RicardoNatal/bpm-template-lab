@@ -1,0 +1,18 @@
+{
+  "valid": true,
+  "templateId": "plano-saude-base",
+  "errors": [],
+  "warnings": [],
+  "summary": {
+    "stepsCount": 4,
+    "routesCount": 4,
+    "presetsCount": 3,
+    "blocksCount": 5,
+    "blockInstancesCount": 14,
+    "fieldSchemasCount": 5,
+    "processVariablesCount": 11,
+    "dependenciesCount": 11,
+    "featuresCount": 6
+  },
+  "completeness": 100
+}

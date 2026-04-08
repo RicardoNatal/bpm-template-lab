@@ -1,5 +1,5 @@
 export const environment = {
-  server: 'http://189.16.40.50:8180/',
+  server: 'https://web01s1h.seniorcloud.com.br:37301/',
   client_id: '',
   fluxo: 'treinamento',
   valida_versao: false,
@@ -13,13 +13,12 @@ export const environment = {
     invoke: 'https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/platform/conector/actions/invoke',
     timeout_1_min: 'https://timeout.xplatform.com.br',
     extended_timeout: 'https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/platform/bpm_timeout/queries/invoke',
-    extented_timeout_async: 'https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/platform/bpm_timeout/signals/invokeAsync',
     response_timeout: 'https://platform.senior.com.br/t/senior.com.br/bridge/1.0/rest/platform/bpm_timeout/queries/getTicketResponse'
   },
   webServices: {
     baseUrl: 'URL DA XT',
     module: 'rubi',
-    encryption: '0',
+    encryption: '3',
     user: '',
     password: ''
   },

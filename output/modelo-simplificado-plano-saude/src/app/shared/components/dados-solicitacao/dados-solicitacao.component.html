@@ -1,0 +1,31 @@
+<hst-card [titulo]="'Solicitação'">
+  <form [formGroup]="formulario">
+    <app-select
+      #tipoSolicitacao
+      type="radio"
+      orientacao="horizontal"
+      [config]="configTipoSolicitacao"
+      [formGroup]="formulario"
+      formControlName="tipoSolicitacao"
+    ></app-select>
+    <br />
+    <app-select
+      #plano
+      type="select"
+      [config]="configPlanos"
+      [formGroup]="formulario"
+      formControlName="planos"
+    >
+    </app-select>
+    <br />
+    <app-dados-dependentes
+      [tipoOperacao]="formulario.get('tipoSolicitacao')?.value"
+    ></app-dados-dependentes>
+    <br />
+    <app-observacao
+      title="Observação"
+      label="Observação"
+      [mostrarCard]="false"
+    ></app-observacao>
+  </form>
+</hst-card>

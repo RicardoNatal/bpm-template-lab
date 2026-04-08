@@ -1,0 +1,9 @@
+{
+  "templateId": "plano-saude-base",
+  "presetId": "completo",
+  "project": {
+    "name": "Modelo Completo Plano Saúde",
+    "slug": "modelo-completo-plano-saude"
+  },
+  "customizations": []
+}

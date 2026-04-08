@@ -1,0 +1,163 @@
+[
+  {
+    "key": "dados-solicitante",
+    "label": "Dados do Solicitante",
+    "type": "json",
+    "writtenBy": [
+      "solicitacao"
+    ],
+    "readBy": [
+      "revisao",
+      "analise-rh",
+      "detalhes"
+    ],
+    "notification": false,
+    "optional": false,
+    "sourceComponent": "dados-solicitante",
+    "sourceField": "dadosSolicitante"
+  },
+  {
+    "key": "dados-colaborador",
+    "label": "Dados do Colaborador",
+    "type": "json",
+    "writtenBy": [
+      "solicitacao"
+    ],
+    "readBy": [
+      "revisao",
+      "analise-rh"
+    ],
+    "notification": false,
+    "optional": true,
+    "sourceComponent": "dados-solicitante",
+    "sourceField": "colaboradorSelecionado"
+  },
+  {
+    "key": "plano-selecionado",
+    "label": "Plano de Saúde Selecionado",
+    "type": "json",
+    "writtenBy": [
+      "solicitacao"
+    ],
+    "readBy": [
+      "revisao",
+      "analise-rh",
+      "detalhes"
+    ],
+    "notification": true,
+    "optional": false,
+    "sourceComponent": "dados-solicitacao",
+    "sourceField": "planoSelecionado"
+  },
+  {
+    "key": "operacao-tipo",
+    "label": "Tipo de Operação",
+    "type": "string",
+    "writtenBy": [
+      "solicitacao"
+    ],
+    "readBy": [
+      "revisao",
+      "analise-rh",
+      "detalhes"
+    ],
+    "notification": false,
+    "optional": false,
+    "sourceComponent": "dados-solicitacao",
+    "sourceField": "tipoOperacao"
+  },
+  {
+    "key": "aprovacao-gestor",
+    "label": "Aprovação do Gestor",
+    "type": "boolean",
+    "writtenBy": [
+      "revisao"
+    ],
+    "readBy": [
+      "analise-rh",
+      "detalhes"
+    ],
+    "notification": true,
+    "optional": false,
+    "sourceComponent": "dados-gestor",
+    "sourceField": "aprovado",
+    "requiredFeature": "gestor-validation"
+  },
+  {
+    "key": "observacao-gestor",
+    "label": "Observação do Gestor",
+    "type": "string",
+    "writtenBy": [
+      "revisao"
+    ],
+    "readBy": [
+      "analise-rh",
+      "detalhes"
+    ],
+    "notification": false,
+    "optional": true,
+    "sourceComponent": "observacao",
+    "sourceField": "observacaoGestor"
+  },
+  {
+    "key": "observacao-rh",
+    "label": "Observação do RH",
+    "type": "string",
+    "writtenBy": [
+      "analise-rh"
+    ],
+    "readBy": [
+      "detalhes"
+    ],
+    "notification": false,
+    "optional": true,
+    "sourceComponent": "observacao",
+    "sourceField": "observacaoRH",
+    "requiredFeature": "observacao-rh"
+  },
+  {
+    "key": "usuario-solicitante",
+    "label": "Usuário Solicitante",
+    "type": "string",
+    "writtenBy": [
+      "solicitacao"
+    ],
+    "readBy": [
+      "revisao",
+      "analise-rh",
+      "detalhes"
+    ],
+    "notification": false,
+    "optional": false,
+    "sourceComponent": "dados-solicitante",
+    "sourceField": "nomeUsuario"
+  },
+  {
+    "key": "ticket-request",
+    "label": "Ticket de Requisição",
+    "type": "string",
+    "writtenBy": [
+      "solicitacao"
+    ],
+    "readBy": [
+      "revisao",
+      "analise-rh"
+    ],
+    "notification": false,
+    "optional": true
+  },
+  {
+    "key": "dados-persistencia",
+    "label": "Dados para Persistência",
+    "type": "json",
+    "writtenBy": [
+      "analise-rh"
+    ],
+    "readBy": [
+      "detalhes"
+    ],
+    "notification": false,
+    "optional": false,
+    "requiredFeature": "senior-xt-integration"
+  }
+]

@@ -1,0 +1,15 @@
+<app-dados-solicitante
+  data-template-block-instance="dados-solicitante-solicitacao">
+</app-dados-solicitante>
+
+<!-- TEMPLATE:OPTIONAL block="dados-gestor" instance="dados-gestor-solicitacao" -->
+<app-dados-gestor
+  data-template-block-instance="dados-gestor-solicitacao"
+  [hidden]="!ehGestor()"
+  (emitColaborador)="novoColaborador($event)">
+</app-dados-gestor>
+<!-- /TEMPLATE:OPTIONAL -->
+
+<app-dados-solicitacao
+  data-template-block-instance="dados-solicitacao-solicitacao">
+</app-dados-solicitacao>

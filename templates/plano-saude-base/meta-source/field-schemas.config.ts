@@ -1,0 +1,127 @@
+import { BlockFieldSchema } from './template.types';
+
+/**
+ * FIELD SCHEMAS — Gerado por ai-bootstrap-meta
+ */
+export const FIELD_SCHEMAS: BlockFieldSchema[] = [
+  {
+    blockId: 'dados-solicitante',
+    fields: [
+      {
+        id: 'nome-solicitante',
+        label: 'Nome do Solicitante',
+        type: 'text',
+        validators: [{ name: 'required' }],
+        optional: false,
+        validationVariable: true,
+        readOnlyInSteps: ['detalhes', 'analise-rh', 'revisao'],
+      },
+      {
+        id: 'matricula-solicitante',
+        label: 'Matrícula',
+        type: 'text',
+        validators: [{ name: 'required' }],
+        optional: false,
+        validationVariable: true,
+        readOnlyInSteps: ['detalhes', 'analise-rh', 'revisao'],
+      },
+    ],
+  },
+  {
+    blockId: 'dados-gestor',
+    fields: [
+      {
+        id: 'nome-gestor',
+        label: 'Nome do Gestor',
+        type: 'text',
+        validators: [{ name: 'required' }],
+        optional: false,
+        validationVariable: true,
+        featureDependency: 'gestor-validation',
+        readOnlyInSteps: ['detalhes', 'analise-rh', 'revisao'],
+      },
+      {
+        id: 'matricula-gestor',
+        label: 'Matrícula do Gestor',
+        type: 'text',
+        validators: [{ name: 'required' }],
+        optional: false,
+        validationVariable: true,
+        featureDependency: 'gestor-validation',
+        readOnlyInSteps: ['detalhes', 'analise-rh', 'revisao'],
+      },
+    ],
+  },
+  {
+    blockId: 'dados-solicitacao',
+    fields: [
+      {
+        id: 'tipo-solicitacao',
+        label: 'Tipo de Solicitação',
+        type: 'select',
+        validators: [{ name: 'required' }],
+        optional: false,
+        validationVariable: true,
+        readOnlyInSteps: ['analise-rh', 'revisao'],
+      },
+      {
+        id: 'plano-saude',
+        label: 'Plano de Saúde',
+        type: 'select',
+        validators: [{ name: 'required' }],
+        optional: false,
+        validationVariable: true,
+        featureDependency: 'planos-integration',
+        readOnlyInSteps: ['analise-rh', 'revisao'],
+      },
+    ],
+    subBlocks: [
+        {
+          blockId: 'dados-dependentes',
+          selector: 'hst-selectable-table',
+          fields: [
+          {
+            id: 'dependentes-selecionados',
+            label: 'Dependentes Selecionados',
+            type: 'checkbox',
+            validators: [],
+            optional: true,
+            validationVariable: false,
+            featureDependency: 'dependentes-management',
+            readOnlyInSteps: ['analise-rh', 'revisao'],
+          },
+          ],
+          optional: true,
+        },
+    ],
+  },
+  {
+    blockId: 'observacao',
+    fields: [
+      {
+        id: 'observacao-rh',
+        label: 'Observação do RH',
+        type: 'textarea',
+        validators: [],
+        optional: true,
+        validationVariable: false,
+        featureDependency: 'observacao-rh',
+        readOnlyInSteps: ['revisao'],
+      },
+    ],
+  },
+  {
+    blockId: 'dados-dependentes',
+    fields: [
+      {
+        id: 'dependentes-records',
+        label: 'Registros de Dependentes',
+        type: 'select',
+        validators: [],
+        optional: true,
+        validationVariable: false,
+        readOnlyInSteps: [],
+      },
+    ],
+  },
+];

@@ -1,0 +1,10 @@
+<app-dados-solicitante
+  data-template-block-instance="dados-solicitante-detalhes">
+</app-dados-solicitante>
+
+<!-- TEMPLATE:OPTIONAL block="dados-gestor" instance="dados-gestor-detalhes" -->
+<app-dados-gestor
+  data-template-block-instance="dados-gestor-detalhes"
+  [hidden]="!solicitanteEhGestor">
+</app-dados-gestor>
+<!-- /TEMPLATE:OPTIONAL -->

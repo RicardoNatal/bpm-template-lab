@@ -120,7 +120,7 @@ export class SolicitacaoComponent implements EtapaModel {
 
   async buscarDadosSolicitante(): Promise<void> {
     const response = await firstValueFrom(
-      this.seniorXT.dadosSolicitante().pipe(
+      this.seniorXT.dadosSolicitante(this.nomeSolicitante).pipe(
         catchError((err) => {
           this.notification.requestError(err);
           this.desabilitarFormulario();
@@ -181,7 +181,7 @@ export class SolicitacaoComponent implements EtapaModel {
       .subscribe((response) => {
         this.valesPorEmpresa = response;
 
-        if (!this.valesPorEmpresa.length) {
+        if (this.valesPorEmpresa.length !== 2) {
           this.notification.requestError(
             'Foi identificada uma inconsistência na configuração de VA/VR para a empresa do colaborador. Entre em contato com o Administrador do sistema para realizar o ajuste necessário.',
           );
@@ -193,13 +193,13 @@ export class SolicitacaoComponent implements EtapaModel {
           (vale) => !codsValesAtuais.includes(vale.NCodVal),
         );
 
-        // if (valesFiltrados.length !== 1) {
-        //   this.notification.requestError(
-        //     'O benefício atualmente atribuído ao colaborador não está de acordo com a configuração de VA/VR da empresa do colaborador. Entre em contato com o Administrador do sistema para realizar o ajuste necessário.',
-        //   );
-        //   this.desabilitarFormulario();
-        //   return;
-        // }
+        if (valesFiltrados.length !== 1) {
+          this.notification.requestError(
+            'O benefício atualmente atribuído ao colaborador não está de acordo com a configuração de VA/VR da empresa do colaborador. Entre em contato com o Administrador do sistema para realizar o ajuste necessário.',
+          );
+          this.desabilitarFormulario();
+          return;
+        }
 
         this.dadosSolicitacaoComponent.definirOpcoesDeVale(valesFiltrados);
       });

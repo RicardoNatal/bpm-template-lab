@@ -1,0 +1,32 @@
+# ── Dependências ──
+node_modules/
+.env
+
+# ── Build / dist ──
+dist/
+*.tsbuildinfo
+
+# ── Output de geração (artefatos temporários) ──
+output/va-vr-*
+output/!.gitkeep
+
+# ── IDE ──
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── OS ──
+.DS_Store
+Thumbs.db
+
+# ── Logs ──
+*.log
+debug.log
+npm-debug.log*
+
+# ── Angular build (dentro de templates/project) ──
+templates/*/project/.angular/
+templates/*/project/node_modules/
+templates/*/project/dist/

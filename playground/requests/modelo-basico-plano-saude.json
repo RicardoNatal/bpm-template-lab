@@ -1,0 +1,9 @@
+{
+  "templateId": "plano-saude-base",
+  "presetId": "simplificado",
+  "project": {
+    "name": "Modelo Simplificado Plano Saúde",
+    "slug": "modelo-simplificado-plano-saude"
+  },
+  "customizations": []
+}

@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "templateId": "plano-saude-base",
+  "presetId": "sem-dependentes",
+  "projectName": "Modelo Sem Dependentes Plano Saúde",
+  "outputDir": "C:\\Users\\Ricardo.Schvambach\\Desktop\\Desenvolvimentos\\Hackaton\\bpm-template-lab\\output\\modelo-sem-dependentes-plano-saude",
+  "operationsExecuted": [
+    {
+      "type": "disable_feature",
+      "target": "dependentes-management",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-dependentes-table",
+      "success": true
+    },
+    {
+      "type": "filter_process_variables_by_feature",
+      "target": "_all",
+      "success": true
+    }
+  ],
+  "warnings": [],
+  "filesModified": [
+    "src/app/shared/components/dados-dependentes/dados-dependentes.component.html",
+    "_meta/process-variables.json",
+    "_meta/steps.json",
+    "_meta/routes.json",
+    "_meta/manifest.json"
+  ],
+  "duration": 511
+}

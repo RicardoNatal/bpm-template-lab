@@ -1,0 +1,23 @@
+.form-error {
+  color: var(--red-500) !important;
+  display: block;
+  margin-left: 0;
+  box-sizing: border-box;
+}
+
+.required-error {
+  color: var(--red-500) !important;
+  font-size: smaller;
+  margin-left: 0;
+  margin-top: 0.5rem;
+}
+
+:host ::ng-deep .form-error input,
+:host ::ng-deep .form-error textarea,
+:host ::ng-deep .form-error .p-inputtext,
+:host ::ng-deep .form-error .p-inputtextarea,
+:host ::ng-deep .form-error .p-dropdown,
+:host ::ng-deep .form-error .p-dropdown-trigger 
+{
+  border-color: #f87171 !important;
+}

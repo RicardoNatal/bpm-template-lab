@@ -26,7 +26,7 @@ import { DEPENDENCY_RULES } from './dependencies.config';
  * 8. Percorrer dependencies[] para cascatas transitivas
  */
 export const WORKFLOW_TEMPLATE_MANIFEST: WorkflowTemplateManifest = {
-  templateId: 'banco-mercantil-va-vr',
+  templateId: 'modelo-padrao-va-vr',
   name: 'Troca de Benefício VA/VR',
   description:
     'Fluxo BPM para solicitação de troca de vale alimentação/refeição (VA/VR) ' +

@@ -1,0 +1,34 @@
+{
+  "sem-dependentes": {
+    "viewBox": "0 0 740 200",
+    "nodes": [
+      { "id": "start", "type": "start", "cx": 28, "cy": 100 },
+      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 60, "y": 75, "w": 135, "h": 50, "stepId": "solicitacao" },
+      { "id": "revisao", "type": "task", "label": "Revisão", "x": 250, "y": 75, "w": 120, "h": 50, "stepId": "revisao" },
+      { "id": "analise-rh", "type": "task", "label": "Análise RH", "x": 430, "y": 75, "w": 130, "h": 50, "stepId": "analise-rh" },
+      { "id": "detalhes", "type": "task", "label": "Detalhes", "x": 620, "y": 75, "w": 110, "h": 50, "stepId": "detalhes" },
+      { "id": "end", "type": "end", "cx": 780, "cy": 100 }
+    ],
+    "edges": [
+      { "points": [[42,100],[60,100]] },
+      { "points": [[195,100],[250,100]], "label": "Revisar", "labelPos": [222,87] },
+      { "points": [[370,100],[430,100]], "label": "Análise RH", "labelPos": [400,87] },
+      { "points": [[560,100],[620,100]], "label": "Prosseguir", "labelPos": [590,87] },
+      { "points": [[730,100],[768,100]], "label": "Finalizar", "labelPos": [749,87] }
+    ]
+  },
+  "simplificado": {
+    "viewBox": "0 0 460 200",
+    "nodes": [
+      { "id": "start", "type": "start", "cx": 30, "cy": 100 },
+      { "id": "solicitacao", "type": "task", "label": "Solicitação", "x": 65, "y": 75, "w": 135, "h": 50, "stepId": "solicitacao" },
+      { "id": "detalhes", "type": "task", "label": "Detalhes", "x": 275, "y": 75, "w": 110, "h": 50, "stepId": "detalhes" },
+      { "id": "end", "type": "end", "cx": 435, "cy": 100 }
+    ],
+    "edges": [
+      { "points": [[44,100],[65,100]] },
+      { "points": [[200,100],[275,100]], "label": "Prosseguir", "labelPos": [237,87] },
+      { "points": [[385,100],[423,100]], "label": "Finalizar", "labelPos": [404,87] }
+    ]
+  }
+}

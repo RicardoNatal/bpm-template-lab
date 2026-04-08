@@ -1,0 +1,59 @@
+<label *ngIf="config.label">
+  <strong *ngIf="isRequired() && config.label" style="display: inline;"
+        class="form-error" >
+    *
+  </strong>
+  {{ config.label }}
+</label>
+
+<p-dropdown
+  *ngIf="type === 'select' && !isDisabled"
+  class="w-full"
+  [hidden]="isDisabled"
+  [options]="config.options?.length ? config.options : [{ label: 'N/A', value: null, disabled: true }]"
+  optionLabel="label"
+  optionValue="value"
+  [placeholder]="config.placeholder"
+  [disabled]="isDisabled"
+  [ngModel]="value"
+  (onChange)="handleChange($event.value)"
+  (onBlur)="onTouched()"
+  [ngClass]="showError() ? 'form-error' : ''">
+</p-dropdown>
+
+<div
+  *ngIf="type === 'radio'"
+  class="grid"
+>
+  <div
+    class="col-12 radio-group"
+    [ngClass]="{
+      'radio-vertical': orientacao === 'vertical',
+      'radio-horizontal': orientacao === 'horizontal'
+    }"
+  >
+    <div
+      *ngFor="let option of config.options"
+      class="radio-item"
+      [ngClass]="'col-' + getColSize(option.size) "
+      style="padding: 0;"
+    >
+      <p-radioButton
+        name="radioGroup"
+        [value]="option.value"
+        [label]="option.label"
+        [ngModel]="value"
+        (ngModelChange)="handleChange($event)"
+        (onBlur)="onTouched()"
+        [disabled]="option.disabled || isDisabled"
+        >
+      </p-radioButton>
+    </div>
+  </div>
+</div>
+
+<p [hidden]="!isDisabled || this.type != 'select'"> {{selectedLabel}} </p>
+
+<div *ngIf="showError()" class="required-error">
+  * Campo obrigatório!
+</div>

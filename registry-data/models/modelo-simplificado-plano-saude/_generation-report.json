@@ -1,0 +1,112 @@
+{
+  "success": true,
+  "templateId": "plano-saude-base",
+  "presetId": "simplificado",
+  "projectName": "Modelo Simplificado Plano Saúde",
+  "outputDir": "C:\\Users\\Ricardo.Schvambach\\Desktop\\Desenvolvimentos\\Hackaton\\bpm-template-lab\\output\\modelo-simplificado-plano-saude",
+  "operationsExecuted": [
+    {
+      "type": "disable_feature",
+      "target": "gestor-validation",
+      "success": true
+    },
+    {
+      "type": "disable_feature",
+      "target": "dependentes-management",
+      "success": true
+    },
+    {
+      "type": "disable_feature",
+      "target": "observacao-rh",
+      "success": true
+    },
+    {
+      "type": "disable_step",
+      "target": "revisao",
+      "success": true
+    },
+    {
+      "type": "disable_step",
+      "target": "analise-rh",
+      "success": true
+    },
+    {
+      "type": "disable_route",
+      "target": "revisao",
+      "success": true
+    },
+    {
+      "type": "disable_route",
+      "target": "analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-gestor-analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-gestor-detalhes",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-gestor-revisao",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-gestor-solicitacao",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-solicitante-analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-solicitacao-analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "observacao-analise-rh",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-solicitante-revisao",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "dados-solicitacao-revisao",
+      "success": true
+    },
+    {
+      "type": "remove_block_instance",
+      "target": "observacao-revisao",
+      "success": true
+    },
+    {
+      "type": "filter_process_variables_by_feature",
+      "target": "_all",
+      "success": true
+    }
+  ],
+  "warnings": [],
+  "filesModified": [
+    "src/app/app-routing.module.ts",
+    "src/app/modules/analise-rh/analise-rh.component.html",
+    "src/app/modules/detalhes/detalhes.component.html",
+    "src/app/modules/revisao/revisao.component.html",
+    "src/app/modules/solicitacao/solicitacao.component.html",
+    "_meta/process-variables.json",
+    "_meta/steps.json",
+    "_meta/routes.json",
+    "_meta/manifest.json"
+  ],
+  "duration": 548
+}

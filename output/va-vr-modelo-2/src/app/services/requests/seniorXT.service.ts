@@ -14,10 +14,10 @@ import { DadosValeModel, ValesModel } from 'src/app/shared/models/vale.model';
 export class SeniorXTService {
   constructor(private invoke: InvokeService) {}
 
-  dadosSolicitante(): Observable<RetornoDadosSolicitanteDTO> {
+  dadosSolicitante(ANomUsu: string): Observable<RetornoDadosSolicitanteDTO> {
     return from(
       this.invoke.postComTimeoutExtendido<RetornoDadosSolicitanteDTO>(
-        'br.com.senior.modelo.padrao.va.vr',
+        'com.senior.automacao.wf.va.vr',
         'retornaSolicitante',
         {},
       ),
@@ -28,7 +28,7 @@ export class SeniorXTService {
     return from(
       this.invoke
         .postComTimeoutExtendido<ValesModel>(
-          'br.com.senior.modelo.padrao.va.vr',
+          'com.senior.automacao.wf.va.vr',
           'retornaBeneficioAtual',
           {},
         )
@@ -43,7 +43,7 @@ export class SeniorXTService {
   valesPorEmpresa() {
     return this.invoke
       .obterDadosXT<ValesModel>(
-        'br.com.senior.modelo.padrao.va.vr',
+        'com.senior.automacao.wf.va.vr',
         'retornaValesPorEmpresa',
         'rubi',
       )
@@ -64,7 +64,7 @@ export class SeniorXTService {
     NCodValAtual: number,
   ): Promise<any> {
     return this.invoke.postComTimeoutExtendido(
-      'br.com.senior.modelo.padrao.va.vr',
+      'com.senior.automacao.wf.va.vr',
       'gravaBeneficioNovo',
       { NNumCad, NNumEmp, NTipCol, NCodValAtual, NCodValNovo },
     );

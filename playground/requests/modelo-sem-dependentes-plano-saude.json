@@ -1,0 +1,9 @@
+{
+  "templateId": "plano-saude-base",
+  "presetId": "sem-dependentes",
+  "project": {
+    "name": "Modelo Sem Dependentes Plano Saúde",
+    "slug": "modelo-sem-dependentes-plano-saude"
+  },
+  "customizations": []
+}

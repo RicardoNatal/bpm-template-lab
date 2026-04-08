@@ -1,0 +1,9 @@
+{
+  "error": true,
+  "timeout": [
+    "portasQueDevemDarErroExecucao"
+  ],
+  "erroExecucao": [
+    "portasQueDevemDarErroExecucao"
+  ]
+}

@@ -1,0 +1,11 @@
+<div [appBlockInteraction]="interacaoBloqueada || bloqueioSelecao">
+  <hst-selectable-table
+    data-template-block-instance="dados-dependentes-table"
+    [records]="dependentesFiltrados"
+    [selectedRecords]="dependentesSelecionados"
+    (onSelectedChange)="onSelecionadosChange($event)"
+    [columnsConfig]="columnConfig"
+    [loading]="carregando"
+    [totalRecords]="totalDependentes"
+  ></hst-selectable-table>
+</div>

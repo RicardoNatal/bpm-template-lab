@@ -1,0 +1,15 @@
+{
+  "success": true,
+  "templateId": "plano-saude-base",
+  "presetId": "completo",
+  "projectName": "Modelo Completo Plano Saúde",
+  "outputDir": "C:\\Users\\Ricardo.Schvambach\\Desktop\\Desenvolvimentos\\Hackaton\\bpm-template-lab\\output\\modelo-completo-plano-saude",
+  "operationsExecuted": [],
+  "warnings": [],
+  "filesModified": [
+    "_meta/steps.json",
+    "_meta/routes.json",
+    "_meta/manifest.json"
+  ],
+  "duration": 436
+}

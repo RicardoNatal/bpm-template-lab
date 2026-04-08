@@ -1,0 +1,148 @@
+{
+  "templateId": "plano-saude-base",
+  "templateDir": "C:\\Users\\Ricardo.Schvambach\\Desktop\\Desenvolvimentos\\Hackaton\\bpm-template-lab\\templates\\plano-saude-base",
+  "inferred": {
+    "routes": [
+      {
+        "path": "detalhes",
+        "modulePath": "./modules/detalhes/detalhes.module",
+        "moduleName": "DetalhesModule"
+      },
+      {
+        "path": "solicitacao"
+      },
+      {
+        "path": "revisao"
+      },
+      {
+        "path": "analise-rh"
+      }
+    ],
+    "components": [
+      {
+        "name": "AppComponent",
+        "selector": "app-root",
+        "templateFile": "src/app/app.component.html",
+        "htmlPath": "src/app/app.component.html"
+      },
+      {
+        "name": "AnaliseRhComponent",
+        "selector": "app-analise-rh",
+        "templateFile": "src/app/modules/analise-rh/analise-rh.component.html",
+        "htmlPath": "src/app/modules/analise-rh/analise-rh.component.html"
+      },
+      {
+        "name": "DetalhesComponent",
+        "selector": "app-detalhes",
+        "templateFile": "src/app/modules/detalhes/detalhes.component.html",
+        "htmlPath": "src/app/modules/detalhes/detalhes.component.html"
+      },
+      {
+        "name": "RevisaoComponent",
+        "selector": "app-revisao",
+        "templateFile": "src/app/modules/revisao/revisao.component.html",
+        "htmlPath": "src/app/modules/revisao/revisao.component.html"
+      },
+      {
+        "name": "SolicitacaoComponent",
+        "selector": "app-solicitacao",
+        "templateFile": "src/app/modules/solicitacao/solicitacao.component.html",
+        "htmlPath": "src/app/modules/solicitacao/solicitacao.component.html"
+      },
+      {
+        "name": "DadosDependentesComponent",
+        "selector": "app-dados-dependentes",
+        "templateFile": "src/app/shared/components/dados-dependentes/dados-dependentes.component.html",
+        "htmlPath": "src/app/shared/components/dados-dependentes/dados-dependentes.component.html"
+      },
+      {
+        "name": "DadosGestorComponent",
+        "selector": "app-dados-gestor",
+        "templateFile": "src/app/shared/components/dados-gestor/dados-gestor.component.html",
+        "htmlPath": "src/app/shared/components/dados-gestor/dados-gestor.component.html"
+      },
+      {
+        "name": "DadosSolicitacaoComponent",
+        "selector": "app-dados-solicitacao",
+        "templateFile": "src/app/shared/components/dados-solicitacao/dados-solicitacao.component.html",
+        "htmlPath": "src/app/shared/components/dados-solicitacao/dados-solicitacao.component.html"
+      },
+      {
+        "name": "DadosSolicitanteComponent",
+        "selector": "app-dados-solicitante",
+        "templateFile": "src/app/shared/components/dados-solicitante/dados-solicitante.component.html",
+        "htmlPath": "src/app/shared/components/dados-solicitante/dados-solicitante.component.html"
+      },
+      {
+        "name": "ObservacaoComponent",
+        "selector": "app-observacao",
+        "templateFile": "src/app/shared/components/observacao/observacao.component.html",
+        "htmlPath": "src/app/shared/components/observacao/observacao.component.html"
+      },
+      {
+        "name": "SelectComponent",
+        "selector": "app-select",
+        "templateFile": "src/app/shared/components/select/select.component.html",
+        "htmlPath": "src/app/shared/components/select/select.component.html"
+      }
+    ],
+    "modules": [
+      "AppRoutingModule",
+      "AppModule",
+      "AnaliseRhRoutingModule",
+      "AnaliseRhModule",
+      "DetalhesRoutingModule",
+      "DetalhesModule",
+      "RevisaoRoutingModule",
+      "RevisaoModule",
+      "SolicitacaoRoutingModule",
+      "SolicitacaoModule",
+      "SharedModule"
+    ],
+    "htmlFiles": [
+      "src/app/app.component.html",
+      "src/app/modules/analise-rh/analise-rh.component.html",
+      "src/app/modules/detalhes/detalhes.component.html",
+      "src/app/modules/revisao/revisao.component.html",
+      "src/app/modules/solicitacao/solicitacao.component.html",
+      "src/app/shared/components/dados-dependentes/dados-dependentes.component.html",
+      "src/app/shared/components/dados-gestor/dados-gestor.component.html",
+      "src/app/shared/components/dados-solicitacao/dados-solicitacao.component.html",
+      "src/app/shared/components/dados-solicitante/dados-solicitante.component.html",
+      "src/app/shared/components/observacao/observacao.component.html",
+      "src/app/shared/components/select/select.component.html"
+    ]
+  },
+  "created": [
+    "meta-source/template.types.ts",
+    "meta-source/workflow-steps.config.ts",
+    "meta-source/workflow-routes.config.ts",
+    "meta-source/workflow-presets.config.ts",
+    "meta-source/ui-blocks.config.ts",
+    "meta-source/ui-block-instances.config.ts",
+    "meta-source/field-schemas.config.ts",
+    "meta-source/process-variables.config.ts",
+    "meta-source/dependencies.config.ts",
+    "meta-source/workflow-template.manifest.ts"
+  ],
+  "placeholders": [
+    "Presets são esqueleto inicial — definir enabledSteps/enabledFeatures",
+    "Blocos são placeholders genéricos — substituir por blocos reais",
+    "Block instances estão vazias — mapear uso real no HTML",
+    "Field schemas estão vazios — mapear campos reais",
+    "Process variables estão vazias — mapear variáveis reais",
+    "Dependencies estão vazias — mapear cascatas reais"
+  ],
+  "manualReviewNeeded": [
+    "meta-source/template.types.ts — ajustar StepId, BlockId, FeatureId, PresetId",
+    "meta-source/workflow-steps.config.ts — mapear blocks e features de cada step",
+    "meta-source/workflow-presets.config.ts — definir presets reais",
+    "meta-source/ui-blocks.config.ts — mapear blocos de UI reais",
+    "meta-source/ui-block-instances.config.ts — mapear instâncias reais com templateFile e dataAttribute",
+    "meta-source/field-schemas.config.ts — mapear campos de formulário reais",
+    "meta-source/process-variables.config.ts — mapear variáveis de processo reais",
+    "meta-source/dependencies.config.ts — mapear dependências entre entidades",
+    "meta-source/workflow-template.manifest.ts — ajustar name, description, features",
+    "Adicionar data-template-block-instance=\"...\" nos HTMLs relevantes (11 HTMLs encontrados)"
+  ]
+}

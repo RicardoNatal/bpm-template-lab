@@ -1,0 +1,50 @@
+server {
+
+  listen 80;
+  index index.html;
+  error_log  /var/log/nginx/error.log;
+  root /usr/share/nginx/html;
+  server_name localhost; # informar o nome do domínio
+
+  ignore_invalid_headers off;
+  client_max_body_size 0;
+  proxy_buffering off;
+  proxy_ssl_verify off;
+
+
+  # Habilitar criptografia
+  gzip on;
+  gzip_vary on;
+  gzip_proxied any;
+  gzip_comp_level 6;
+  gzip_buffers 16 8k;
+  gzip_http_version 1.1;
+  gzip_min_length 256;
+  gzip_types text/plain text/css application/json application/javascript application/x-javascript text/xml application/xml application/xml+rss text/javascript application/vnd.ms-fontobject application/x-font-ttf font/opentype image/svg+xml image/x-icon;
+
+
+  #Recursos de Segurança
+  server_tokens off;
+  add_header X-Frame-Options SAMEORIGIN;
+  add_header X-XSS-Protection "1; mode=block";
+  add_header X-Content-Type-Options nosniff;
+  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
+  #add_header Content-Security-Policy "default-src 'none'; object-src 'none'; frame-ancestors 'none'; connect-src *; font-src *; style-src 'self' 'unsafe-inline' fonts.gstatic.com; script-src 'self' www.google-analytics.com ajax.googleapis.com www.google.com google.com gstatic.com www.gstatic.com; img-src 'self' data:; frame-src 'self' www.google-analytics.com ajax.googleapis.com www.google.com google.com gstatic.com www.gstatic.com";
+
+  #Habilitar cache por período
+  location ~* \.(?:ico|css|svg|js|gif|jpe?g|png)$ {
+    expires 30d;
+    add_header Pragma public;
+    add_header Cache-Control "public";
+  }
+
+  #Rota principal
+  location / {
+    try_files $uri$args $uri$args/ /index.html;
+  }
+
+  #Rota das APIs
+  location /api {
+    proxy_pass  ${API_URL};
+  }
+}

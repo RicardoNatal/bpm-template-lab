@@ -1,0 +1,24 @@
+
+<hst-card
+  [titulo]="'Colaborador'"
+>
+  <form [formGroup]="formulario">
+    <hst-lookup
+      [hidden]="!mostrarLookup()"
+      [formGroup]="formulario"
+      formControlName="dadosColaborador"
+      [label]="'Colaborador'"
+      placeholder="'Clique para buscar'"
+      [config]="buscaColabsConfig">
+    </hst-lookup>
+    <br>
+    <hst-dados
+      [hidden]="!colaboradorSelecionado"
+      [campos]="camposColaborador"
+      [escondeFoto]="true"
+      [apenasCampos]="true"
+      [noBorder]="true"
+    >
+    </hst-dados>
+  </form>
+</hst-card>

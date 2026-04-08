@@ -1,0 +1,25 @@
+<hst-card
+  [titulo]="title" [hidden]="!mostrarCard"
+>
+  <div [formGroup]="formulario">
+    <hst-input
+      [type]="'textarea'"
+      [label]="label"
+      [maxLength]="maxLenght"
+      formControlName="observacao"
+      [ngClass]="mostrarErro('observacao', formulario) ? 'formulario-error' : ''"
+      >
+    </hst-input>
+  </div>
+</hst-card>
+
+<div [formGroup]="formulario" [hidden]="mostrarCard">
+  <hst-input
+    [type]="'textarea'"
+    [label]="label"
+    [maxLength]="maxLenght"
+    formControlName="observacao"
+    [ngClass]="mostrarErro('observacao', formulario) ? 'formulario-error' : ''"
+    >
+  </hst-input>
+</div>

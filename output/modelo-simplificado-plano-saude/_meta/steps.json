@@ -1,0 +1,35 @@
+[
+  {
+    "id": "solicitacao",
+    "label": "Solicitação",
+    "route": "/solicitacao",
+    "componentClass": "SolicitacaoComponent",
+    "mode": "edit",
+    "blocks": [
+      "dados-solicitante",
+      "dados-gestor",
+      "dados-solicitacao"
+    ],
+    "features": [
+      "gestor-validation",
+      "dependentes-management",
+      "planos-integration"
+    ],
+    "optional": false
+  },
+  {
+    "id": "detalhes",
+    "label": "Detalhes",
+    "route": "/detalhes",
+    "componentClass": "DetalhesComponent",
+    "mode": "readonly",
+    "blocks": [
+      "dados-solicitante",
+      "dados-gestor"
+    ],
+    "features": [
+      "readonly-fields"
+    ],
+    "optional": false
+  }
+]
